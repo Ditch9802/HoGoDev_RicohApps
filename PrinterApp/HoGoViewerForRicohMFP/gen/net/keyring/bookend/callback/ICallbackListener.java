@@ -1,6 +1,6 @@
 /*
  * This file is auto-generated.  DO NOT MODIFY.
- * Original file: F:\\tmp\\workspace\\HoGoViewerForRicohMFP\\src\\net\\keyring\\bookend\\callback\\ICallbackListener.aidl
+ * Original file: C:\\Users\\ThienDV\\Documents\\Data\\AndroidProject\\Ricoh\\HoGoDev_RicohApps\\PrinterApp\\HoGoViewerForRicohMFP\\src\\net\\keyring\\bookend\\callback\\ICallbackListener.aidl
  */
 package net.keyring.bookend.callback;
 /**

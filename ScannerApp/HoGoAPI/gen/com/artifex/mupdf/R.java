@@ -8,8 +8,8 @@ package com.artifex.mupdf;
 
 public final class R {
 	public static final class color {
-		public static final int bar = 0x7f050008;
-		public static final int canvas = 0x7f050007;
+		public static final int bar = 0x7f080008;
+		public static final int canvas = 0x7f080007;
 	}
 	public static final class drawable {
 		public static final int busy = 0x7f02000c;
@@ -53,27 +53,27 @@ public final class R {
 		public static final int picker_entry = 0x7f030018;
 	}
 	public static final class string {
-		public static final int app_name = 0x7f070000;
-		public static final int cancel = 0x7f07005b;
-		public static final int enter_password = 0x7f070061;
-		public static final int gen_pdf = 0x7f070066;
-		public static final int link_control = 0x7f070064;
-		public static final int no_further_occurences_found = 0x7f070065;
-		public static final int no_media_hint = 0x7f070059;
-		public static final int no_media_warning = 0x7f070058;
-		public static final int open_failed = 0x7f07005a;
-		public static final int outline_title = 0x7f070060;
-		public static final int picker_title = 0x7f07005f;
-		public static final int progress_title = 0x7f070069;
-		public static final int search_backwards = 0x7f07005c;
-		public static final int search_document = 0x7f07005e;
-		public static final int search_forwards = 0x7f07005d;
-		public static final int searching_ = 0x7f070063;
-		public static final int text_not_found = 0x7f070062;
-		public static final int title_activity_main = 0x7f070068;
-		public static final int view_pdf = 0x7f070067;
+		public static final int app_name = 0x7f060000;
+		public static final int cancel = 0x7f06005c;
+		public static final int enter_password = 0x7f060062;
+		public static final int gen_pdf = 0x7f060067;
+		public static final int link_control = 0x7f060065;
+		public static final int no_further_occurences_found = 0x7f060066;
+		public static final int no_media_hint = 0x7f06005a;
+		public static final int no_media_warning = 0x7f060059;
+		public static final int open_failed = 0x7f06005b;
+		public static final int outline_title = 0x7f060061;
+		public static final int picker_title = 0x7f060060;
+		public static final int progress_title = 0x7f06006a;
+		public static final int search_backwards = 0x7f06005d;
+		public static final int search_document = 0x7f06005f;
+		public static final int search_forwards = 0x7f06005e;
+		public static final int searching_ = 0x7f060064;
+		public static final int text_not_found = 0x7f060063;
+		public static final int title_activity_main = 0x7f060069;
+		public static final int view_pdf = 0x7f060068;
 	}
 	public static final class style {
-		public static final int Theme_NoBackground_NoTitle = 0x7f080005;
+		public static final int Theme_NoBackground_NoTitle = 0x7f070005;
 	}
 }

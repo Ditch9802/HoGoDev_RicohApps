@@ -15,24 +15,24 @@ public final class R {
     public static final class attr {
     }
     public static final class color {
-        public static final int background=0x7f050009;
-        public static final int bar=0x7f050008;
-        public static final int black=0x7f050001;
-        public static final int blue=0x7f05000a;
-        public static final int canvas=0x7f050007;
-        public static final int dimgray=0x7f050002;
-        public static final int gold=0x7f050006;
-        public static final int gray=0x7f050003;
-        public static final int lightgray=0x7f050004;
-        public static final int transparent=0x7f050000;
-        public static final int white=0x7f050005;
+        public static final int background=0x7f080009;
+        public static final int bar=0x7f080008;
+        public static final int black=0x7f080001;
+        public static final int blue=0x7f08000a;
+        public static final int canvas=0x7f080007;
+        public static final int dimgray=0x7f080002;
+        public static final int gold=0x7f080006;
+        public static final int gray=0x7f080003;
+        public static final int lightgray=0x7f080004;
+        public static final int transparent=0x7f080000;
+        public static final int white=0x7f080005;
     }
     public static final class dimen {
-        /** 
+        /**  Default screen margins, per the Android Design guidelines. 
+
          Customize dimensions originally defined in res/values/dimens.xml (such as
          screen margins) for sw720dp devices (e.g. 10" tablets) in landscape here.
     
- Default screen margins, per the Android Design guidelines. 
 
          Customize dimensions originally defined in res/values/dimens.xml (such as
          screen margins) for sw720dp devices (e.g. 10" tablets) in landscape here.
@@ -44,23 +44,23 @@ public final class R {
          screen margins) for sw720dp devices (e.g. 10" tablets) in landscape here.
     
          */
-        public static final int activity_horizontal_margin=0x7f060002;
-        public static final int activity_vertical_margin=0x7f060003;
-        public static final int book_item_padding=0x7f06000a;
-        public static final int book_shelf_margin_bottom=0x7f06000b;
-        public static final int bottom_bar_h=0x7f060008;
-        public static final int copy_right_margin_bottom=0x7f060004;
-        public static final int flipper_heigth=0x7f060001;
-        public static final int flipper_width=0x7f060000;
-        public static final int ic_add_size=0x7f06000c;
-        public static final int id_accept_size=0x7f06000e;
-        public static final int margin_16px=0x7f060005;
-        public static final int margin_32px=0x7f060010;
-        public static final int margin_8px=0x7f06000d;
-        public static final int margin_90px=0x7f06000f;
-        public static final int top_bar_h=0x7f060006;
-        public static final int top_bar_padding_bottom=0x7f060007;
-        public static final int top_bar_padding_top=0x7f060009;
+        public static final int activity_horizontal_margin=0x7f050000;
+        public static final int activity_vertical_margin=0x7f050001;
+        public static final int book_item_padding=0x7f05000a;
+        public static final int book_shelf_margin_bottom=0x7f05000b;
+        public static final int bottom_bar_h=0x7f050008;
+        public static final int copy_right_margin_bottom=0x7f050004;
+        public static final int flipper_heigth=0x7f050003;
+        public static final int flipper_width=0x7f050002;
+        public static final int ic_add_size=0x7f05000c;
+        public static final int id_accept_size=0x7f05000e;
+        public static final int margin_16px=0x7f050005;
+        public static final int margin_32px=0x7f050010;
+        public static final int margin_8px=0x7f05000d;
+        public static final int margin_90px=0x7f05000f;
+        public static final int top_bar_h=0x7f050006;
+        public static final int top_bar_padding_bottom=0x7f050007;
+        public static final int top_bar_padding_top=0x7f050009;
     }
     public static final class drawable {
         public static final int bg_button=0x7f020000;
@@ -333,147 +333,147 @@ public final class R {
         public static final int main=0x7f090000;
     }
     public static final class string {
-        public static final int action_settings=0x7f070001;
-        public static final int action_upload=0x7f07006b;
-        public static final int app_name=0x7f070000;
-        public static final int cancel=0x7f07005b;
-        public static final int enter_password=0x7f070061;
-        public static final int gen_pdf=0x7f070066;
-        public static final int hello_world=0x7f07006a;
-        public static final int link_control=0x7f070064;
-        public static final int my_document=0x7f07006d;
-        public static final int no_further_occurences_found=0x7f070065;
-        public static final int no_media_hint=0x7f070059;
-        public static final int no_media_warning=0x7f070058;
-        public static final int open_failed=0x7f07005a;
-        public static final int outline_title=0x7f070060;
-        public static final int picker_title=0x7f07005f;
-        public static final int progress_title=0x7f070069;
-        public static final int search_backwards=0x7f07005c;
-        public static final int search_document=0x7f07005e;
-        public static final int search_forwards=0x7f07005d;
-        public static final int searching_=0x7f070063;
-        public static final int send_document=0x7f07006c;
-        public static final int send_history=0x7f07006e;
-        public static final int text_not_found=0x7f070062;
-        public static final int title_activity_main=0x7f070068;
-        public static final int txid_addressbook_b_freqent=0x7f070028;
-        public static final int txid_addressbook_b_switch_title=0x7f070027;
+        public static final int action_settings=0x7f060001;
+        public static final int action_upload=0x7f06006b;
+        public static final int app_name=0x7f060000;
+        public static final int cancel=0x7f06005c;
+        public static final int enter_password=0x7f060062;
+        public static final int gen_pdf=0x7f060067;
+        public static final int hello_world=0x7f060002;
+        public static final int link_control=0x7f060065;
+        public static final int my_document=0x7f06006d;
+        public static final int no_further_occurences_found=0x7f060066;
+        public static final int no_media_hint=0x7f06005a;
+        public static final int no_media_warning=0x7f060059;
+        public static final int open_failed=0x7f06005b;
+        public static final int outline_title=0x7f060061;
+        public static final int picker_title=0x7f060060;
+        public static final int progress_title=0x7f06006a;
+        public static final int search_backwards=0x7f06005d;
+        public static final int search_document=0x7f06005f;
+        public static final int search_forwards=0x7f06005e;
+        public static final int searching_=0x7f060064;
+        public static final int send_document=0x7f06006c;
+        public static final int send_history=0x7f06006e;
+        public static final int text_not_found=0x7f060063;
+        public static final int title_activity_main=0x7f060069;
+        public static final int txid_addressbook_b_freqent=0x7f060029;
+        public static final int txid_addressbook_b_switch_title=0x7f060028;
         /**  Addressbook 
          */
-        public static final int txid_addressbook_t_title=0x7f070026;
-        public static final int txid_cmn_b_cancel=0x7f070004;
-        public static final int txid_cmn_b_close=0x7f070005;
-        public static final int txid_cmn_b_error=0x7f070006;
-        public static final int txid_cmn_b_ok=0x7f070007;
-        public static final int txid_cmn_b_start=0x7f070003;
+        public static final int txid_addressbook_t_title=0x7f060027;
+        public static final int txid_cmn_b_cancel=0x7f060005;
+        public static final int txid_cmn_b_close=0x7f060006;
+        public static final int txid_cmn_b_error=0x7f060007;
+        public static final int txid_cmn_b_ok=0x7f060008;
+        public static final int txid_cmn_b_start=0x7f060004;
         /**  Boot Failed Dialog 
          */
-        public static final int txid_cmn_d_cannot_connect=0x7f070015;
+        public static final int txid_cmn_d_cannot_connect=0x7f060016;
         /**  Please Wait Dialog 
          */
-        public static final int txid_cmn_d_wait=0x7f070014;
+        public static final int txid_cmn_d_wait=0x7f060015;
         /**  Common Button Message 
          */
-        public static final int txid_cmn_t_title=0x7f070002;
-        public static final int txid_dest_b_manual_input_folder_cancel=0x7f070047;
-        public static final int txid_dest_b_manual_input_folder_ok=0x7f070046;
-        public static final int txid_dest_b_manual_input_mail_cancel=0x7f070056;
-        public static final int txid_dest_b_manual_input_mail_ok=0x7f070055;
-        public static final int txid_dest_br_manual_input_folder_ftp=0x7f07004a;
-        public static final int txid_dest_br_manual_input_folder_ncp=0x7f07004b;
-        public static final int txid_dest_br_manual_input_folder_smb=0x7f070049;
+        public static final int txid_cmn_t_title=0x7f060003;
+        public static final int txid_dest_b_manual_input_folder_cancel=0x7f060048;
+        public static final int txid_dest_b_manual_input_folder_ok=0x7f060047;
+        public static final int txid_dest_b_manual_input_mail_cancel=0x7f060057;
+        public static final int txid_dest_b_manual_input_mail_ok=0x7f060056;
+        public static final int txid_dest_br_manual_input_folder_ftp=0x7f06004b;
+        public static final int txid_dest_br_manual_input_folder_ncp=0x7f06004c;
+        public static final int txid_dest_br_manual_input_folder_smb=0x7f06004a;
         /**  Destination 
          */
-        public static final int txid_dest_t_folder_manual_ftp=0x7f070023;
-        public static final int txid_dest_t_folder_manual_ncp=0x7f070025;
-        public static final int txid_dest_t_folder_manual_smb=0x7f070024;
-        public static final int txid_dest_t_manual_input_folder_connect_protocol=0x7f070048;
-        public static final int txid_dest_t_manual_input_folder_connect_type=0x7f070051;
-        public static final int txid_dest_t_manual_input_folder_connect_type_bindery=0x7f070053;
-        public static final int txid_dest_t_manual_input_folder_connect_type_nds=0x7f070052;
-        public static final int txid_dest_t_manual_input_folder_pass=0x7f07004f;
-        public static final int txid_dest_t_manual_input_folder_path=0x7f07004d;
-        public static final int txid_dest_t_manual_input_folder_port=0x7f070050;
-        public static final int txid_dest_t_manual_input_folder_server=0x7f07004c;
+        public static final int txid_dest_t_folder_manual_ftp=0x7f060024;
+        public static final int txid_dest_t_folder_manual_ncp=0x7f060026;
+        public static final int txid_dest_t_folder_manual_smb=0x7f060025;
+        public static final int txid_dest_t_manual_input_folder_connect_protocol=0x7f060049;
+        public static final int txid_dest_t_manual_input_folder_connect_type=0x7f060052;
+        public static final int txid_dest_t_manual_input_folder_connect_type_bindery=0x7f060054;
+        public static final int txid_dest_t_manual_input_folder_connect_type_nds=0x7f060053;
+        public static final int txid_dest_t_manual_input_folder_pass=0x7f060050;
+        public static final int txid_dest_t_manual_input_folder_path=0x7f06004e;
+        public static final int txid_dest_t_manual_input_folder_port=0x7f060051;
+        public static final int txid_dest_t_manual_input_folder_server=0x7f06004d;
         /**   Manual Input(Folder)  
          */
-        public static final int txid_dest_t_manual_input_folder_title=0x7f070045;
-        public static final int txid_dest_t_manual_input_folder_user=0x7f07004e;
-        public static final int txid_dest_t_manual_input_mail_address=0x7f070057;
+        public static final int txid_dest_t_manual_input_folder_title=0x7f060046;
+        public static final int txid_dest_t_manual_input_folder_user=0x7f06004f;
+        public static final int txid_dest_t_manual_input_mail_address=0x7f060058;
         /**   Manual Input(Mail) 
          */
-        public static final int txid_dest_t_manual_input_mail_title=0x7f070054;
-        public static final int txid_scan_b_address_address_book=0x7f07001d;
-        public static final int txid_scan_b_address_direct=0x7f07001e;
-        public static final int txid_scan_b_count_down_finish=0x7f070044;
-        public static final int txid_scan_b_count_down_start=0x7f070043;
-        public static final int txid_scan_b_kind_folder=0x7f07001b;
-        public static final int txid_scan_b_kind_to=0x7f07001c;
-        public static final int txid_scan_b_other_preview_off=0x7f07003f;
-        public static final int txid_scan_b_other_preview_on=0x7f07003e;
-        public static final int txid_scan_b_other_preview_title=0x7f07003d;
-        public static final int txid_scan_b_top_auto_color_select=0x7f070031;
-        public static final int txid_scan_b_top_file_mpdf=0x7f070036;
-        public static final int txid_scan_b_top_file_mtiff=0x7f070034;
-        public static final int txid_scan_b_top_file_spdf=0x7f070035;
-        public static final int txid_scan_b_top_file_stiff_jpg=0x7f070033;
-        public static final int txid_scan_b_top_full_color_glossy_photo=0x7f070030;
-        public static final int txid_scan_b_top_full_color_text_photo=0x7f07002f;
-        public static final int txid_scan_b_top_gray_scale=0x7f07002e;
-        public static final int txid_scan_b_top_mono_photo=0x7f07002d;
-        public static final int txid_scan_b_top_mono_text=0x7f07002a;
-        public static final int txid_scan_b_top_mono_text_lineart=0x7f07002c;
-        public static final int txid_scan_b_top_mono_text_photo=0x7f07002b;
-        public static final int txid_scan_b_top_one_sided=0x7f070038;
-        public static final int txid_scan_b_top_spread=0x7f07003b;
-        public static final int txid_scan_b_top_top_to_bottom=0x7f07003a;
-        public static final int txid_scan_b_top_top_to_top=0x7f070039;
-        public static final int txid_scan_d_canceling=0x7f070017;
-        public static final int txid_scan_d_count=0x7f070019;
+        public static final int txid_dest_t_manual_input_mail_title=0x7f060055;
+        public static final int txid_scan_b_address_address_book=0x7f06001e;
+        public static final int txid_scan_b_address_direct=0x7f06001f;
+        public static final int txid_scan_b_count_down_finish=0x7f060045;
+        public static final int txid_scan_b_count_down_start=0x7f060044;
+        public static final int txid_scan_b_kind_folder=0x7f06001c;
+        public static final int txid_scan_b_kind_to=0x7f06001d;
+        public static final int txid_scan_b_other_preview_off=0x7f060040;
+        public static final int txid_scan_b_other_preview_on=0x7f06003f;
+        public static final int txid_scan_b_other_preview_title=0x7f06003e;
+        public static final int txid_scan_b_top_auto_color_select=0x7f060032;
+        public static final int txid_scan_b_top_file_mpdf=0x7f060037;
+        public static final int txid_scan_b_top_file_mtiff=0x7f060035;
+        public static final int txid_scan_b_top_file_spdf=0x7f060036;
+        public static final int txid_scan_b_top_file_stiff_jpg=0x7f060034;
+        public static final int txid_scan_b_top_full_color_glossy_photo=0x7f060031;
+        public static final int txid_scan_b_top_full_color_text_photo=0x7f060030;
+        public static final int txid_scan_b_top_gray_scale=0x7f06002f;
+        public static final int txid_scan_b_top_mono_photo=0x7f06002e;
+        public static final int txid_scan_b_top_mono_text=0x7f06002b;
+        public static final int txid_scan_b_top_mono_text_lineart=0x7f06002d;
+        public static final int txid_scan_b_top_mono_text_photo=0x7f06002c;
+        public static final int txid_scan_b_top_one_sided=0x7f060039;
+        public static final int txid_scan_b_top_spread=0x7f06003c;
+        public static final int txid_scan_b_top_top_to_bottom=0x7f06003b;
+        public static final int txid_scan_b_top_top_to_top=0x7f06003a;
+        public static final int txid_scan_d_canceling=0x7f060018;
+        public static final int txid_scan_d_count=0x7f06001a;
         /**  Scanning Dialog 
          */
-        public static final int txid_scan_d_scanning=0x7f070016;
-        public static final int txid_scan_d_sending=0x7f070018;
-        public static final int txid_scan_t_address_title_bcc=0x7f070021;
-        public static final int txid_scan_t_address_title_cc=0x7f070020;
-        public static final int txid_scan_t_address_title_folder=0x7f070022;
-        public static final int txid_scan_t_address_title_to=0x7f07001f;
-        public static final int txid_scan_t_count_down_text=0x7f070041;
+        public static final int txid_scan_d_scanning=0x7f060017;
+        public static final int txid_scan_d_sending=0x7f060019;
+        public static final int txid_scan_t_address_title_bcc=0x7f060022;
+        public static final int txid_scan_t_address_title_cc=0x7f060021;
+        public static final int txid_scan_t_address_title_folder=0x7f060023;
+        public static final int txid_scan_t_address_title_to=0x7f060020;
+        public static final int txid_scan_t_count_down_text=0x7f060042;
         /**  CountDown 
          */
-        public static final int txid_scan_t_count_down_title=0x7f070040;
+        public static final int txid_scan_t_count_down_title=0x7f060041;
         /**  Destination Type  
          */
-        public static final int txid_scan_t_kind_title=0x7f07001a;
-        public static final int txid_scan_t_no_count_down_text=0x7f070042;
-        public static final int txid_scan_t_state_maintenance=0x7f07000a;
+        public static final int txid_scan_t_kind_title=0x7f06001b;
+        public static final int txid_scan_t_no_count_down_text=0x7f060043;
+        public static final int txid_scan_t_state_maintenance=0x7f06000b;
         /**  Scanner Status 
          */
-        public static final int txid_scan_t_state_please_wait=0x7f070008;
-        public static final int txid_scan_t_state_ready=0x7f070009;
-        public static final int txid_scan_t_state_reason_cover_open=0x7f07000e;
-        public static final int txid_scan_t_state_reason_media_jam=0x7f07000f;
-        public static final int txid_scan_t_state_reason_other=0x7f070011;
-        public static final int txid_scan_t_state_reason_paused=0x7f070010;
-        public static final int txid_scan_t_state_scanning=0x7f07000b;
-        public static final int txid_scan_t_state_severity_error=0x7f070012;
-        public static final int txid_scan_t_state_severity_warning=0x7f070013;
-        public static final int txid_scan_t_state_stopped=0x7f07000c;
-        public static final int txid_scan_t_state_unknown=0x7f07000d;
+        public static final int txid_scan_t_state_please_wait=0x7f060009;
+        public static final int txid_scan_t_state_ready=0x7f06000a;
+        public static final int txid_scan_t_state_reason_cover_open=0x7f06000f;
+        public static final int txid_scan_t_state_reason_media_jam=0x7f060010;
+        public static final int txid_scan_t_state_reason_other=0x7f060012;
+        public static final int txid_scan_t_state_reason_paused=0x7f060011;
+        public static final int txid_scan_t_state_scanning=0x7f06000c;
+        public static final int txid_scan_t_state_severity_error=0x7f060013;
+        public static final int txid_scan_t_state_severity_warning=0x7f060014;
+        public static final int txid_scan_t_state_stopped=0x7f06000d;
+        public static final int txid_scan_t_state_unknown=0x7f06000e;
         /**  Scan Color 
          */
-        public static final int txid_scan_t_top_color_title=0x7f070029;
+        public static final int txid_scan_t_top_color_title=0x7f06002a;
         /**  File Type 
          */
-        public static final int txid_scan_t_top_file_title=0x7f070032;
+        public static final int txid_scan_t_top_file_title=0x7f060033;
         /**  Other 
          */
-        public static final int txid_scan_t_top_other_title=0x7f07003c;
+        public static final int txid_scan_t_top_other_title=0x7f06003d;
         /**  Paper Side 
          */
-        public static final int txid_scan_t_top_side_title=0x7f070037;
-        public static final int view_pdf=0x7f070067;
+        public static final int txid_scan_t_top_side_title=0x7f060038;
+        public static final int view_pdf=0x7f060068;
     }
     public static final class style {
         /** 
@@ -517,27 +517,27 @@ public final class R {
     
  API 14 theme customizations can go here. 
          */
-        public static final int AppBaseTheme=0x7f080000;
-        public static final int AppButton=0x7f080007;
+        public static final int AppBaseTheme=0x7f070000;
+        public static final int AppButton=0x7f070007;
         /**  Application theme. 
- Application theme. 
  All customizations that are NOT specific to a particular API-level can go here. 
+ Application theme. 
  Application theme. 
  All customizations that are NOT specific to a particular API-level can go here. 
          */
-        public static final int AppTheme=0x7f080001;
-        public static final int TabButton=0x7f080008;
-        public static final int TextBox=0x7f080006;
-        public static final int TextTitle=0x7f080009;
-        public static final int Theme_NoBackground_NoTitle=0x7f080005;
+        public static final int AppTheme=0x7f070001;
+        public static final int TabButton=0x7f070008;
+        public static final int TextBox=0x7f070006;
+        public static final int TextTitle=0x7f070009;
+        public static final int Theme_NoBackground_NoTitle=0x7f070005;
         /**  宛先一覧のタグボタン 
          */
-        public static final int address_tag_button=0x7f080002;
+        public static final int address_tag_button=0x7f070002;
         /**  宛先選択ダイアログ 
          */
-        public static final int no_line_dialog=0x7f080003;
+        public static final int no_line_dialog=0x7f070003;
         /**  スキャン設定ダイアログ 
          */
-        public static final int no_title_dialog=0x7f080004;
+        public static final int no_title_dialog=0x7f070004;
     }
 }
