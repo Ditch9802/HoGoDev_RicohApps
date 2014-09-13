@@ -28,13 +28,13 @@ public final class R {
 		public static final int tiled_background = 0x7f02003d;
 	}
 	public static final class id {
-		public static final int button1 = 0x7f0a009a;
-		public static final int button2 = 0x7f0a009b;
+		public static final int button1 = 0x7f0a00a3;
+		public static final int button2 = 0x7f0a00a4;
 		public static final int cancel = 0x7f0a0034;
 		public static final int docNameText = 0x7f0a0032;
 		public static final int lowerButtons = 0x7f0a0038;
 		public static final int outlineButton = 0x7f0a0031;
-		public static final int page = 0x7f0a0076;
+		public static final int page = 0x7f0a007f;
 		public static final int pageNumber = 0x7f0a003a;
 		public static final int pageSlider = 0x7f0a0039;
 		public static final int searchBack = 0x7f0a0036;
@@ -42,15 +42,15 @@ public final class R {
 		public static final int searchForward = 0x7f0a0037;
 		public static final int searchText = 0x7f0a0035;
 		public static final int switcher = 0x7f0a002e;
-		public static final int title = 0x7f0a0075;
+		public static final int title = 0x7f0a007e;
 		public static final int topBar = 0x7f0a002f;
 		public static final int topBar2 = 0x7f0a0033;
 	}
 	public static final class layout {
 		public static final int activity_main = 0x7f030001;
 		public static final int buttons = 0x7f030007;
-		public static final int outline_entry = 0x7f030017;
-		public static final int picker_entry = 0x7f030018;
+		public static final int outline_entry = 0x7f030019;
+		public static final int picker_entry = 0x7f03001a;
 	}
 	public static final class string {
 		public static final int app_name = 0x7f060000;

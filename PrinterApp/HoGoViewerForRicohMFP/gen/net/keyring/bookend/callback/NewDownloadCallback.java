@@ -1,6 +1,6 @@
 /*
  * This file is auto-generated.  DO NOT MODIFY.
- * Original file: C:\\Users\\ThienDV\\Documents\\Data\\AndroidProject\\Ricoh\\HoGoDev_RicohApps\\PrinterApp\\HoGoViewerForRicohMFP\\src\\net\\keyring\\bookend\\callback\\NewDownloadCallback.aidl
+ * Original file: C:\\Users\\dung\\git\\HoGoDev_RicohApps\\PrinterApp\\HoGoViewerForRicohMFP\\src\\net\\keyring\\bookend\\callback\\NewDownloadCallback.aidl
  */
 package net.keyring.bookend.callback;
 /**

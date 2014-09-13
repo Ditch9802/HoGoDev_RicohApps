@@ -47,7 +47,7 @@ public final class R {
 	}
 	public static final class id {
 		public static final int activity_root = 0x7f0a0010;
-		public static final int address_container = 0x7f0a0069;
+		public static final int address_container = 0x7f0a0072;
 		public static final int btn_address_address_book = 0x7f0a004b;
 		public static final int btn_address_direct = 0x7f0a004c;
 		public static final int btn_cancel = 0x7f0a0018;
@@ -63,21 +63,21 @@ public final class R {
 		public static final int btn_page_prev = 0x7f0a0014;
 		public static final int btn_side = 0x7f0a005a;
 		public static final int btn_start = 0x7f0a0019;
-		public static final int button0 = 0x7f0a0099;
-		public static final int button1 = 0x7f0a009a;
-		public static final int button10 = 0x7f0a00a3;
-		public static final int button2 = 0x7f0a009b;
-		public static final int button3 = 0x7f0a009c;
-		public static final int button4 = 0x7f0a009d;
-		public static final int button5 = 0x7f0a009e;
-		public static final int button6 = 0x7f0a009f;
-		public static final int button7 = 0x7f0a00a0;
-		public static final int button8 = 0x7f0a00a1;
-		public static final int button9 = 0x7f0a00a2;
+		public static final int button0 = 0x7f0a00a2;
+		public static final int button1 = 0x7f0a00a3;
+		public static final int button10 = 0x7f0a00ac;
+		public static final int button2 = 0x7f0a00a4;
+		public static final int button3 = 0x7f0a00a5;
+		public static final int button4 = 0x7f0a00a6;
+		public static final int button5 = 0x7f0a00a7;
+		public static final int button6 = 0x7f0a00a8;
+		public static final int button7 = 0x7f0a00a9;
+		public static final int button8 = 0x7f0a00aa;
+		public static final int button9 = 0x7f0a00ab;
 		public static final int button_cancel = 0x7f0a0000;
 		public static final int button_change_tag_group = 0x7f0a0008;
 		public static final int button_ok = 0x7f0a0002;
-		public static final int container_page = 0x7f0a00a4;
+		public static final int container_page = 0x7f0a00ad;
 		public static final int edit_address = 0x7f0a004a;
 		public static final int edit_pass = 0x7f0a0046;
 		public static final int edit_path = 0x7f0a0044;
@@ -91,7 +91,7 @@ public final class R {
 		public static final int include_setting_preview = 0x7f0a0050;
 		public static final int layout_entry_view = 0x7f0a000a;
 		public static final int layout_progress = 0x7f0a0009;
-		public static final int layout_tag_buttons = 0x7f0a0098;
+		public static final int layout_tag_buttons = 0x7f0a00a1;
 		public static final int layout_tagbutton_area = 0x7f0a0003;
 		public static final int listview_address_entry = 0x7f0a000b;
 		public static final int listview_detail = 0x7f0a0052;
@@ -109,16 +109,16 @@ public final class R {
 		public static final int tag_group_2 = 0x7f0a0006;
 		public static final int tag_group_3 = 0x7f0a0007;
 		public static final int textView_title = 0x7f0a0001;
-		public static final int text_category = 0x7f0a006c;
+		public static final int text_category = 0x7f0a0075;
 		public static final int text_cur_page = 0x7f0a0016;
 		public static final int text_dest_title = 0x7f0a005e;
-		public static final int text_detail = 0x7f0a006e;
-		public static final int text_key_display = 0x7f0a006b;
-		public static final int text_regist_no = 0x7f0a006a;
+		public static final int text_detail = 0x7f0a0077;
+		public static final int text_key_display = 0x7f0a0074;
+		public static final int text_regist_no = 0x7f0a0073;
 		public static final int text_state = 0x7f0a0060;
 		public static final int text_title_detail = 0x7f0a0051;
 		public static final int text_total_page = 0x7f0a0017;
-		public static final int text_value = 0x7f0a006d;
+		public static final int text_value = 0x7f0a0076;
 		public static final int txt_count_down = 0x7f0a003b;
 		public static final int txt_title = 0x7f0a0056;
 		public static final int view_destination = 0x7f0a005c;
@@ -134,12 +134,12 @@ public final class R {
 		public static final int dlg_no_count_down = 0x7f03000c;
 		public static final int dlg_setting_other = 0x7f03000d;
 		public static final int frag_scan = 0x7f03000f;
-		public static final int list_row_address_entry = 0x7f030013;
-		public static final int list_row_setting_category = 0x7f030014;
-		public static final int list_row_setting_detail = 0x7f030015;
-		public static final int view_address_tag_10buttons = 0x7f03001d;
-		public static final int view_address_tag_5buttons = 0x7f03001e;
-		public static final int view_preview_image = 0x7f03001f;
+		public static final int list_row_address_entry = 0x7f030014;
+		public static final int list_row_setting_category = 0x7f030015;
+		public static final int list_row_setting_detail = 0x7f030016;
+		public static final int view_address_tag_10buttons = 0x7f03001f;
+		public static final int view_address_tag_5buttons = 0x7f030020;
+		public static final int view_preview_image = 0x7f030021;
 	}
 	public static final class menu {
 		public static final int main = 0x7f090000;
