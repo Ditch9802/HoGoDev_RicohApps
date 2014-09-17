@@ -98,17 +98,13 @@ public class MainActivity extends ScanActivity implements
 	
 	@Override
 	public void onCheckedChanged(int checkedId) {
-		switch (checkedId) {
-		case R.id.tab_send_document:
+		if(checkedId == R.id.tab_send_document)
 			gotoUpdateScreen();
-			break;
-		case R.id.tab_my_document:
+		else if(checkedId == R.id.tab_my_document)
 			gotoBookShelfScreen();
-			break;
-		case R.id.tab_send_history:
+		else if(checkedId == R.id.tab_send_history)
 			gotoHistoryScreen();
-			break;
-		}
+
 	}
 
 	private void gotoBookShelfScreen() {
@@ -245,18 +241,12 @@ public class MainActivity extends ScanActivity implements
 
 	@Override
 	public void onClick(View view) {
-		switch (view.getId()) {
-		case R.id.action_add:
-			// gotoAddScreen();
+		int id = view.getId();
+		if(id == R.id.action_add)
 			gotoUpdateScreen();
-			break;
-		case R.id.action_send:
-			// gotoAddScreen();
+		else if(id == R.id.action_send)
 			gotoSendScreen();
-			break;
-		default:
-			break;
-		}
+
 	}
 
 	private void gotoSendScreen() {

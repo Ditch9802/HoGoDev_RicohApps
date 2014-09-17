@@ -49,14 +49,9 @@ public class AddFileSuccessfulFragment extends Fragment implements OnClickListen
 
 	@Override
 	public void onClick(View view) {
-		switch (view.getId()) {
-		case R.id.btn_send_this_document:
+		if(view.getId() == R.id.btn_send_this_document)
 			((MainActivity)getActivity()).gotoSendDocumentScreen(sendData);
-			break;
 
-		default:
-			break;
-		}
 	}
 
 }

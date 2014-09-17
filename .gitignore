@@ -4,13 +4,25 @@
 .mtj.tmp/
 
 # Package Files #
-*.jar
 *.war
 *.ear
 
 #bin, gen
-*/bin/
-*/gen/
+/HoGoDev_RicohApps/bin/
+/HoGoDev_RicohApps/gen/
+/PrinterApp/HoGoViewerForRicohMFP/bin/
+/PrinterApp/HoGoViewerForRicohMFP/gen/
+/PrinterApp/PrintSample/bin/
+/PrinterApp/PrintSample/gen/
+/ScannerApp/HoGoAPI/bin/
+/ScannerApp/HoGoAPI/gen/
+/ScannerApp/PdfLib/bin/
+/ScannerApp/PdfLib/gen/
+/ScannerApp/ScanAPILib/bin/
+/ScannerApp/ScanAPILib/gen/
+/ScannerApp/ServiceAPILib/bin/
+/ScannerApp/ServiceAPILib/gen/
+
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
