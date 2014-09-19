@@ -2,6 +2,7 @@ package com.gso.hogoapi;
 
 public class APIType {
 
+	public static final String SIGNUP = "/v1/CreateUser";
 	public static final String LOGIN = "/v1/Login";
 	public static final String UPLOAD = "/v1/UploadDocument";
 	public static final String ENCODE = "/v1/StartEncoding";

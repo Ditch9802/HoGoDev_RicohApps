@@ -11,6 +11,7 @@ import com.gso.hogoapi.model.FileData;
 import com.gso.hogoapi.model.LoginData;
 import com.gso.hogoapi.model.PackageData;
 import com.gso.hogoapi.model.ResponseData;
+import com.gso.hogoapi.model.SignUpData;
 
 public class DataParser {
 
@@ -21,6 +22,28 @@ public class DataParser {
 	public Object parseRetaurentList() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	public SignUpData parseSignUp(String input) {
+		// TODO Auto-generated method stub
+		try {
+			JSONObject root = new JSONObject(input);
+			SignUpData data = new SignUpData();
+			boolean status = root.optString("status").equalsIgnoreCase("OK");
+			String desc = "";
+			if (root.has("status_desc"))
+				desc = root.optString("status_desc");
+
+			data.setStatus(status);
+			data.setDesc(desc);
+			return data;
+
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			return null;
+		}
+
 	}
 
 	public Object parseLogin(String input) {
@@ -56,18 +79,18 @@ public class DataParser {
 			FileData data = new FileData();
 			String status = root.optString("status");
 			resData.setStatus(status);
-			if(status.equalsIgnoreCase("OK")){
+			if (status.equalsIgnoreCase("OK")) {
 				data.setFileName(root.optString("file_name"));
 				data.setQueueId(root.optString("queue_id"));
 				resData.setData(data);
-			}else{
-				
+			} else {
+
 			}
 
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
-		
+
 		}
 		return resData;
 	}
@@ -91,7 +114,7 @@ public class DataParser {
 		// TODO Auto-generated method stub
 		ResponseData data = new ResponseData();
 		try {
-			
+
 			JSONObject root = new JSONObject(input);
 			String status = root.optString("status");
 			String documentId = root.optString("document_id");
@@ -99,7 +122,6 @@ public class DataParser {
 			item.setDocumentId(documentId);
 			data.setStatus(status);
 			data.setData(item);
-			
 
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -113,22 +135,21 @@ public class DataParser {
 		input = input.replace("package_id ", "package_id");
 		ResponseData resData = new ResponseData();
 		try {
-			
+
 			JSONObject root = new JSONObject(input);
 			String status = root.optString("status");
 
 			PackageData item = new PackageData();
-			if(status.equals("OK")){
-				item.setId(root.optString("package_id"));	
+			if (status.equals("OK")) {
+				item.setId(root.optString("package_id"));
 			}
 			resData.setData(item);
 			resData.setStatus(status);
-			
 
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
-			
+
 		}
 		return resData;
 	}
@@ -141,18 +162,18 @@ public class DataParser {
 			JSONObject root = new JSONObject(input);
 			String status = root.optString("status");
 			resData.setStatus(status);
-			if(root.optString("status").equalsIgnoreCase("OK")){
+			if (root.optString("status").equalsIgnoreCase("OK")) {
 				JSONArray array = root.optJSONArray("document_id");
-				if(array !=null){
+				if (array != null) {
 					int length = array.length();
-					for(int i = 0 ; i < length; i++){
+					for (int i = 0; i < length; i++) {
 						String obj = array.optString(i);
-						if(obj !=null){
+						if (obj != null) {
 							FileData item = new FileData();
 							item.setDocumentId(obj);
 							data.add(item);
 						}
-						
+
 					}
 				}
 			}
@@ -173,13 +194,13 @@ public class DataParser {
 			JSONObject root = new JSONObject(input);
 			String status = root.optString("status");
 			resData.setStatus(status);
-			if(root.optString("status").equalsIgnoreCase("OK")){
+			if (root.optString("status").equalsIgnoreCase("OK")) {
 				JSONArray array = root.optJSONArray("recipient_detail");
-				if(array !=null){
+				if (array != null) {
 					int length = array.length();
-					for(int i = 0 ; i < length; i++){
+					for (int i = 0; i < length; i++) {
 						JSONObject obj = array.optJSONObject(i);
-						if(obj !=null){
+						if (obj != null) {
 							AddressBookItem item = new AddressBookItem();
 							item.setEmail(obj.optString("e-mail"));
 							item.setFirstName(obj.optString("first_name"));
@@ -187,7 +208,7 @@ public class DataParser {
 							item.setMiddleName(obj.optString("middle_name"));
 							data.add(item);
 						}
-						
+
 					}
 				}
 			}

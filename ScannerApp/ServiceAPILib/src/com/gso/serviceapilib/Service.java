@@ -362,4 +362,8 @@ public class Service implements Runnable {
 		request(serviceType, params, true, false);
 	}
 
+	public void signUp(ServiceAction action, String serviceType, Map<String, Object> params) {
+		mAction = action;
+		request(serviceType, params, true, false);
+	}
 }

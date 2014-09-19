@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:id="@+id/rl_main_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true" >
+
+        <View
+            android:id="@+id/view_dummy_start_screen"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="20dp"
+            android:visibility="invisible" />
+
+        <Button
+            android:id="@+id/btn_send_start_screen"
+            style="@style/AppButton"
+            android:layout_width="170dp"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@+id/view_dummy_start_screen"
+            android:gravity="center"
+            android:padding="40dp"
+            android:text="Send" />
+
+        <Button
+            android:id="@+id/btn_history_start_screen"
+            style="@style/AppButton"
+            android:layout_width="170dp"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/view_dummy_start_screen"
+            android:gravity="center"
+            android:padding="40dp"
+            android:text="History" />
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/btn_about_start_screen"
+        style="@style/AppButton"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/rl_main_container"
+        android:layout_marginRight="50dp"
+        android:layout_marginTop="@dimen/activity_horizontal_margin"
+        android:gravity="center"
+        android:paddingLeft="50dp"
+        android:paddingRight="50dp"
+        android:text="About" />
+
+</RelativeLayout>

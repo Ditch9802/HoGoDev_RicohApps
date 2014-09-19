@@ -218,7 +218,7 @@
                     android:visibility="invisible" />
 
                 <Button
-                    android:id="@+id/btnLogin"
+                    android:id="@+id/btn_create_user"
                     style="@style/AppButton"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"

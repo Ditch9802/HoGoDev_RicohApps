@@ -8,49 +8,79 @@
 
     <include
         android:id="@+id/copy_right_login"
-        layout="@layout/logo_copyright"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/activity_horizontal_margin"
+        layout="@layout/logo_copyright" />
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/copy_right_login"
-        android:layout_marginTop="10dp" >
+        android:layout_below="@+id/copy_right_login" >
 
         <LinearLayout
             android:id="@+id/login_form"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:gravity="center_horizontal"
             android:orientation="vertical"
             android:paddingLeft="30dp"
             android:paddingRight="30dp" >
 
-            <TextView
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingBottom="@dimen/activity_horizontal_margin"
+                android:weightSum="10" >
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:gravity="left"
+                    android:text="User name:" />
+
+                <EditText
+                    android:id="@+id/et_user_name"
+                    style="@style/TextBox"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="7"
+                    android:drawableLeft="@drawable/ic_account"
+                    android:hint="Enter your e-mail address" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingBottom="@dimen/activity_horizontal_margin"
+                android:weightSum="10" >
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:gravity="left"
+                    android:text="Password:" />
+
+                <EditText
+                    android:id="@+id/et_user_password"
+                    style="@style/TextBox"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="7"
+                    android:drawableLeft="@drawable/ic_password"
+                    android:hint="Enter your password"
+                    android:inputType="textPassword" />
+            </LinearLayout>
+
+            <CheckBox
+                android:id="@+id/chk_keep_login"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/hello_world"
-                android:visibility="gone" />
-
-            <EditText
-                android:id="@+id/et_user_name"
-                style="@style/TextBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/margin_16px"
-                android:drawableLeft="@drawable/ic_account"
-                android:hint="Enter your e-mail address" />
-
-            <EditText
-                android:id="@+id/et_user_password"
-                style="@style/TextBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/margin_16px"
-                android:drawableLeft="@drawable/ic_password"
-                android:hint="Enter your password"
-                android:inputType="textPassword" />
+                android:text="Keep me logged in" />
 
             <Button
                 android:id="@+id/btnLogin"
@@ -59,15 +89,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:gravity="center"
-                android:text="LOG IN" />
+                android:text="CREATE NEW ACCOUNT" />
         </LinearLayout>
     </ScrollView>
-
-    <ProgressBar
-        android:id="@+id/pr_bar_login"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:visibility="gone" />
 
 </RelativeLayout>

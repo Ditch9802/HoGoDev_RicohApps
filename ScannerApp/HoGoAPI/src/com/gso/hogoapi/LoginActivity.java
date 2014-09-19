@@ -30,7 +30,6 @@ public class LoginActivity extends FragmentActivity implements IServiceListener 
 	private Object mIsKeepMein;
 	private EditText mEtUsername;
 	private EditText mEtUserpassword;
-	private ProgressBar mPrBar;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +37,6 @@ public class LoginActivity extends FragmentActivity implements IServiceListener 
 		setContentView(R.layout.activity_main);
 		mEtUsername = (EditText) findViewById(R.id.et_user_name);
 		mEtUserpassword = (EditText) findViewById(R.id.et_user_password);
-		mPrBar = (ProgressBar) findViewById(R.id.pr_bar_login);
 
 	}
 
@@ -90,7 +88,6 @@ public class LoginActivity extends FragmentActivity implements IServiceListener 
 		params.put("Password", mPassword);
 		params.put("KeepMeLogin", mIsKeepMein);
 		service.login(ServiceAction.ActionLogin, APIType.LOGIN, params);
-		setProgressVisibility(true);
 	}
 
 	@Override
@@ -117,11 +114,6 @@ public class LoginActivity extends FragmentActivity implements IServiceListener 
 			}
 
 		}
-		setProgressVisibility(false);
-	}
-
-	private void setProgressVisibility(boolean isShow) {
-		mPrBar.setVisibility(isShow ? View.VISIBLE : View.GONE);
 	}
 
 	private void gotoUpdateScreen() {
