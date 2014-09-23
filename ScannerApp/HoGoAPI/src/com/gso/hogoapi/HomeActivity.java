@@ -10,10 +10,14 @@ import jp.co.ricoh.ssdk.sample.app.scan.application.ScanSampleApplication;
 import jp.co.ricoh.ssdk.sample.function.scan.ScanPDF;
 
 import com.gso.hogoapi.fragement.LoginFragment;
+import com.gso.hogoapi.fragement.AppScanFragment.OnFinishedScanningListener;
 import com.gso.hogoapi.fragement.LoginFragment.OnLoginFragmentListener;
 import com.gso.hogoapi.fragement.AppScanFragment;
+import com.gso.hogoapi.fragement.PreviewFragment;
 import com.gso.hogoapi.fragement.SignUpFragment;
 import com.gso.hogoapi.fragement.StartScreenFragment;
+import com.gso.hogoapi.fragement.StartScreenFragment.OnStartScreenListener;
+import com.gso.hogoapi.fragement.UploadFileFragment;
 import com.gso.hogoapi.model.FileUpload;
 import com.gso.hogoapi.util.pdf.JpegToPDF;
 
@@ -26,14 +30,16 @@ import android.util.Log;
 import android.widget.Toast;
 
 public class HomeActivity extends ScanActivity implements
-		OnLoginFragmentListener {
-	
+		OnLoginFragmentListener, OnFinishedScanningListener,
+		OnStartScreenListener {
+
 	final boolean isEmulatorMode = true;
 
 	private final String TAG_FRAGMENT_LOGIN = "TAG_FRAGMENT_LOGIN";
 	private final String TAG_FRAGMENT_SCAN_SETTINGS = "TAG_FRAGMENT_SCAN_SETTINGS";
 	private final String TAG_FRAGMENT_SIGNUP = "TAG_FRAGMENT_SIGNUP";
 	private final String TAG_FRAGMENT_START_SCREEN = "TAG_FRAGMENT_START_SCREEN";
+	private final String TAG_FRAGMENT_PREVIEW = "TAG_FRAGMENT_PREVIEW";
 
 	@Override
 	protected void onCreate(Bundle arg0) {
@@ -41,15 +47,25 @@ public class HomeActivity extends ScanActivity implements
 		setContentView(R.layout.content_frame);
 
 		if (arg0 == null) {
-			addFragment(TAG_FRAGMENT_SCAN_SETTINGS, false);
+			addFragment(TAG_FRAGMENT_LOGIN, null, false);
 		}
 	}
+
 	@Override
 	protected void onResume() {
 		super.onResume();
 	}
 
-	private void addFragment(String tag, boolean backward) {
+	@Override
+	public void onBackPressed() {
+		if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
+			getSupportFragmentManager().popBackStack();
+		} else {
+			super.onBackPressed();
+		}
+	}
+
+	private void addFragment(String tag, Object data, boolean backward) {
 		Fragment fragContent = null;
 		if (tag == TAG_FRAGMENT_LOGIN) {
 			fragContent = new LoginFragment();
@@ -59,13 +75,20 @@ public class HomeActivity extends ScanActivity implements
 			fragContent = new StartScreenFragment();
 		} else if (tag == TAG_FRAGMENT_SCAN_SETTINGS) {
 			fragContent = new AppScanFragment();
+		} else if (tag == TAG_FRAGMENT_PREVIEW) {
+			fragContent = new PreviewFragment();
+			if (data != null) {
+				Bundle bundle = new Bundle();
+				bundle.putSerializable("file", (FileUpload) data);
+				fragContent.setArguments(bundle);
+			}
 		}
 
 		if (fragContent != null) {
 			FragmentTransaction mTransaction = getSupportFragmentManager()
 					.beginTransaction();
 			mTransaction.replace(R.id.content_frame, fragContent, tag);
-			if (backward)
+			if (backward || tag == TAG_FRAGMENT_START_SCREEN)
 				mTransaction.addToBackStack(null);
 
 			mTransaction.commit();
@@ -74,19 +97,21 @@ public class HomeActivity extends ScanActivity implements
 
 	@Override
 	public void onCreateAccount() {
-		addFragment(TAG_FRAGMENT_SIGNUP, true);
+		addFragment(TAG_FRAGMENT_SIGNUP, null, true);
 	}
 
 	@Override
 	public void onStartScreen() {
-		addFragment(TAG_FRAGMENT_START_SCREEN, false);
+		addFragment(TAG_FRAGMENT_START_SCREEN, null, false);
 	}
-	
+
 	ScanPDF mScanPDF;
+
 	@Override
 	public void onJobCompleted() {
 		super.onJobCompleted();
-		mScanPDF = new ScanPDF(((ScanSampleApplication) getApplication()).getScanJob());
+		mScanPDF = new ScanPDF(
+				((ScanSampleApplication) getApplication()).getScanJob());
 		/**
 		 * Continue by change to send screen. After user click send. You can get
 		 * inputStream by call ((MainActivity)getActivity).getPDFInputStream().
@@ -95,8 +120,10 @@ public class HomeActivity extends ScanActivity implements
 			@Override
 			protected FileUpload doInBackground(Void... params) {
 				// How to get inputStream.
-				final String localPath = HomeActivity.this.getFilesDir() + "/hogodoc_scan.jpg";
-				final String pdfPath = HomeActivity.this.getFilesDir() + "/hogodoc_scan.pdf";			
+				final String localPath = HomeActivity.this.getFilesDir()
+						+ "/hogodoc_scan.jpg";
+				final String pdfPath = HomeActivity.this.getFilesDir()
+						+ "/hogodoc_scan.pdf";
 				Log.d("pdfPath", "pdfPath" + pdfPath);
 				InputStream in = null;
 				try {
@@ -104,8 +131,7 @@ public class HomeActivity extends ScanActivity implements
 					if (isEmulatorMode) {
 						// process output image
 						write(mScanPDF.getImageInputStream(), localPath);
-					} else
-					{
+					} else {
 						// process output PDF in real device
 						write(mScanPDF.getImageInputStream(), pdfPath);
 					}
@@ -116,7 +142,8 @@ public class HomeActivity extends ScanActivity implements
 							@Override
 							public void run() {
 								// update ui here
-								Toast.makeText(getApplicationContext(),
+								Toast.makeText(
+										getApplicationContext(),
 										"Scan Job Completed! Please wait a moment ...",
 										Toast.LENGTH_SHORT).show();
 							}
@@ -128,15 +155,16 @@ public class HomeActivity extends ScanActivity implements
 						JpegToPDF convert = new JpegToPDF();
 						File file = new File(pdfPath);
 						FileOutputStream fos = new FileOutputStream(file);
-						boolean result = convert.convertJpegToPDF(localPath, fos);
+						boolean result = convert.convertJpegToPDF(localPath,
+								fos);
 						if (!result) {
 							runOnUiThread(new Runnable() {
 								@Override
 								public void run() {
 									// update ui here
 									Toast.makeText(getApplicationContext(),
-											"Cannot convert Image to PDF!", Toast.LENGTH_SHORT)
-											.show();
+											"Cannot convert Image to PDF!",
+											Toast.LENGTH_SHORT).show();
 								}
 							});
 						}
@@ -152,8 +180,9 @@ public class HomeActivity extends ScanActivity implements
 						@Override
 						public void run() {
 							// update ui here
-							Toast.makeText(getApplicationContext(), "Error: " + exMessage,
-									Toast.LENGTH_LONG).show();
+							Toast.makeText(getApplicationContext(),
+									"Error: " + exMessage, Toast.LENGTH_LONG)
+									.show();
 						}
 					});
 
@@ -174,14 +203,19 @@ public class HomeActivity extends ScanActivity implements
 			protected void onPostExecute(FileUpload result) {
 				super.onPostExecute(result);
 				if (result != null) {
-//					gotoUpdateScreen(result);
+					Fragment frag = getSupportFragmentManager()
+							.findFragmentByTag(TAG_FRAGMENT_SCAN_SETTINGS);
+					if (frag != null && frag instanceof AppScanFragment) {
+						((AppScanFragment) frag).onFinishedScanning(result);
+					}
 				}
 			}
 		}.execute();
 
 	}
-	
-	public static void write(InputStream inStream, String output) throws IOException {
+
+	public static void write(InputStream inStream, String output)
+			throws IOException {
 		final File outputFile = new File(output);
 		final File parent = outputFile.getParentFile();
 		if (!parent.exists()) {
@@ -196,5 +230,17 @@ public class HomeActivity extends ScanActivity implements
 		inStream.close();
 		outStream.flush();
 		outStream.close();
+	}
+
+	@Override
+	public void onFinishedScanning(FileUpload result) {
+		addFragment(TAG_FRAGMENT_PREVIEW, result, false);
+	}
+
+	@Override
+	public void onStartScreenButtonClicked(int button) {
+		if (button == StartScreenFragment.BUTTON_SEND) {
+			addFragment(TAG_FRAGMENT_SCAN_SETTINGS, null, true);
+		}
 	}
 }

@@ -1,7 +1,12 @@
 package com.gso.hogoapi.fragement;
 
+import java.io.File;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
+
+import org.apache.http.entity.mime.content.FileBody;
 
 import jp.co.ricoh.ssdk.sample.app.scan.activity.AddressActivity;
 import jp.co.ricoh.ssdk.sample.app.scan.activity.DialogUtil;
@@ -51,10 +56,22 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.gso.hogoapi.APIType;
+import com.gso.hogoapi.HoGoApplication;
+import com.gso.hogoapi.MainActivity;
 import com.gso.hogoapi.R;
+import com.gso.hogoapi.model.FileData;
+import com.gso.hogoapi.model.FileUpload;
+import com.gso.hogoapi.model.ResponseData;
+import com.gso.hogoapi.service.DataParser;
+import com.gso.serviceapilib.IServiceListener;
+import com.gso.serviceapilib.Service;
+import com.gso.serviceapilib.ServiceAction;
+import com.gso.serviceapilib.ServiceResponse;
 
-public class AppScanFragment extends Fragment {
+public class AppScanFragment extends Fragment implements IServiceListener {
 
 	private final static String TAG = ScanFragment.class.getSimpleName();
 
@@ -161,6 +178,21 @@ public class AppScanFragment extends Fragment {
 	 */
 	private boolean mMultipleRunning = false;
 	private CheckBox chkPreview;
+	OnFinishedScanningListener mFinishedScanningListener;
+
+	public interface OnFinishedScanningListener {
+		public void onFinishedScanning(FileUpload result);
+	}
+
+	@Override
+	public void onAttach(Activity activity) {
+		super.onAttach(activity);
+		try {
+			mFinishedScanningListener = (OnFinishedScanningListener) activity;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -294,7 +326,7 @@ public class AppScanFragment extends Fragment {
 				DialogUtil.showDialog(dialog);
 			}
 		});
-		
+
 		// (7)
 		chkPreview = (CheckBox) view.findViewById(R.id.chk_show_preview);
 
@@ -303,7 +335,6 @@ public class AppScanFragment extends Fragment {
 		mButtonStart.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				if(chkPreview.isChecked())
 				mStateMachine.procScanEvent(ScanEvent.REQUEST_JOB_START);
 			}
 		});
@@ -789,13 +820,13 @@ public class AppScanFragment extends Fragment {
 				}
 			}
 
-//			final String result = stateLabel;
-//			mHandler.post(new Runnable() {
-//				@Override
-//				public void run() {
-//					text_state.setText(result);
-//				}
-//			});
+			// final String result = stateLabel;
+			// mHandler.post(new Runnable() {
+			// @Override
+			// public void run() {
+			// text_state.setText(result);
+			// }
+			// });
 
 			// (2)
 			if (OccuredErrorLevel.ERROR.equals(errorLevel)
@@ -979,6 +1010,7 @@ public class AppScanFragment extends Fragment {
 				mButtonSide.setText(mScanSettingDataHolder
 						.getSelectedSideLabel());
 				enableSettingKey();
+				enableStartKey();
 				mStateMachine.procScanEvent(ScanEvent.ACTIVITY_BOOT_COMPLETED);
 			} else {
 				// the connection is invalid.
@@ -1010,7 +1042,7 @@ public class AppScanFragment extends Fragment {
 	 * èª­å�–é–‹å§‹ãƒœã‚¿ãƒ³ã‚’ç„¡åŠ¹åŒ–ã�—ã�¾ã�™ã€‚ Disables the start button.
 	 */
 	private void disableStartKey() {
-		 mButtonStart.setEnabled(false);
+		mButtonStart.setEnabled(false);
 	}
 
 	/**
@@ -1093,6 +1125,75 @@ public class AppScanFragment extends Fragment {
 			return null;
 		}
 
+	}
+
+	public void onFinishedScanning(FileUpload result) {
+		Log.w(TAG, "isPreview:" + chkPreview.isChecked());
+		if (chkPreview.isChecked()) {
+			mFinishedScanningListener.onFinishedScanning(result);
+		} else {
+			// upload and encode file
+			Service service = new Service(this);
+			Map<String, Object> params = new HashMap<String, Object>();
+			params.put("SessionID",
+					HoGoApplication.instace().getToken(getActivity()));
+			try {
+				String oldFile = getFileNameWithoutExtn(result.getPdfPath());
+				// String url = mFileUpload.getPdfPath().replace(oldFile,
+				// mEtFilePath.getText());
+				File file = new File("" + result.getPdfPath());
+				if (file.exists()) {
+					FileBody encFile = new FileBody(file, "pdf");
+					params.put("File", encFile);
+				}
+
+			} catch (Exception e) {
+				// TODO: handle exception
+				e.printStackTrace();
+			}
+			service.login(ServiceAction.ActionUpload, APIType.UPLOAD, params);
+		}
+	}
+
+	public static String getFileNameWithoutExtn(String url) {
+		String fileName = url.substring(url.lastIndexOf('/') + 1, url.length());
+		String fileNameWithoutExtn = fileName.substring(0,
+				fileName.lastIndexOf('.'));
+		return fileNameWithoutExtn;
+	}
+
+	@Override
+	public void onCompleted(Service service, ServiceResponse result) {
+		if (result.isSuccess()
+				&& result.getAction() == ServiceAction.ActionUpload) {
+			Log.d("Upload onCompleted", "onCompleted " + result.getData());
+			DataParser parser = new DataParser(true);
+			ResponseData resData = parser.parseUpdateResult((String) result
+					.getData());
+			FileData parseData = (FileData) resData.getData();
+
+			if ("OK".equals(resData.getStatus())) {
+				// if(getActivity()!=null &&!getActivity().isFinishing()){
+				// Toast.makeText(getActivity(),
+				// "Document uploaded successfully, please waiting for encoding data.",
+				// Toast.LENGTH_LONG).show();
+				// parseData.setFileTitle(""+mEtFilePath.getText().toString());
+				// }
+				// ((MainActivity) getActivity()).deleteFile(mFileUpload);
+				// ((MainActivity) getActivity()).gotoEncodeScreen(parseData);
+			} else if ("SessionIdNotFound"
+					.equalsIgnoreCase(resData.getStatus())) {
+				HoGoApplication.instace().setToken(getActivity(), null);
+				// ((MainActivity) getActivity()).gotologinScreen();
+			} else {
+				if (getActivity() != null) {
+					if (!getActivity().isFinishing())
+						Toast.makeText(getActivity(), "Upload Fail",
+								Toast.LENGTH_LONG).show();
+				}
+
+			}
+		}
 	}
 
 }

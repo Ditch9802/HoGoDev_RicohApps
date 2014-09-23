@@ -63,8 +63,8 @@ public class StartScreenFragment extends Fragment implements OnClickListener {
 		if (id == btnAbout.getId())
 			mListener.onStartScreenButtonClicked(BUTTON_ABOUT);
 		else if (id == btnSend.getId())
-			mListener.onStartScreenButtonClicked(BUTTON_HISTORY);
-		else if (id == btnHistory.getId())
 			mListener.onStartScreenButtonClicked(BUTTON_SEND);
+		else if (id == btnHistory.getId())
+			mListener.onStartScreenButtonClicked(BUTTON_HISTORY);
 	}
 }
