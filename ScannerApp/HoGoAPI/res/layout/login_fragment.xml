@@ -42,6 +42,7 @@
                     android:text="User name:" />
 
                 <EditText
+                    android:text="lxanh@tma.com.vn"
                     android:id="@+id/et_user_name"
                     style="@style/TextBox"
                     android:layout_width="0dp"
@@ -66,6 +67,7 @@
                     android:text="Password:" />
 
                 <EditText
+                    android:text="123456"
                     android:id="@+id/et_user_password"
                     style="@style/TextBox"
                     android:layout_width="0dp"

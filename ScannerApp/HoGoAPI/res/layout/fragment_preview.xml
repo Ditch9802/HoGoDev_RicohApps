@@ -6,6 +6,8 @@
     android:padding="@dimen/activity_horizontal_margin" >
 
     <FrameLayout
+        android:layout_marginTop="@dimen/normal_size"
+        android:layout_below="@+id/tv_preview"
         android:id="@+id/img_preview_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -20,7 +22,15 @@
             android:visibility="gone" />
     </FrameLayout>
 
-    <Button
+    <TextView
+        android:textStyle="bold"
+        android:id="@+id/tv_preview"
+        android:gravity="center_horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/preview_text" />
+
+	<Button
         android:id="@+id/btn_next_preview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

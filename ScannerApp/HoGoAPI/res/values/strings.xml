@@ -8,5 +8,6 @@
     <string name="send_document">Send Document</string>
     <string name="my_document">My Document</string>
     <string name="send_history">Send History</string>
-
+   <string name="preview_text">Document Preview</string>
+    
 </resources>
