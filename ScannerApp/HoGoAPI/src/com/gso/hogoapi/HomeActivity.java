@@ -9,6 +9,7 @@ import jp.co.ricoh.ssdk.sample.app.scan.activity.ScanActivity;
 import jp.co.ricoh.ssdk.sample.app.scan.application.ScanSampleApplication;
 import jp.co.ricoh.ssdk.sample.function.scan.ScanPDF;
 
+import com.gso.hogoapi.fragement.HistoryFragment;
 import com.gso.hogoapi.fragement.LoginFragment;
 import com.gso.hogoapi.fragement.AppScanFragment.OnFinishedScanningListener;
 import com.gso.hogoapi.fragement.LoginFragment.OnLoginFragmentListener;
@@ -33,6 +34,9 @@ public class HomeActivity extends ScanActivity implements
 		OnLoginFragmentListener, OnFinishedScanningListener,
 		OnStartScreenListener {
 
+
+	private static final String TAG = HomeActivity.class.getSimpleName();
+
 	final boolean isEmulatorMode = true;
 
 	private final String TAG_FRAGMENT_LOGIN = "TAG_FRAGMENT_LOGIN";
@@ -40,6 +44,7 @@ public class HomeActivity extends ScanActivity implements
 	private final String TAG_FRAGMENT_SIGNUP = "TAG_FRAGMENT_SIGNUP";
 	private final String TAG_FRAGMENT_START_SCREEN = "TAG_FRAGMENT_START_SCREEN";
 	private final String TAG_FRAGMENT_PREVIEW = "TAG_FRAGMENT_PREVIEW";
+	private final String TAG_FRAGMENT_HISTORY = "TAG_FRAGMENT_HISTORY";
 
 	@Override
 	protected void onCreate(Bundle arg0) {
@@ -47,7 +52,13 @@ public class HomeActivity extends ScanActivity implements
 		setContentView(R.layout.content_frame);
 
 		if (arg0 == null) {
-			addFragment(TAG_FRAGMENT_LOGIN, null, false);
+			final String token = HoGoApplication.instace().getToken(getApplicationContext());
+			Log.d(TAG, "token: " + token );
+			if(token == null) {
+				addFragment(TAG_FRAGMENT_LOGIN, null, false);
+			} else {
+				onStartScreen();
+			}
 		}
 	}
 
@@ -75,6 +86,8 @@ public class HomeActivity extends ScanActivity implements
 			fragContent = new StartScreenFragment();
 		} else if (tag == TAG_FRAGMENT_SCAN_SETTINGS) {
 			fragContent = new AppScanFragment();
+		} else if (tag == TAG_FRAGMENT_HISTORY) {
+			fragContent = new HistoryFragment();
 		} else if (tag == TAG_FRAGMENT_PREVIEW) {
 			fragContent = new PreviewFragment();
 			if (data != null) {
@@ -241,6 +254,8 @@ public class HomeActivity extends ScanActivity implements
 	public void onStartScreenButtonClicked(int button) {
 		if (button == StartScreenFragment.BUTTON_SEND) {
 			addFragment(TAG_FRAGMENT_SCAN_SETTINGS, null, true);
+		} else if (button == StartScreenFragment.BUTTON_HISTORY) {
+			addFragment(TAG_FRAGMENT_HISTORY, null, true);
 		}
 	}
 }

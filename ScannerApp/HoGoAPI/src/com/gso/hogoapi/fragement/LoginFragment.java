@@ -90,7 +90,8 @@ public class LoginFragment extends Fragment implements IServiceListener {
 					KeyEvent event) {
 				if (actionId == EditorInfo.IME_ACTION_DONE) {
 					// do something
-					mLoginFragmentListener.onStartScreen();
+//					mLoginFragmentListener.onStartScreen();
+					exeLogin();
 				}
 				return false;
 			}

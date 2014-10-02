@@ -11,6 +11,7 @@ public class APIType {
 	public static final String ADDRESS_BOOK = "/v1/GetRecipientListDetail";
 	public static final String GET_MY_DOCUMENT = "/v1/GetDocumentList";
 	public static final String SEND_PACKAGE_NOTE = "/v1/SendPackageNotice";
+	public static final String GET_ALL_HISTORY = "/v1/GetAllHistory";
 
 	/**
 	 * @param args
