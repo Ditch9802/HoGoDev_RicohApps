@@ -18,6 +18,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
@@ -50,6 +51,7 @@ public class LoginFragment extends Fragment implements IServiceListener {
 	private ProgressDialog mDialog;
 
 	OnLoginFragmentListener mLoginFragmentListener;
+	private CheckBox cbxKeepMeLogedIn;
 
 	public interface OnLoginFragmentListener {
 		public void onCreateAccount();
@@ -75,22 +77,21 @@ public class LoginFragment extends Fragment implements IServiceListener {
 	}
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		View v = inflater.inflate(R.layout.login_fragment, container, false);
 		mEtUsername = (EditText) v.findViewById(R.id.et_user_name);
 		mEtUserpassword = (EditText) v.findViewById(R.id.et_user_password);
 		btnCreateAccount = (Button) v.findViewById(R.id.btnLogin);
+		cbxKeepMeLogedIn = (CheckBox) v.findViewById(R.id.chk_keep_login);
 
 		// set listeners
 		mEtUserpassword.setOnEditorActionListener(new OnEditorActionListener() {
 			@Override
-			public boolean onEditorAction(TextView v, int actionId,
-					KeyEvent event) {
+			public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
 				if (actionId == EditorInfo.IME_ACTION_DONE) {
 					// do something
-					mLoginFragmentListener.onStartScreen();
+					onLoginClicked();
 				}
 				return false;
 			}
@@ -110,9 +111,7 @@ public class LoginFragment extends Fragment implements IServiceListener {
 
 		@Override
 		public boolean onKey(View v, int keyCode, KeyEvent event) {
-			if ((event.getAction() == KeyEvent.ACTION_DOWN)
-					&& (keyCode == KeyEvent.KEYCODE_ENTER)) {
-				// onLoginClicked();
+			if ((event.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
 				mLoginFragmentListener.onStartScreen();
 
 			}
@@ -124,8 +123,8 @@ public class LoginFragment extends Fragment implements IServiceListener {
 	public void onLoginClicked() {
 		if (checkInputData()) {
 			Log.w("Login", "DONE");
-			// mDialog.show();
-			// exeLogin();
+			mDialog.show();
+			exeLogin();
 		} else {
 			Log.w("Login", "FAILED");
 		}
@@ -135,8 +134,7 @@ public class LoginFragment extends Fragment implements IServiceListener {
 	private boolean checkInputData() {
 		// TODO Auto-generated method stub
 		boolean isEnough = true;
-		Animation shake = AnimationUtils.loadAnimation(getActivity(),
-				R.anim.shake);
+		Animation shake = AnimationUtils.loadAnimation(getActivity(), R.anim.shake);
 		String user = mEtUsername.getText().toString();
 		String pass = mEtUserpassword.getText().toString();
 		if (user.length() == 0) {
@@ -159,6 +157,7 @@ public class LoginFragment extends Fragment implements IServiceListener {
 		// TODO Auto-generated method stub
 		mUserName = mEtUsername.getText().toString();// "lxanh@tma.com.vn"
 		mPassword = "" + md5(mEtUserpassword.getText().toString());// "e10adc3949ba59abbe56e057f20f883e"
+		mIsKeepMein = cbxKeepMeLogedIn.isChecked();
 		Service service = new Service(this);
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("EmailAddress", mUserName);
@@ -168,29 +167,22 @@ public class LoginFragment extends Fragment implements IServiceListener {
 	}
 
 	@Override
-	public void onCompleted(com.gso.serviceapilib.Service service,
-			ServiceResponse result) {
+	public void onCompleted(com.gso.serviceapilib.Service service, ServiceResponse result) {
 		mDialog.dismiss();
 
-		if (result.isSuccess()
-				&& result.getAction() == ServiceAction.ActionLogin) {
+		if (result.isSuccess() && result.getAction() == ServiceAction.ActionLogin) {
 			String resultString = (String) result.getData();
-			Log.d("onCompleted", "onCompleted " + result.getAction() + " "
-					+ resultString);
+			Log.d("onCompleted", "onCompleted " + result.getAction() + " " + resultString);
 			if (resultString != null) {
 				DataParser parser = new DataParser(true);
-				LoginData parseData = (LoginData) parser
-						.parseLogin(resultString);
+				LoginData parseData = (LoginData) parser.parseLogin(resultString);
 				if (parseData.isStatus()) {
-					Toast.makeText(getActivity(), "Login success",
-							Toast.LENGTH_LONG).show();
-					HoGoApplication.instace().setToken(getActivity(),
-							parseData.getToken());
+					Toast.makeText(getActivity(), "Login success", Toast.LENGTH_LONG).show();
+					HoGoApplication.instace().setToken(getActivity(), parseData.getToken(), mIsKeepMein);
 
 					mLoginFragmentListener.onStartScreen();
 				} else {
-					Toast.makeText(getActivity(), "Login Fail",
-							Toast.LENGTH_LONG).show();
+					Toast.makeText(getActivity(), "Login Fail", Toast.LENGTH_LONG).show();
 				}
 			}
 

@@ -1,5 +1,6 @@
 package com.gso.hogoapi;
 
+import com.gso.hogoapi.util.SharedPreferencesManager;
 import com.gso.serviceapilib.API;
 import com.gso.serviceapilib.ServiceAPILibApplication;
 import com.gso.serviceapilib.ServiceAction;
@@ -11,8 +12,8 @@ import jp.co.ricoh.ssdk.sample.app.scan.application.ScanSampleApplication;
 
 public class HoGoApplication extends ScanSampleApplication {
 
-	private static final String PREFS_NAME = "user_data";
-
+	private static SharedPreferencesManager sharedPreferenceManager;
+	private static String sToken;
 	/**
 	 * @param args
 	 */
@@ -40,23 +41,43 @@ public class HoGoApplication extends ScanSampleApplication {
 
 	public String getToken(Context context) {
 		// TODO Auto-generated method stub
-		String token = null;
-		SharedPreferences account = context.getApplicationContext().getSharedPreferences(PREFS_NAME, 0);
-		if(account !=null){
-			token = account.getString("token", null);
-			ServiceAPILibApplication.token = token;
+		String token = sToken;
+		if(sToken == null){
+			SharedPreferencesManager account = getSharedPreferencesManager(context);
+			if(account !=null){
+				token = account.loadSession();
+			}
 		}
 		return token;
 	}
 	public void setToken(Context context, String token){
-		SharedPreferences account = context.getApplicationContext().getSharedPreferences(PREFS_NAME, 0);
-		SharedPreferences.Editor editor = account.edit();
 		if(token!=null){
-			editor.putString("token", token);
+			getSharedPreferencesManager(context).saveSession(token);
 		}else{
-			editor.remove("token");
+			getSharedPreferencesManager(context).clearSession();
 		}
-		editor.commit();
+	}
+	
+	public void setToken(Context context, String token, boolean isKeepLoggedIn){
+		if(token!=null){
+			if(isKeepLoggedIn){
+				sToken = token;
+				getSharedPreferencesManager(context).saveSession(token);
+			}else{
+				sToken = token;
+			}
+			
+		}else{
+			getSharedPreferencesManager(context).clearSession();
+		}
+	}
+	
+	public SharedPreferencesManager getSharedPreferencesManager(Context context){
+		if(sharedPreferenceManager == null){
+			sharedPreferenceManager = new SharedPreferencesManager(context);
+		}
+		
+		return sharedPreferenceManager;
 	}
 
 }

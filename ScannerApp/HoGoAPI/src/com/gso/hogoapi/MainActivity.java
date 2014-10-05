@@ -29,6 +29,7 @@ import org.apache.http.entity.mime.content.StringBody;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
@@ -45,9 +46,15 @@ import com.gso.hogoapi.fragement.AppScanFragment;
 import com.gso.hogoapi.fragement.BookShelfFragment;
 import com.gso.hogoapi.fragement.EncodeFileFragment;
 import com.gso.hogoapi.fragement.LoginFragment;
+import com.gso.hogoapi.fragement.PreviewFragment;
 import com.gso.hogoapi.fragement.SendFileFragment;
 import com.gso.hogoapi.fragement.SendHistoryFragment;
+import com.gso.hogoapi.fragement.SignUpFragment;
+import com.gso.hogoapi.fragement.StartScreenFragment;
 import com.gso.hogoapi.fragement.UploadFileFragment;
+import com.gso.hogoapi.fragement.AppScanFragment.OnFinishedScanningListener;
+import com.gso.hogoapi.fragement.LoginFragment.OnLoginFragmentListener;
+import com.gso.hogoapi.fragement.StartScreenFragment.OnStartScreenListener;
 import com.gso.hogoapi.model.FileData;
 import com.gso.hogoapi.model.FileUpload;
 import com.gso.hogoapi.model.SendData;
@@ -56,7 +63,8 @@ import com.gso.hogoapi.views.RadioGroupController;
 import com.gso.hogoapi.views.TabButton;
 
 public class MainActivity extends ScanActivity implements
-		RadioGroupController.OnCheckedChangeListener, OnClickListener {
+		RadioGroupController.OnCheckedChangeListener, OnClickListener,OnLoginFragmentListener, OnFinishedScanningListener,
+		OnStartScreenListener  {
 
 	protected static final String TAG = MainActivity.class.getSimpleName();
 	private ProgressBar mPrBar;
@@ -72,6 +80,15 @@ public class MainActivity extends ScanActivity implements
 	//Setting mode for running in emulator or real Ricoh device
 	final boolean isEmulatorMode = true;
 
+	
+	//New code v2 
+	private final String TAG_FRAGMENT_LOGIN = "TAG_FRAGMENT_LOGIN";
+	private final String TAG_FRAGMENT_SCAN_SETTINGS = "TAG_FRAGMENT_SCAN_SETTINGS";
+	private final String TAG_FRAGMENT_SIGNUP = "TAG_FRAGMENT_SIGNUP";
+	private final String TAG_FRAGMENT_START_SCREEN = "TAG_FRAGMENT_START_SCREEN";
+	private final String TAG_FRAGMENT_PREVIEW = "TAG_FRAGMENT_PREVIEW";
+	//end 
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -86,7 +103,7 @@ public class MainActivity extends ScanActivity implements
 		mBottomBar = findViewById(R.id.bottom_bar);
 		mContent = (FrameLayout) findViewById(R.id.content);
 		initBottomBar();
-//		initContent();
+		initContent();
 	}
 
 	@Override
@@ -131,14 +148,16 @@ public class MainActivity extends ScanActivity implements
 	private void initContent() {
 		// TODO Auto-generated method stub
 		if (HoGoApplication.instace().getToken(this) != null) {
-			gotoScanScreen();
+//			gotoScanScreen();
+			onStartScreen();
 
 		} else {
-			mTopBar.setVisibility(View.GONE);
-			mBottomBar.setVisibility(View.GONE);
-			LoginFragment loginFragment = new LoginFragment();
-			FragmentTransaction transaction = mFramentManager.beginTransaction();
-			transaction.add(R.id.content, loginFragment).commit();
+//			mTopBar.setVisibility(View.GONE);
+//			mBottomBar.setVisibility(View.GONE);
+//			LoginFragment loginFragment = new LoginFragment();
+//			FragmentTransaction transaction = mFramentManager.beginTransaction();
+//			transaction.add(R.id.content, loginFragment).commit();
+			showLogin();
 
 		}
 
@@ -567,5 +586,60 @@ public class MainActivity extends ScanActivity implements
 	public void deleteFile(FileUpload mFileUpload) {
 		// TODO Auto-generated method stub
 		new ASynDeleteFile(mFileUpload).execute();
+	}
+	
+	//New code for v2
+	
+	private void addFragment(String tag, Object data, boolean backward) {
+		Fragment fragContent = null;
+		if (tag == TAG_FRAGMENT_LOGIN) {
+			fragContent = new LoginFragment();
+		} else if (tag == TAG_FRAGMENT_SIGNUP) {
+			fragContent = new SignUpFragment();
+		} else if (tag == TAG_FRAGMENT_START_SCREEN) {
+			setHeaderVisibility(false);
+			fragContent = new StartScreenFragment();
+		} else if (tag == TAG_FRAGMENT_SCAN_SETTINGS) {
+			fragContent = new AppScanFragment();
+		} else if (tag == TAG_FRAGMENT_PREVIEW) {
+			fragContent = new PreviewFragment();
+			if (data != null) {
+				Bundle bundle = new Bundle();
+				bundle.putSerializable("file", (FileUpload) data);
+				fragContent.setArguments(bundle);
+			}
+		}
+
+		if (fragContent != null) {
+			FragmentTransaction mTransaction = getSupportFragmentManager()
+					.beginTransaction();
+			mTransaction.replace(R.id.content, fragContent, tag);
+			if (backward || tag == TAG_FRAGMENT_START_SCREEN)
+				mTransaction.addToBackStack(null);
+
+			mTransaction.commit();
+		}
+	}
+
+	@Override
+	public void onCreateAccount() {
+		addFragment(TAG_FRAGMENT_SIGNUP, null, true);
+	}
+
+	@Override
+	public void onStartScreen() {
+		addFragment(TAG_FRAGMENT_START_SCREEN, null, false);
+	}
+
+	@Override
+	public void onFinishedScanning(FileUpload result) {
+		addFragment(TAG_FRAGMENT_PREVIEW, result, false);
+	}
+
+	@Override
+	public void onStartScreenButtonClicked(int button) {
+		if (button == StartScreenFragment.BUTTON_SEND) {
+			addFragment(TAG_FRAGMENT_SCAN_SETTINGS, null, true);
+		}
 	}
 }
