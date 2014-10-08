@@ -1,9 +1,21 @@
 package com.gso.hogoapi.fragement;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.json.JSONObject;
+
+import retrofit.client.Response;
+
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,9 +24,15 @@ import android.widget.ListView;
 import com.gso.hogoapi.HoGoApplication;
 import com.gso.hogoapi.R;
 import com.gso.hogoapi.adapter.HistoryAdapter;
+import com.gso.hogoapi.model.Document;
+import com.gso.hogoapi.model.History;
+import com.gso.hogoapi.model.HistoryDetail;
+import com.gso.hogoapi.model.PackageDistributionHeaderResponse;
+import com.gso.hogoapi.model.Recipient;
 import com.gso.hogoapi.model.ResponseHistory;
 import com.gso.hogoapi.service.Api;
 import com.gso.hogoapi.service.ApiImpl;
+import com.gso.hogoapi.util.JsonHelper;
 import com.gso.serviceapilib.IServiceListener;
 import com.gso.serviceapilib.Service;
 import com.gso.serviceapilib.ServiceAction;
@@ -24,7 +42,7 @@ public class HistoryFragment extends Fragment implements IServiceListener {
 
 	private final Api api = new ApiImpl();
 	private HistoryAdapter adapter;
-	private AsyncTask<Void, Void, ResponseHistory> task;
+	private AsyncTask<Void, Void, List<History>> task;
 	private ProgressDialog mDialog;
 
 	@Override
@@ -75,7 +93,7 @@ public class HistoryFragment extends Fragment implements IServiceListener {
 		final String StopDate = "09/21/2014 23:59:59";
 		final String SessionID = HoGoApplication.instace().getToken(
 				getActivity().getApplicationContext());
-		task = new AsyncTask<Void, Void, ResponseHistory>() {
+		task = new AsyncTask<Void, Void, List<History>>() {
 
 			@Override
 			protected void onPreExecute() {
@@ -83,26 +101,105 @@ public class HistoryFragment extends Fragment implements IServiceListener {
 				mDialog = ProgressDialog.show(getActivity(), null, "loading...",false, true);
 			}
 			@Override
-			protected ResponseHistory doInBackground(Void... params) {
-				return api.getAllHistory(sEcho, displayStart, displayLength,
+			protected List<History> doInBackground(Void... params) {
+				ResponseHistory responseHistory = api.getAllHistory(sEcho, displayStart, displayLength,
 						Type, StartDate, StopDate, SessionID);
+				if (responseHistory != null && "OK".equals(responseHistory.status)) {
+					
+					for (History history : responseHistory.history_detail) {
+						PackageDistributionHeaderResponse packageDistributionHeaderResponse = api.getPackageDistributionHeader(SessionID, history.packID);
+						if("OK".equals(packageDistributionHeaderResponse.status)) {
+							Response response = api.getPackageDistributionDetail(SessionID, history.packID);
+							if(response == null || response.getStatus() != 200) {
+								Log.d("HistoryFragment", "responseStatus: " + (response == null ? "" : response.getStatus()));
+								return null;
+							}
+							try {
+								String jsonString = readStream(response.getBody().in());
+								JSONObject jsonObject = JsonHelper.fromJsonString(jsonString);
+								if(jsonObject == null) return null;
+								String status = JsonHelper.getValue(jsonObject, "status");
+								if("OK".equals(status)) {
+									JSONObject detailObject = JsonHelper.getJsonObject(jsonObject, "detail");
+									if(detailObject == null) {
+										return null;
+									}
+									List<History> result = new ArrayList<History>();
+									for (Document document : packageDistributionHeaderResponse.documents) {
+										JSONObject documentObject = JsonHelper.getJsonObject(detailObject, document.id);
+										if(documentObject == null) continue;
+										for (Recipient recipient: packageDistributionHeaderResponse.recipients) {
+											JSONObject recipientObject = JsonHelper.getJsonObject(documentObject, recipient.id);
+											if(recipientObject == null) continue;
+											
+											HistoryDetail historyDetail = JsonHelper.fromJson(recipientObject.toString(), HistoryDetail.class);
+											if(historyDetail==null) continue;
+											
+											History item = new History();
+											item.historyID = history.historyID; 
+											item.historyType = history.historyType;
+											item.packID = history.packID;
+											item.documentName =  document.title;
+											item.recipientName = recipient.name;
+											item.recipientEmail = recipient.email;
+											item.createDate = history.createDate;
+											item.point = history.point;
+											item.paymentType = history.paymentType;
+											item.total = history.total;
+											item.status = historyDetail.status;
+											item.num_of_download = historyDetail.num_of_download;
+											item.be_download_id = historyDetail.be_download_id;
+											item.opened_status = historyDetail.opened_status;
+											item.opened_date = historyDetail.opened_date;
+											result.add(item);
+										}
+									}	
+									return result;
+								}
+							} catch (IOException e) {
+								e.printStackTrace();
+							}
+							
+							
+						}
+					}
+				}
+				return null;
 			}
 
+			private String readStream(InputStream in) throws IOException {
+				ByteArrayOutputStream baos = new ByteArrayOutputStream();
+	            if (in != null) {
+	              byte[] buf = new byte[2048];
+	              int r;
+	              while ((r = in.read(buf)) != -1) {
+	                baos.write(buf, 0, r);
+	              }
+	            }
+	            return new String(baos.toByteArray());
+			}
 			@Override
-			protected void onPostExecute(ResponseHistory result) {
+			protected void onPostExecute(List<History> result) {
 				super.onPostExecute(result);
 				if(mDialog != null) {
 					mDialog.dismiss();
 					mDialog = null;
 				}
-				if (result != null && "OK".equals(result.status)) {
-					adapter.changeDataSet(result.history_detail);
+				if (result != null) {
+					adapter.changeDataSet(result);
+				} else {
+					showAlert("Error", "Can not get data");
 				}
 			}
+			
 		};
 		task.execute();
 	}
-
+	
+	private void showAlert(String string, String string2) {
+		// TODO Auto-generated method stub
+		
+	}
 	@Override
 	public void onCompleted(Service service, ServiceResponse result) {
 		if (result.getAction() == ServiceAction.ActionGetAllHistory) {
