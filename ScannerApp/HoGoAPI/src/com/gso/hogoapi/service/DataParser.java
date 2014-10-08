@@ -6,11 +6,16 @@ import java.util.List;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import android.text.TextUtils;
+
+import com.google.gson.Gson;
+import com.google.gson.JsonParseException;
 import com.gso.hogoapi.model.AddressBookItem;
 import com.gso.hogoapi.model.FileData;
 import com.gso.hogoapi.model.LoginData;
 import com.gso.hogoapi.model.PackageData;
 import com.gso.hogoapi.model.ResponseData;
+import com.gso.hogoapi.model.ResponseHistory;
 import com.gso.hogoapi.model.SignUpData;
 
 public class DataParser {
@@ -185,6 +190,12 @@ public class DataParser {
 		}
 		return resData;
 	}
+	
+	final Gson gson = new Gson();
+	public ResponseHistory parseHistory(String input) throws JsonParseException {
+		if(TextUtils.isEmpty(input)) return null;
+		return gson.fromJson(input, ResponseHistory.class);
+	}
 
 	public ResponseData parseAddressBookResponse(String input) {
 		// TODO Auto-generated method stub
@@ -220,5 +231,7 @@ public class DataParser {
 		}
 		return resData;
 	}
+	
+	
 
 }
