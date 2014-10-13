@@ -614,7 +614,7 @@ public class MainActivity extends ScanActivity implements
 			FragmentTransaction mTransaction = getSupportFragmentManager()
 					.beginTransaction();
 			mTransaction.replace(R.id.content, fragContent, tag);
-			if (backward || tag == TAG_FRAGMENT_START_SCREEN)
+			if (!backward || tag == TAG_FRAGMENT_START_SCREEN)
 				mTransaction.addToBackStack(null);
 
 			mTransaction.commit();

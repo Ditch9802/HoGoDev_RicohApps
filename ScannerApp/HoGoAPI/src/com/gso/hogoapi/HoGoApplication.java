@@ -21,7 +21,8 @@ public class HoGoApplication extends ScanSampleApplication {
 	public void onCreate() {
 		// TODO Auto-generated method stub
 		super.onCreate();
-		API.hostURL = "http://avalanche.hogodoc.com/HoGoPDFX/api";
+//		API.hostURL = "http://avalanche.hogodoc.com/HoGoPDFX/api";
+		API.hostURL = "http://8.30.161.30:8080/HoGo/api";
 
 	}
 

@@ -2,16 +2,20 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="@dimen/top_bar_h"
-    android:background="@drawable/bg_top_bar"
+    android:background="@color/transparent"
     android:orientation="horizontal"
     android:paddingBottom="@dimen/top_bar_padding_bottom"
     android:paddingTop="@dimen/top_bar_padding_top" >
 
-    <ImageView
+
+    <TextView
+        style="@style/TextTitle"
+        android:id="@+id/tv_title_view"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:src="@drawable/hogo_logo" />
+        android:singleLine="true"
+        android:text="@string/title_login" />
 
     <ImageView
         android:id="@+id/action_send"
@@ -21,7 +25,7 @@
         android:layout_centerVertical="true"
         android:layout_marginRight="@dimen/margin_16px"
         android:src="@android:drawable/ic_menu_send"
-        android:visibility="gone" />
+        android:visibility="visible" />
 
     <ImageView
         android:id="@+id/action_add"
@@ -31,6 +35,6 @@
         android:layout_centerVertical="true"
         android:layout_marginRight="@dimen/margin_16px"
         android:src="@drawable/ic_action_add"
-        android:visibility="gone" />
+        android:visibility="visible" />
 
 </RelativeLayout>
