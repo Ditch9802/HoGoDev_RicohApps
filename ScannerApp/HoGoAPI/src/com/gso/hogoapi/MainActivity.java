@@ -331,8 +331,8 @@ public class MainActivity extends ScanActivity implements
 		// TODO Auto-generated method stub
 		if (keyCode == event.KEYCODE_BACK) {
 			//findViewById(R.id.top_bar).setVisibility(View.VISIBLE);
-			System.exit(1);
-			// onBackPressesd();
+//			System.exit(1);
+//			 onBackPressesd();
 		}
 		return super.onKeyDown(keyCode, event);
 	}
@@ -614,7 +614,7 @@ public class MainActivity extends ScanActivity implements
 			FragmentTransaction mTransaction = getSupportFragmentManager()
 					.beginTransaction();
 			mTransaction.replace(R.id.content, fragContent, tag);
-			if (!backward || tag == TAG_FRAGMENT_START_SCREEN)
+			if (backward || tag == TAG_FRAGMENT_START_SCREEN)
 				mTransaction.addToBackStack(null);
 
 			mTransaction.commit();
