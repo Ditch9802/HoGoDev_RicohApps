@@ -8,6 +8,7 @@ import com.gso.serviceapilib.ServiceAction;
 import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 import jp.co.ricoh.ssdk.sample.app.scan.application.ScanSampleApplication;
 
 public class HoGoApplication extends ScanSampleApplication {
@@ -49,6 +50,8 @@ public class HoGoApplication extends ScanSampleApplication {
 				token = account.loadSession();
 			}
 		}
+		Log.d("getToken","Session: "+token);
+		ServiceAPILibApplication.token = token;
 		return token;
 	}
 	public void setToken(Context context, String token){

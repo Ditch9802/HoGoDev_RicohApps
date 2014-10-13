@@ -177,7 +177,7 @@ public class LoginFragment extends Fragment implements IServiceListener {
 				DataParser parser = new DataParser(true);
 				LoginData parseData = (LoginData) parser.parseLogin(resultString);
 				if (parseData.isStatus()) {
-					Toast.makeText(getActivity(), "Login success", Toast.LENGTH_LONG).show();
+					Toast.makeText(getActivity(), "Login successful", Toast.LENGTH_LONG).show();
 					HoGoApplication.instace().setToken(getActivity(), parseData.getToken(), mIsKeepMein);
 
 					mLoginFragmentListener.onStartScreen();
