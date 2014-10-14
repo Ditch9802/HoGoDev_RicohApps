@@ -7,8 +7,10 @@ import retrofit.client.Response;
 import retrofit.http.POST;
 import retrofit.http.Query;
 
+import com.gso.hogoapi.HoGoApplication;
 import com.gso.hogoapi.model.PackageDistributionHeaderResponse;
 import com.gso.hogoapi.model.ResponseHistory;
+import com.gso.serviceapilib.API;
 
 public class ApiImpl implements Api {
 
@@ -23,7 +25,7 @@ public class ApiImpl implements Api {
 //		};
 
 		RestAdapter restAdapter = new RestAdapter.Builder()
-				.setEndpoint("http://avalanche.hogodoc.com/HoGo/api")
+				.setEndpoint(""+API.hostURL)
 				.setLogLevel(RestAdapter.LogLevel.FULL).build();
 
 		api = restAdapter.create(Api.class);

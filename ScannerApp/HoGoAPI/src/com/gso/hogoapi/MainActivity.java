@@ -45,6 +45,7 @@ import com.gso.hogoapi.fragement.AddFileSuccessfulFragment;
 import com.gso.hogoapi.fragement.AppScanFragment;
 import com.gso.hogoapi.fragement.BookShelfFragment;
 import com.gso.hogoapi.fragement.EncodeFileFragment;
+import com.gso.hogoapi.fragement.HistoryFragment;
 import com.gso.hogoapi.fragement.LoginFragment;
 import com.gso.hogoapi.fragement.PreviewFragment;
 import com.gso.hogoapi.fragement.SendFileFragment;
@@ -87,6 +88,7 @@ public class MainActivity extends ScanActivity implements
 	private final String TAG_FRAGMENT_SIGNUP = "TAG_FRAGMENT_SIGNUP";
 	private final String TAG_FRAGMENT_START_SCREEN = "TAG_FRAGMENT_START_SCREEN";
 	private final String TAG_FRAGMENT_PREVIEW = "TAG_FRAGMENT_PREVIEW";
+	private final String TAG_FRAGMENT_HISTORY = "TAG_FRAGMENT_HISTORY";
 	//end 
 	
 	@Override
@@ -601,6 +603,8 @@ public class MainActivity extends ScanActivity implements
 			fragContent = new StartScreenFragment();
 		} else if (tag == TAG_FRAGMENT_SCAN_SETTINGS) {
 			fragContent = new AppScanFragment();
+		}else if (tag == TAG_FRAGMENT_HISTORY) {
+			fragContent = new HistoryFragment();
 		} else if (tag == TAG_FRAGMENT_PREVIEW) {
 			fragContent = new PreviewFragment();
 			if (data != null) {
@@ -640,6 +644,8 @@ public class MainActivity extends ScanActivity implements
 	public void onStartScreenButtonClicked(int button) {
 		if (button == StartScreenFragment.BUTTON_SEND) {
 			addFragment(TAG_FRAGMENT_SCAN_SETTINGS, null, true);
+		}else if(button == StartScreenFragment.BUTTON_HISTORY){
+			addFragment(TAG_FRAGMENT_HISTORY, null, true);
 		}
 	}
 }
