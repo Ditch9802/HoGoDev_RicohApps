@@ -20,4 +20,7 @@
     <string name="title_activity_main">MainActivity</string>
     <string name="progress_title">Generateing pdf...</string>
     
+    
+    <string name="title_login">Login</string>
+    
 </resources>
