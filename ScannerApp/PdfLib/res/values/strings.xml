@@ -18,6 +18,7 @@
     <string name="gen_pdf">Generate pdf</string>
     <string name="view_pdf">View pdf</string>
     <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_preview">Document Preview</string>
     <string name="progress_title">Generateing pdf...</string>
     
     
