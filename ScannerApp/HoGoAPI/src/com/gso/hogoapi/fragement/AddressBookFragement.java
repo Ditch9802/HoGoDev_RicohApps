@@ -12,15 +12,19 @@ import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ListView;
-import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.gso.hogoapi.APIType;
@@ -46,6 +50,7 @@ public class AddressBookFragement extends DialogFragment implements IServiceList
 //	private ProgressBar prBar;
 	private Button btnDone;
 	private AddressBookAdapter adapter;
+	private EditText etSearch;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -62,7 +67,7 @@ public class AddressBookFragement extends DialogFragment implements IServiceList
         lvFriends = (ListView) v.findViewById(R.id.lvFriends);
         btnDone = (Button) v.findViewById(R.id.btn_done);
         addressBookSelected = new ArrayList<AddressBookItem>();
-
+        v.findViewById(R.id.cbxTag).setVisibility(View.GONE);
         btnDone.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -71,15 +76,39 @@ public class AddressBookFragement extends DialogFragment implements IServiceList
                 onDoneClicked(v);
             }
         });
-        exeGetData();
+        exeGetData(null);
         final FrameLayout frameLayout = new FrameLayout(getActivity());
         frameLayout.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
-        final FrameLayout.LayoutParams contentViewLP = new FrameLayout.LayoutParams(600,
+        final FrameLayout.LayoutParams contentViewLP = new FrameLayout.LayoutParams(800,
                 ViewGroup.LayoutParams.MATCH_PARENT);
         contentViewLP.gravity = Gravity.CENTER;
         frameLayout.addView(v, contentViewLP);
+        
+        etSearch = (EditText)v.findViewById(R.id.et_search_addressbook);
+        etSearch.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+			
+			@Override
+			public boolean onEditorAction(TextView arg0, int arg1, KeyEvent arg2) {
+				// TODO Auto-generated method stub
+				if(arg1 == EditorInfo.IME_ACTION_SEARCH){
+					exeSearch(arg0.getText().toString());
+					InputMethodManager imm = (InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+		            imm.hideSoftInputFromWindow(etSearch.getWindowToken(), 
+		                                      InputMethodManager.RESULT_UNCHANGED_SHOWN);
+					return true;
+				}
+				return false;
+			}
+		});
         return frameLayout;
     }
+
+	protected void exeSearch(String string) {
+		// TODO Auto-generated method stub
+		List<AddressBookItem> datas = new ArrayList<AddressBookItem>();
+		bindAddressBookData(datas);
+		exeGetData(string);
+	}
 
 	@Override
 	public void onAttach(Activity activity) {
@@ -118,7 +147,7 @@ public class AddressBookFragement extends DialogFragment implements IServiceList
 		return list;
 	}
 
-	private void exeGetData() {
+	private void exeGetData(String searchString) {
 		// TODO Auto-generated method stub
 //		setProgressBarShowing(true);
 		Service service = new Service(this);
@@ -127,6 +156,9 @@ public class AddressBookFragement extends DialogFragment implements IServiceList
 		params.put("DisplayLength", "" + 20);
 		params.put("DisplayStart", "0");
 		params.put("sEcho", "0");
+		if(searchString !=null){
+			params.put("SearchString",""+searchString);
+		}
 
 		service.login(ServiceAction.ActionGetAddressbook, APIType.ADDRESS_BOOK, params);
 		((MainActivity) getActivity()).setProgressVisibility(true);
@@ -155,8 +187,15 @@ public class AddressBookFragement extends DialogFragment implements IServiceList
 
 	private void bindAddressBookData(List<AddressBookItem> friendList) {
 		// TODO Auto-generated method stub
-		adapter = new AddressBookAdapter(context, friendList);
-		lvFriends.setAdapter(adapter);
+		if(adapter == null){
+			adapter = new AddressBookAdapter(context, friendList);
+			lvFriends.setAdapter(adapter);
+		}else{
+			adapter.changeData(friendList);
+			adapter.notifyDataSetChanged();
+		}
+
+		
 	}
 
 	public void onChecked(View v) {
@@ -188,7 +227,15 @@ public class AddressBookFragement extends DialogFragment implements IServiceList
 				// ((MainActivity) getActivity()).setProgressVisibility(false);
 			}
 		} else {
-			Toast.makeText(getActivity(), "Get address Fail", Toast.LENGTH_LONG).show();
+			getActivity().runOnUiThread(new Runnable() {
+				
+				@Override
+				public void run() {
+					// TODO Auto-generated method stub
+					Toast.makeText(getActivity(), "Get address Fail", Toast.LENGTH_LONG).show();
+				}
+			});
+			
 		}
 //		setProgressBarShowing(false);
 		((MainActivity) getActivity()).setProgressVisibility(false);

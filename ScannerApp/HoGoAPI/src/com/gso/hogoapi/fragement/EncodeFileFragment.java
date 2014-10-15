@@ -181,8 +181,10 @@ public class EncodeFileFragment extends DialogFragment implements
 							Toast.LENGTH_LONG).show();
 				}
 
+				FileData shareData = (FileData)encodeStatus.getData();
+				shareData.setFileName(mFile.getFileTitle());
 				((MainActivity) getActivity()).setProgressVisibility(false);
-				((MainActivity) getActivity()).gotoAddScreen((FileData)encodeStatus.getData());
+				((MainActivity) getActivity()).gotoAddScreen(shareData);
 			} else if (encodeStatus.getStatus()!=null && "4".equals(encodeStatus.getStatus())) {
 				if(timer!=null){
 					timer.cancel();
