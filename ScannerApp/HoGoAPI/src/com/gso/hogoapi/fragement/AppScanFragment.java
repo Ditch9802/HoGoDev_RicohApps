@@ -55,6 +55,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -74,7 +75,7 @@ import com.gso.serviceapilib.ServiceResponse;
 public class AppScanFragment extends Fragment implements IServiceListener {
 
 	private final static String TAG = ScanFragment.class.getSimpleName();
-
+	public static boolean IS_PREVIEW;
 	/**
 	 * Ã£â€šÂ¢Ã£Æ’â€”Ã£Æ’ÂªÃ£â€šÂ±Ã£Æ’Â¼Ã£â€šÂ·Ã£Æ’Â§Ã£Æ’Â³Ã£ï¿½Â®Ã§Â¨Â®Ã¥Ë†Â¥
 	 * Ã£â€šÂ·Ã£â€šÂ¹Ã£Æ’â€ Ã£Æ’Â Ã¨Â­Â¦Ã¥â€˜Å Ã£Æ’â‚¬Ã£â€šÂ¤Ã£â€šÂ¢Ã£Æ’Â­Ã£â€šÂ°Ã£ï¿½Â®Ã¨Â¨Â­Ã¥Â®Å¡Ã£ï¿½Â«Ã¤Â½Â¿Ã§â€�Â¨Ã£ï¿½â€”Ã£ï¿½Â¾Ã£ï¿½â„¢Ã£â‚¬â€š
@@ -350,6 +351,15 @@ public class AppScanFragment extends Fragment implements IServiceListener {
 		// (7)
 		chkPreview = (CheckBox) view.findViewById(R.id.chk_show_preview);
 
+		chkPreview.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+			
+			@Override
+			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+				// TODO Auto-generated method stub
+				IS_PREVIEW = chkPreview.isChecked();
+			}
+		});
+		
 		// (8)
 		mButtonStart = (RelativeLayout) view.findViewById(R.id.btn_start);
 		mButtonStart.setOnClickListener(new View.OnClickListener() {
@@ -1148,10 +1158,11 @@ public class AppScanFragment extends Fragment implements IServiceListener {
 	}
 
 	public void onFinishedScanning(FileUpload result) {
-		Log.w(TAG, "isPreview:" + chkPreview.isChecked());
-		if (chkPreview.isChecked()) {
-			mFinishedScanningListener.onFinishedScanning(result);
-		} else {
+		Log.d("onFinishedScanning", "isPreview:" + chkPreview.isChecked());
+//		if (chkPreview.isChecked()) {
+//			mFinishedScanningListener.onFinishedScanning(result);
+//		} else 
+		{
 			// upload and encode file
 			Service service = new Service(this);
 			Map<String, Object> params = new HashMap<String, Object>();

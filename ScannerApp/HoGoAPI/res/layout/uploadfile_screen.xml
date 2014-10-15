@@ -22,6 +22,7 @@
         android:layout_height="50dp"
         android:layout_margin="10dp"
         android:layout_alignParentBottom="true"
+        android:visibility="invisible"
         android:gravity="right" >
 
         <Button
@@ -50,6 +51,7 @@
         android:layout_margin="10dp"
         android:background="@drawable/white_container"
         android:gravity="center_vertical"
+        android:visibility="invisible"
         android:padding="10dp" >
 
         <RelativeLayout

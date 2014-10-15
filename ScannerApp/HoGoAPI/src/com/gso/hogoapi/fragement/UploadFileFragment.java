@@ -119,7 +119,13 @@ public class UploadFileFragment extends MuPDFFragment implements OnClickListener
 		btnUpload.setOnClickListener(this);
 		btnEncode.setOnClickListener(this);
 		btnUploadExe.setOnClickListener(this);
-		
+		mIsPreview = AppScanFragment.IS_PREVIEW;
+		if(!mIsPreview){
+			exeUploadFile();
+		}else{
+			v.findViewById(R.id.ln_back_next).setVisibility(View.VISIBLE);
+			v.findViewById(R.id.rl_choosefile).setVisibility(View.VISIBLE);
+		}
 		return v;
 	}
 

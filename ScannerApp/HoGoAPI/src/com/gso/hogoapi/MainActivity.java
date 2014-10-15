@@ -190,6 +190,7 @@ public class MainActivity extends ScanActivity implements
 	}
 
 	public void gotoUpdateScreen(FileUpload file, OriginalPreview originalPreview) {
+		Log.d("gotoUpdateScreen","gotoUpdateScreen "+ originalPreview.getValue());
 		UploadFileFragment fragement = new UploadFileFragment();
 		FragmentTransaction transaction = mFramentManager.beginTransaction();
 		Bundle bundle = new Bundle();
