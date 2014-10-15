@@ -70,6 +70,15 @@
     <string name="txid_scan_b_top_full_color_glossy_photo">Full Color(Glossy Photo)</string>
     <string name="txid_scan_b_top_auto_color_select">Auto Color</string>
 
+    <string name="txid_scan_t_top_resolution_title">Scan Resolution</string>
+    <string name="txid_scan_b_top_100">100dpi</string>
+    <string name="txid_scan_b_top_150">150dpi</string>
+    <string name="txid_scan_b_top_200">200dpi</string>
+    <string name="txid_scan_b_top_300">300dpi</string>
+    <string name="txid_scan_b_top_400">400dpi</string>
+    <string name="txid_scan_b_top_600">600dpi</string>
+    <string name="txid_scan_b_top_auto_resolution_select">Auto Color</string>
+    
     <!-- File Type -->
     <string name="txid_scan_t_top_file_title">File Type</string>
     <string name="txid_scan_b_top_file_stiff_jpg">TIFF / JPEG (Single Page)</string>
