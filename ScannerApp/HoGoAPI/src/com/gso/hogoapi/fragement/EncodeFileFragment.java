@@ -177,7 +177,7 @@ public class EncodeFileFragment extends DialogFragment implements
 				if(getActivity()!=null){
 					if(!getActivity().isFinishing())
 					  Toast.makeText(getActivity(),
-							"Document encoded successfully",
+							"Your document is being encoded",
 							Toast.LENGTH_LONG).show();
 				}
 

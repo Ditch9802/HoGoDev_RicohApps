@@ -38,38 +38,38 @@ import jp.co.ricoh.ssdk.sample.function.scan.attribute.standard.SmbAddressManual
 import java.util.List;
 
 /**
- * 本サンプル内で表示する各ダイアログを定義したクラスです。
+ * æœ¬ã‚µãƒ³ãƒ—ãƒ«å†…ã�§è¡¨ç¤ºã�™ã‚‹å�„ãƒ€ã‚¤ã‚¢ãƒ­ã‚°ã‚’å®šç¾©ã�—ã�Ÿã‚¯ãƒ©ã‚¹ã�§ã�™ã€‚
  * This class defines the dialogs displayed in this sample application.
  */
 public class DialogUtil {
 
     /**
-     * アクティビティが前面表示した際に通知されるブロードキャストインテントのアクション名
+     * ã‚¢ã‚¯ãƒ†ã‚£ãƒ“ãƒ†ã‚£ã�Œå‰�é�¢è¡¨ç¤ºã�—ã�Ÿéš›ã�«é€šçŸ¥ã�•ã‚Œã‚‹ãƒ–ãƒ­ãƒ¼ãƒ‰ã‚­ãƒ£ã‚¹ãƒˆã‚¤ãƒ³ãƒ†ãƒ³ãƒˆã�®ã‚¢ã‚¯ã‚·ãƒ§ãƒ³å��
      * The action name of the broadcast intent to be sent when the activity displayed.
      */
     public static final String INTENT_ACTION_SUB_ACTIVITY_RESUMED = "jp.co.ricoh.ssdk.sample.app.scan.SUB_ACTIVITY_RESUMED";
 
 
     /**
-     * ダイアログのデフォルトの横幅
+     * ãƒ€ã‚¤ã‚¢ãƒ­ã‚°ã�®ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã�®æ¨ªå¹…
      * Default dialog width
      */
     private static final int DEFAULT_DIALOG_WIDTH = 400;
 
     /**
-     * ダイアログのデフォルトの縦幅
+     * ãƒ€ã‚¤ã‚¢ãƒ­ã‚°ã�®ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã�®ç¸¦å¹…
      * Default dialog height
      */
     public static final int DEFAULT_DIALOG_HEIGHT = 600;
 
     /**
-     * 入力ダイアログの横幅
+     * å…¥åŠ›ãƒ€ã‚¤ã‚¢ãƒ­ã‚°ã�®æ¨ªå¹…
      * Entry dialog width
      */
     public static final int INPUT_DIALOG_WIDTH = 600;
 
     /**
-     * ダイアログを指定された幅で表示します。
+     * ãƒ€ã‚¤ã‚¢ãƒ­ã‚°ã‚’æŒ‡å®šã�•ã‚Œã�Ÿå¹…ã�§è¡¨ç¤ºã�—ã�¾ã�™ã€‚
      * Displays the dialog in specified width.
      *
      * @param d dialog
@@ -85,7 +85,7 @@ public class DialogUtil {
     }
 
     /**
-     * ダイアログをデフォルトサイズで表示します。
+     * ãƒ€ã‚¤ã‚¢ãƒ­ã‚°ã‚’ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã‚µã‚¤ã‚ºã�§è¡¨ç¤ºã�—ã�¾ã�™ã€‚
      * Displays the dialog in default size.
      *
      * @param d dialog
@@ -95,16 +95,16 @@ public class DialogUtil {
     }
 
     /**
-     * 宛先形式選択ダイアログを表示します。
-     * [処理内容]
-     *   (1)メール・アドレス帳選択のとき
-     *        - アドレス帳を開きます。
-     *   (2)メール・直接入力のとき
-     *        - メールアドレス直接入力画面を開きます。
-     *   (3)フォルダ・アドレス帳選択のとき
-     *        - アドレス帳を開きます。
-     *   (4)フォルダ・直接入力のとき
-     *        - フォルダ設定直接入力画面を開きます。
+     * å®›å…ˆå½¢å¼�é�¸æŠžãƒ€ã‚¤ã‚¢ãƒ­ã‚°ã‚’è¡¨ç¤ºã�—ã�¾ã�™ã€‚
+     * [å‡¦ç�†å†…å®¹]
+     *   (1)ãƒ¡ãƒ¼ãƒ«ãƒ»ã‚¢ãƒ‰ãƒ¬ã‚¹å¸³é�¸æŠžã�®ã�¨ã��
+     *        - ã‚¢ãƒ‰ãƒ¬ã‚¹å¸³ã‚’é–‹ã��ã�¾ã�™ã€‚
+     *   (2)ãƒ¡ãƒ¼ãƒ«ãƒ»ç›´æŽ¥å…¥åŠ›ã�®ã�¨ã��
+     *        - ãƒ¡ãƒ¼ãƒ«ã‚¢ãƒ‰ãƒ¬ã‚¹ç›´æŽ¥å…¥åŠ›ç”»é�¢ã‚’é–‹ã��ã�¾ã�™ã€‚
+     *   (3)ãƒ•ã‚©ãƒ«ãƒ€ãƒ»ã‚¢ãƒ‰ãƒ¬ã‚¹å¸³é�¸æŠžã�®ã�¨ã��
+     *        - ã‚¢ãƒ‰ãƒ¬ã‚¹å¸³ã‚’é–‹ã��ã�¾ã�™ã€‚
+     *   (4)ãƒ•ã‚©ãƒ«ãƒ€ãƒ»ç›´æŽ¥å…¥åŠ›ã�®ã�¨ã��
+     *        - ãƒ•ã‚©ãƒ«ãƒ€è¨­å®šç›´æŽ¥å…¥åŠ›ç”»é�¢ã‚’é–‹ã��ã�¾ã�™ã€‚
      *
      * Displays the destination format selection dialog.
      * [Processes]
@@ -193,12 +193,12 @@ public class DialogUtil {
     }
 
     /**
-     * 宛先メールアドレス直接入力ダイアログを生成します。
-     * [処理内容]
-     *   (1)ダイアログの生成と画面設定
-     *   (2)メールアドレス入力エリアの設定
-     *   (3)OKボタンの設定
-     *   (4)キャンセルボタンの設定
+     * å®›å…ˆãƒ¡ãƒ¼ãƒ«ã‚¢ãƒ‰ãƒ¬ã‚¹ç›´æŽ¥å…¥åŠ›ãƒ€ã‚¤ã‚¢ãƒ­ã‚°ã‚’ç”Ÿæˆ�ã�—ã�¾ã�™ã€‚
+     * [å‡¦ç�†å†…å®¹]
+     *   (1)ãƒ€ã‚¤ã‚¢ãƒ­ã‚°ã�®ç”Ÿæˆ�ã�¨ç”»é�¢è¨­å®š
+     *   (2)ãƒ¡ãƒ¼ãƒ«ã‚¢ãƒ‰ãƒ¬ã‚¹å…¥åŠ›ã‚¨ãƒªã‚¢ã�®è¨­å®š
+     *   (3)OKãƒœã‚¿ãƒ³ã�®è¨­å®š
+     *   (4)ã‚­ãƒ£ãƒ³ã‚»ãƒ«ãƒœã‚¿ãƒ³ã�®è¨­å®š
      *
      * Creates the email destination manual entry dialog.
      * [Processes]
@@ -257,12 +257,12 @@ public class DialogUtil {
     }
 
     /**
-     * 宛先フォルダ直接入力ダイアログを生成します。
-     * [処理内容]
-     *   (1)ダイアログの生成と画面設定
-     *   (2)各設定の初期値と入力可否設定
-     *   (3)フォルダタイプ切替ラジオボタンの設定
-     *   (4)OKボタンの設定
+     * å®›å…ˆãƒ•ã‚©ãƒ«ãƒ€ç›´æŽ¥å…¥åŠ›ãƒ€ã‚¤ã‚¢ãƒ­ã‚°ã‚’ç”Ÿæˆ�ã�—ã�¾ã�™ã€‚
+     * [å‡¦ç�†å†…å®¹]
+     *   (1)ãƒ€ã‚¤ã‚¢ãƒ­ã‚°ã�®ç”Ÿæˆ�ã�¨ç”»é�¢è¨­å®š
+     *   (2)å�„è¨­å®šã�®åˆ�æœŸå€¤ã�¨å…¥åŠ›å�¯å�¦è¨­å®š
+     *   (3)ãƒ•ã‚©ãƒ«ãƒ€ã‚¿ã‚¤ãƒ—åˆ‡æ›¿ãƒ©ã‚¸ã‚ªãƒœã‚¿ãƒ³ã�®è¨­å®š
+     *   (4)OKãƒœã‚¿ãƒ³ã�®è¨­å®š
      * Creates the folder destination manual entry dialog.
      * [Processes]
      *   (1) Create dialog and set screen
@@ -473,7 +473,7 @@ public class DialogUtil {
     }
 
     /**
-     * 読取カラー設定ダイアログを生成します。
+     * èª­å�–ã‚«ãƒ©ãƒ¼è¨­å®šãƒ€ã‚¤ã‚¢ãƒ­ã‚°ã‚’ç”Ÿæˆ�ã�—ã�¾ã�™ã€‚
      * Creates the scan color setting dialog.
      *
      * @param context
@@ -500,8 +500,31 @@ public class DialogUtil {
         return dialog.create();
     }
 
+    
+    //Resolution setting
+    
+    public static AlertDialog createResolutionSettingDialog(final Context context, final ScanSettingDataHolder scanSettingDataHolder) {
+
+        final List<Integer> list = scanSettingDataHolder.getResolutionLabelList();
+        final String[] items = new String[list.size()];
+        for(int i=0; i<items.length; ++i) {
+            items[i] = context.getResources().getString(list.get(i));
+        }
+
+        AlertDialog.Builder dialog = new AlertDialog.Builder(context);
+        dialog.setTitle(context.getString(R.string.txid_scan_t_top_resolution_title));
+        dialog.setNegativeButton(context.getString(R.string.txid_cmn_b_close), null);
+        dialog.setItems(items, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                scanSettingDataHolder.setSelectedResolution(list.get(which));
+            }
+        });
+        return dialog.create();
+    }
+    
     /**
-     * ファイル形式設定ダイアログを生成します。
+     * ãƒ•ã‚¡ã‚¤ãƒ«å½¢å¼�è¨­å®šãƒ€ã‚¤ã‚¢ãƒ­ã‚°ã‚’ç”Ÿæˆ�ã�—ã�¾ã�™ã€‚
      * Creates the file setting dialog.
      *
      * @param context
@@ -529,7 +552,7 @@ public class DialogUtil {
     }
 
     /**
-     * スキャン面設定ダイアログを生成します。
+     * ã‚¹ã‚­ãƒ£ãƒ³é�¢è¨­å®šãƒ€ã‚¤ã‚¢ãƒ­ã‚°ã‚’ç”Ÿæˆ�ã�—ã�¾ã�™ã€‚
      * Creates the scan side setting dialog.
      *
      * @param context
@@ -557,13 +580,13 @@ public class DialogUtil {
     }
 
     /**
-     * その他のスキャン設定ダイアログを生成します。
-     * [処理内容]
-     *   (1)ダイアログの画面設定
-     *   (2)各設定項目のセット
-     *      ここでは、プレビュー設定をセットします。
-     *   (3)各設定項目が選択されたときの処理設定
-     *   (4)ダイアログの生成
+     * ã��ã�®ä»–ã�®ã‚¹ã‚­ãƒ£ãƒ³è¨­å®šãƒ€ã‚¤ã‚¢ãƒ­ã‚°ã‚’ç”Ÿæˆ�ã�—ã�¾ã�™ã€‚
+     * [å‡¦ç�†å†…å®¹]
+     *   (1)ãƒ€ã‚¤ã‚¢ãƒ­ã‚°ã�®ç”»é�¢è¨­å®š
+     *   (2)å�„è¨­å®šé …ç›®ã�®ã‚»ãƒƒãƒˆ
+     *      ã�“ã�“ã�§ã�¯ã€�ãƒ—ãƒ¬ãƒ“ãƒ¥ãƒ¼è¨­å®šã‚’ã‚»ãƒƒãƒˆã�—ã�¾ã�™ã€‚
+     *   (3)å�„è¨­å®šé …ç›®ã�Œé�¸æŠžã�•ã‚Œã�Ÿã�¨ã��ã�®å‡¦ç�†è¨­å®š
+     *   (4)ãƒ€ã‚¤ã‚¢ãƒ­ã‚°ã�®ç”Ÿæˆ�
      *
      * Creates the other setting dialog.
      * [Processes]

@@ -103,7 +103,7 @@ public class ScanStateMachine {
      * Ã£â€šÂ¹Ã£â€šÂ­Ã£Æ’Â£Ã£Æ’Â³Ã£â€šÂµÃ£Æ’Â³Ã£Æ’â€”Ã£Æ’Â«Ã£â€šÂ¢Ã£Æ’â€”Ã£Æ’ÂªÃ£â€šÂ±Ã£Æ’Â¼Ã£â€šÂ·Ã£Æ’Â§Ã£Æ’Â³
      * Scan sample application object
      */
-    private static ScanSampleApplication mApplication;
+    public static ScanSampleApplication mApplication;
 
     /**
      * UIÃ£â€šÂ¹Ã£Æ’Â¬Ã£Æ’Æ’Ã£Æ’â€°Ã£ï¿½Â®Ã£Æ’ï¿½Ã£Æ’Â³Ã£Æ’â€°Ã£Æ’Â©Ã£Æ’Â¼
@@ -1282,15 +1282,27 @@ public class ScanStateMachine {
            Log.d(TAG, "getSelectedFileFormatValue: " + scanSetDataHolder.getSelectedFileFormatValue());
            Log.d(TAG, "getSelectedMultiPageValue: " + scanSetDataHolder.getSelectedMultiPageValue());
 
-           //HoGo custom
+//           //HoGo custom: hardcode setting data
+//           // Sets scan attributes.
+//           ScanRequestAttributeSet requestAttributes;
+//           requestAttributes = new HashScanRequestAttributeSet();
+//           requestAttributes.add(AutoCorrectJobSetting.AUTO_CORRECT_ON);
+//           requestAttributes.add(JobMode.SCAN_AND_STORE_TEMPORARY);
+//           requestAttributes.add(ScanColor.AUTO_COLOR);
+//           requestAttributes.add(OriginalSide.ONE_SIDE);
+//           requestAttributes.add(OriginalPreview.OFF);
+           
+           //Real data
            // Sets scan attributes.
            ScanRequestAttributeSet requestAttributes;
            requestAttributes = new HashScanRequestAttributeSet();
            requestAttributes.add(AutoCorrectJobSetting.AUTO_CORRECT_ON);
            requestAttributes.add(JobMode.SCAN_AND_STORE_TEMPORARY);
-           requestAttributes.add(ScanColor.AUTO_COLOR);
-           requestAttributes.add(OriginalSide.ONE_SIDE);
+           requestAttributes.add(scanSetDataHolder.getSelectedColorValue());
+           requestAttributes.add(scanSetDataHolder.getSelectedResolutionValue());
+           requestAttributes.add(scanSetDataHolder.getSelectedSideValue());
            requestAttributes.add(OriginalPreview.OFF);
+           
 
            FileSetting fileSetting = new FileSetting();
            fileSetting.setFileFormat(FileFormat.PDF);

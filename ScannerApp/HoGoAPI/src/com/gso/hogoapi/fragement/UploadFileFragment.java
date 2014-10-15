@@ -63,12 +63,14 @@ public class UploadFileFragment extends MuPDFFragment implements OnClickListener
 	private FileUpload mFileUpload;
 	private String mFileName;
 	private String mCurrentDateandTime;
+	private boolean mIsPreview;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		Bundle bundle = getArguments();
 		mFileUpload = (FileUpload) bundle.getSerializable("file");
+		mIsPreview = (boolean) bundle.getBoolean("is_preview");
 		core = openFile(Uri.decode(mFileUpload.getPdfPath()));
 	}
 	@Override
@@ -80,8 +82,10 @@ public class UploadFileFragment extends MuPDFFragment implements OnClickListener
 				.findViewById(R.id.btn_upload_file);
 		Button btnUploadExe = (Button) v.findViewById(R.id.btn_upload_file_exe);
 		Button btnEncode = (Button) v.findViewById(R.id.btn_encode_file);
-		Button btnCheckEncode = (Button) v
-				.findViewById(R.id.btn_check_encode_statsu);
+		Button btnBack = (Button)v.findViewById(R.id.btn_back);
+		btnBack.setOnClickListener(this);
+//		Button btnCheckEncode = (Button) v
+//				.findViewById(R.id.btn_check_encode_statsu);
 		mEtFilePath = (EditText) v.findViewById(R.id.et_file_path);
 
 		mFileName = getFileNameWithoutExtn(mFileUpload.getPdfPath());
@@ -114,7 +118,6 @@ public class UploadFileFragment extends MuPDFFragment implements OnClickListener
 		
 		btnUpload.setOnClickListener(this);
 		btnEncode.setOnClickListener(this);
-		btnCheckEncode.setOnClickListener(this);
 		btnUploadExe.setOnClickListener(this);
 		
 		return v;
@@ -189,10 +192,10 @@ public class UploadFileFragment extends MuPDFFragment implements OnClickListener
 			loadFileList();
 		} else if (v.getId() == R.id.btn_encode_file) {
 			loadFileList();
-		} else if (v.getId() == R.id.btn_check_encode_statsu) {
-			loadFileList();
 		} else if (v.getId() == R.id.btn_upload_file_exe) {
 			exeUploadFile();
+		} else if(v.getId() == R.id.btn_back){
+			((MainActivity)getActivity()).onBackPressed();
 		}
 	}
 
@@ -252,7 +255,7 @@ public class UploadFileFragment extends MuPDFFragment implements OnClickListener
 			
 			if ("OK".equals(resData.getStatus())) {
 				if(getActivity()!=null &&!getActivity().isFinishing()){
-					Toast.makeText(getActivity(), "Document uploaded successfully, please waiting for encoding data.",
+					Toast.makeText(getActivity(), "Your document is being uploaded to the server",
 							Toast.LENGTH_LONG).show();
 					parseData.setFileTitle(""+mEtFilePath.getText().toString());
 				}

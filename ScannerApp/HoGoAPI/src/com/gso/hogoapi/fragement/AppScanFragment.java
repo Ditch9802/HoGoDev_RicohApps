@@ -6,8 +6,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.apache.http.entity.mime.content.FileBody;
-
 import jp.co.ricoh.ssdk.sample.app.scan.activity.AddressActivity;
 import jp.co.ricoh.ssdk.sample.app.scan.activity.DialogUtil;
 import jp.co.ricoh.ssdk.sample.app.scan.activity.PreviewActivity;
@@ -34,6 +32,9 @@ import jp.co.ricoh.ssdk.sample.function.scan.attribute.standard.ScannerStateReas
 import jp.co.ricoh.ssdk.sample.function.scan.attribute.standard.SmbAddressManualDestinationSetting;
 import jp.co.ricoh.ssdk.sample.function.scan.event.ScanServiceAttributeEvent;
 import jp.co.ricoh.ssdk.sample.function.scan.event.ScanServiceAttributeListener;
+
+import org.apache.http.entity.mime.content.FileBody;
+
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.ActivityManager.RunningAppProcessInfo;
@@ -60,7 +61,6 @@ import android.widget.Toast;
 
 import com.gso.hogoapi.APIType;
 import com.gso.hogoapi.HoGoApplication;
-import com.gso.hogoapi.MainActivity;
 import com.gso.hogoapi.R;
 import com.gso.hogoapi.model.FileData;
 import com.gso.hogoapi.model.FileUpload;
@@ -76,103 +76,103 @@ public class AppScanFragment extends Fragment implements IServiceListener {
 	private final static String TAG = ScanFragment.class.getSimpleName();
 
 	/**
-	 * ã‚¢ãƒ—ãƒªã‚±ãƒ¼ã‚·ãƒ§ãƒ³ã�®ç¨®åˆ¥
-	 * ã‚·ã‚¹ãƒ†ãƒ è­¦å‘Šãƒ€ã‚¤ã‚¢ãƒ­ã‚°ã�®è¨­å®šã�«ä½¿ç”¨ã�—ã�¾ã�™ã€‚
+	 * Ã£â€šÂ¢Ã£Æ’â€”Ã£Æ’ÂªÃ£â€šÂ±Ã£Æ’Â¼Ã£â€šÂ·Ã£Æ’Â§Ã£Æ’Â³Ã£ï¿½Â®Ã§Â¨Â®Ã¥Ë†Â¥
+	 * Ã£â€šÂ·Ã£â€šÂ¹Ã£Æ’â€ Ã£Æ’Â Ã¨Â­Â¦Ã¥â€˜Å Ã£Æ’â‚¬Ã£â€šÂ¤Ã£â€šÂ¢Ã£Æ’Â­Ã£â€šÂ°Ã£ï¿½Â®Ã¨Â¨Â­Ã¥Â®Å¡Ã£ï¿½Â«Ã¤Â½Â¿Ã§â€�Â¨Ã£ï¿½â€”Ã£ï¿½Â¾Ã£ï¿½â„¢Ã£â‚¬â€š
 	 * Application type Used for setting system warning dialog.
 	 */
 	private final static String ALERT_DIALOG_APP_TYPE_SCANNER = "SCANNER";
 
 	/**
-	 * ã‚¹ã‚­ãƒ£ãƒ³ã‚µãƒ³ãƒ—ãƒ«ã‚¢ãƒ—ãƒªã‚±ãƒ¼ã‚·ãƒ§ãƒ³ã�®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
+	 * Ã£â€šÂ¹Ã£â€šÂ­Ã£Æ’Â£Ã£Æ’Â³Ã£â€šÂµÃ£Æ’Â³Ã£Æ’â€”Ã£Æ’Â«Ã£â€šÂ¢Ã£Æ’â€”Ã£Æ’ÂªÃ£â€šÂ±Ã£Æ’Â¼Ã£â€šÂ·Ã£Æ’Â§Ã£Æ’Â³Ã£ï¿½Â®Ã£â€šÂªÃ£Æ’â€“Ã£â€šÂ¸Ã£â€šÂ§Ã£â€šÂ¯Ã£Æ’Ë†
 	 * Application object
 	 */
 	private ScanSampleApplication mApplication;
 
 	/**
-	 * è¨­å®šç”»é�¢ã�‹ã‚‰ã�®é€šçŸ¥ã‚’å�—ã�‘å�–ã‚‹ãƒ–ãƒ­ãƒ¼ãƒ‰ã‚­ãƒ£ã‚¹ãƒˆãƒ¬ã‚·
-	 * ãƒ¼ãƒ�ãƒ¼ Broadcast receiver to accept intents from setting dialog
+	 * Ã¨Â¨Â­Ã¥Â®Å¡Ã§â€�Â»Ã©ï¿½Â¢Ã£ï¿½â€¹Ã£â€šâ€°Ã£ï¿½Â®Ã©â‚¬Å¡Ã§Å¸Â¥Ã£â€šâ€™Ã¥ï¿½â€”Ã£ï¿½â€˜Ã¥ï¿½â€“Ã£â€šâ€¹Ã£Æ’â€“Ã£Æ’Â­Ã£Æ’Â¼Ã£Æ’â€°Ã£â€šÂ­Ã£Æ’Â£Ã£â€šÂ¹Ã£Æ’Ë†Ã£Æ’Â¬Ã£â€šÂ·
+	 * Ã£Æ’Â¼Ã£Æ’ï¿½Ã£Æ’Â¼ Broadcast receiver to accept intents from setting dialog
 	 */
 	private BroadcastReceiver mReceiver;
 
 	/**
-	 * èª­å�–ã‚«ãƒ©ãƒ¼è¨­å®šãƒœã‚¿ãƒ³ Scan color setting button
+	 * Ã¨ÂªÂ­Ã¥ï¿½â€“Ã£â€šÂ«Ã£Æ’Â©Ã£Æ’Â¼Ã¨Â¨Â­Ã¥Â®Å¡Ã£Æ’Å“Ã£â€šÂ¿Ã£Æ’Â³ Scan color setting button
 	 */
 	private Button mButtonColor;
 
 	/**
-	 * ãƒ•ã‚¡ã‚¤ãƒ«è¨­å®šãƒœã‚¿ãƒ³ File setting button
+	 * Ã£Æ’â€¢Ã£â€šÂ¡Ã£â€šÂ¤Ã£Æ’Â«Ã¨Â¨Â­Ã¥Â®Å¡Ã£Æ’Å“Ã£â€šÂ¿Ã£Æ’Â³ File setting button
 	 */
 	private Button mButtonFileSetting;
 
 	/**
-	 * ã‚¹ã‚­ãƒ£ãƒ³é�¢è¨­å®šãƒœã‚¿ãƒ³ Scan side setting button
+	 * Ã£â€šÂ¹Ã£â€šÂ­Ã£Æ’Â£Ã£Æ’Â³Ã©ï¿½Â¢Ã¨Â¨Â­Ã¥Â®Å¡Ã£Æ’Å“Ã£â€šÂ¿Ã£Æ’Â³ Scan side setting button
 	 */
 	private Button mButtonSide;
 
 	/**
-	 * å®›å…ˆè¨­å®šãƒœã‚¿ãƒ³ Destination setting button
+	 * Ã¥Â®â€ºÃ¥â€¦Ë†Ã¨Â¨Â­Ã¥Â®Å¡Ã£Æ’Å“Ã£â€šÂ¿Ã£Æ’Â³ Destination setting button
 	 */
 	private Button mButtonDestination;
 
 	/**
-	 * èª­å�–é–‹å§‹ãƒœã‚¿ãƒ³ Scan start button
+	 * Ã¨ÂªÂ­Ã¥ï¿½â€“Ã©â€“â€¹Ã¥Â§â€¹Ã£Æ’Å“Ã£â€šÂ¿Ã£Æ’Â³ Scan start button
 	 */
 	private RelativeLayout mButtonStart;
 
 	/**
-	 * ã‚¹ã‚­ãƒ£ãƒ³ã‚µãƒ¼ãƒ“ã‚¹çŠ¶æ…‹ãƒªã‚¹ãƒŠãƒ¼ Scan service attribute
+	 * Ã£â€šÂ¹Ã£â€šÂ­Ã£Æ’Â£Ã£Æ’Â³Ã£â€šÂµÃ£Æ’Â¼Ã£Æ’â€œÃ£â€šÂ¹Ã§Å Â¶Ã¦â€¦â€¹Ã£Æ’ÂªÃ£â€šÂ¹Ã£Æ’Å Ã£Æ’Â¼ Scan service attribute
 	 * listener
 	 */
 	private ScanServiceAttributeListener mScanServiceAttrListener;
 
 	/**
-	 * ã‚¹ã‚­ãƒ£ãƒ³è¨­å®š Scan setting
+	 * Ã£â€šÂ¹Ã£â€šÂ­Ã£Æ’Â£Ã£Æ’Â³Ã¨Â¨Â­Ã¥Â®Å¡ Scan setting
 	 */
 	private ScanSettingDataHolder mScanSettingDataHolder;
 
 	/**
-	 * å®›å…ˆè¨­å®š Destination Setting
+	 * Ã¥Â®â€ºÃ¥â€¦Ë†Ã¨Â¨Â­Ã¥Â®Å¡ Destination Setting
 	 */
 	private DestinationSettingDataHolder mDestSettingDataHolder;
 
 	/**
-	 * ã‚¹ãƒ†ãƒ¼ãƒˆãƒžã‚·ãƒ³ State machine
+	 * Ã£â€šÂ¹Ã£Æ’â€ Ã£Æ’Â¼Ã£Æ’Ë†Ã£Æ’Å¾Ã£â€šÂ·Ã£Æ’Â³ State machine
 	 */
 	private ScanStateMachine mStateMachine;
 
 	/**
-	 * ã‚¹ã‚­ãƒ£ãƒ³ã‚µãƒ¼ãƒ“ã‚¹ã�¨æŽ¥ç¶šã�™ã‚‹ã‚¿ã‚¹ã‚¯ Task to connect with
+	 * Ã£â€šÂ¹Ã£â€šÂ­Ã£Æ’Â£Ã£Æ’Â³Ã£â€šÂµÃ£Æ’Â¼Ã£Æ’â€œÃ£â€šÂ¹Ã£ï¿½Â¨Ã¦Å½Â¥Ã§Â¶Å¡Ã£ï¿½â„¢Ã£â€šâ€¹Ã£â€šÂ¿Ã£â€šÂ¹Ã£â€šÂ¯ Task to connect with
 	 * scan service
 	 */
 	private ScanServiceInitTask mScanServiceInitTask;
 
 	/**
-	 * ã‚¹ã‚­ãƒ£ãƒ³ã‚µãƒ¼ãƒ“ã‚¹çŠ¶æ…‹è¡¨ç¤ºãƒ©ãƒ™ãƒ« Scan service state display
+	 * Ã£â€šÂ¹Ã£â€šÂ­Ã£Æ’Â£Ã£Æ’Â³Ã£â€šÂµÃ£Æ’Â¼Ã£Æ’â€œÃ£â€šÂ¹Ã§Å Â¶Ã¦â€¦â€¹Ã¨Â¡Â¨Ã§Â¤ÂºÃ£Æ’Â©Ã£Æ’â„¢Ã£Æ’Â« Scan service state display
 	 * label
 	 */
 	private TextView text_state;
 
 	/**
-	 * ã‚·ã‚¹ãƒ†ãƒ è­¦å‘Šç”»é�¢ã�Œè¡¨ç¤ºã�•ã‚Œã�¦ã�„ã‚‹ã�‹ã�®ãƒ•ãƒ©ã‚° Flag to
+	 * Ã£â€šÂ·Ã£â€šÂ¹Ã£Æ’â€ Ã£Æ’Â Ã¨Â­Â¦Ã¥â€˜Å Ã§â€�Â»Ã©ï¿½Â¢Ã£ï¿½Å’Ã¨Â¡Â¨Ã§Â¤ÂºÃ£ï¿½â€¢Ã£â€šÅ’Ã£ï¿½Â¦Ã£ï¿½â€žÃ£â€šâ€¹Ã£ï¿½â€¹Ã£ï¿½Â®Ã£Æ’â€¢Ã£Æ’Â©Ã£â€šÂ° Flag to
 	 * indicate if system warning screen is displayed
 	 */
 	private volatile boolean mAlertDialogDisplayed = false;
 
 	/**
-	 * ç�¾åœ¨ç™ºç”Ÿã�—ã�¦ã�„ã‚‹ã‚¨ãƒ©ãƒ¼ã�®ã‚¨ãƒ©ãƒ¼ãƒ¬ãƒ™ãƒ« Level of the
+	 * Ã§ï¿½Â¾Ã¥Å“Â¨Ã§â„¢ÂºÃ§â€�Å¸Ã£ï¿½â€”Ã£ï¿½Â¦Ã£ï¿½â€žÃ£â€šâ€¹Ã£â€šÂ¨Ã£Æ’Â©Ã£Æ’Â¼Ã£ï¿½Â®Ã£â€šÂ¨Ã£Æ’Â©Ã£Æ’Â¼Ã£Æ’Â¬Ã£Æ’â„¢Ã£Æ’Â« Level of the
 	 * currently occurring error
 	 */
 	private OccuredErrorLevel mLastErrorLevel = null;
 
 	/**
-	 * ã‚·ã‚¹ãƒ†ãƒ è­¦å‘Šç”»é�¢è¡¨ç¤ºã‚¿ã‚¹ã‚¯ Asynchronous task to request to
+	 * Ã£â€šÂ·Ã£â€šÂ¹Ã£Æ’â€ Ã£Æ’Â Ã¨Â­Â¦Ã¥â€˜Å Ã§â€�Â»Ã©ï¿½Â¢Ã¨Â¡Â¨Ã§Â¤ÂºÃ£â€šÂ¿Ã£â€šÂ¹Ã£â€šÂ¯ Asynchronous task to request to
 	 * display system warning screen
 	 */
 	private AlertDialogDisplayTask mAlertDialogDisplayTask = null;
 
 	/**
-	 * ãƒ¡ã‚¤ãƒ³ã‚¢ã‚¯ãƒ†ã‚£ãƒ“ãƒ†ã‚£èµ·å‹•æ¸ˆã�¿ãƒ•ãƒ©ã‚°
-	 * trueã�§ã�‚ã‚Œã�°ã€�ã�™ã�§ã�«MainActivityã�Œèµ·å‹•æ¸ˆã�¿ã�§ã�™ã€‚
+	 * Ã£Æ’Â¡Ã£â€šÂ¤Ã£Æ’Â³Ã£â€šÂ¢Ã£â€šÂ¯Ã£Æ’â€ Ã£â€šÂ£Ã£Æ’â€œÃ£Æ’â€ Ã£â€šÂ£Ã¨ÂµÂ·Ã¥â€¹â€¢Ã¦Â¸Ë†Ã£ï¿½Â¿Ã£Æ’â€¢Ã£Æ’Â©Ã£â€šÂ°
+	 * trueÃ£ï¿½Â§Ã£ï¿½â€šÃ£â€šÅ’Ã£ï¿½Â°Ã£â‚¬ï¿½Ã£ï¿½â„¢Ã£ï¿½Â§Ã£ï¿½Â«MainActivityÃ£ï¿½Å’Ã¨ÂµÂ·Ã¥â€¹â€¢Ã¦Â¸Ë†Ã£ï¿½Â¿Ã£ï¿½Â§Ã£ï¿½â„¢Ã£â‚¬â€š
 	 * MainActivity running flag If true, another Mainactivity instance is
 	 * running.
 	 */
@@ -202,15 +202,15 @@ public class AppScanFragment extends Fragment implements IServiceListener {
 	}
 
 	/**
-	 * ã‚¢ã‚¯ãƒ†ã‚£ãƒ“ãƒ†ã‚£ã�Œç”Ÿæˆ�ã�•ã‚Œã‚‹ã�¨å‘¼ã�³å‡ºã�•ã‚Œã�¾ã�™ã€‚
-	 * [å‡¦ç�†å†…å®¹] (1)ã‚¢ãƒ—ãƒªã‚±ãƒ¼ã‚·ãƒ§ãƒ³ã�®åˆ�æœŸåŒ–
-	 * (2)è¨­å®šãƒ–ãƒ­ãƒ¼ãƒ‰ã‚­ãƒ£ã‚¹ãƒˆãƒ¬ã‚·ãƒ¼ãƒ�ãƒ¼ã�®è¨­å®š
-	 * (3)å®›å…ˆæŒ‡å®šãƒœã‚¿ãƒ³ã�®è¨­å®š
-	 * (4)èª­ã�¿å�–ã‚Šã‚«ãƒ©ãƒ¼é�¸æŠžãƒœã‚¿ãƒ³ã�®è¨­å®š
-	 * (5)ãƒ•ã‚¡ã‚¤ãƒ«å½¢å¼�é�¸æŠžãƒœã‚¿ãƒ³ã�®è¨­å®š
-	 * (6)åŽŸç¨¿é�¢é�¸æŠžãƒœã‚¿ãƒ³ã�®è¨­å®š
-	 * (7)ã��ã�®ä»–ã�®è¨­å®šãƒœã‚¿ãƒ³ã�®è¨­å®š (8)èª­å�–é–‹å§‹ãƒœã‚¿ãƒ³ã�®è¨­å®š
-	 * (9)å�„ãƒœã‚¿ãƒ³ã�®ç„¡åŠ¹åŒ– (10)ãƒªã‚¹ãƒŠãƒ¼åˆ�æœŸåŒ–
+	 * Ã£â€šÂ¢Ã£â€šÂ¯Ã£Æ’â€ Ã£â€šÂ£Ã£Æ’â€œÃ£Æ’â€ Ã£â€šÂ£Ã£ï¿½Å’Ã§â€�Å¸Ã¦Ë†ï¿½Ã£ï¿½â€¢Ã£â€šÅ’Ã£â€šâ€¹Ã£ï¿½Â¨Ã¥â€˜Â¼Ã£ï¿½Â³Ã¥â€¡ÂºÃ£ï¿½â€¢Ã£â€šÅ’Ã£ï¿½Â¾Ã£ï¿½â„¢Ã£â‚¬â€š
+	 * [Ã¥â€¡Â¦Ã§ï¿½â€ Ã¥â€ â€¦Ã¥Â®Â¹] (1)Ã£â€šÂ¢Ã£Æ’â€”Ã£Æ’ÂªÃ£â€šÂ±Ã£Æ’Â¼Ã£â€šÂ·Ã£Æ’Â§Ã£Æ’Â³Ã£ï¿½Â®Ã¥Ë†ï¿½Ã¦Å“Å¸Ã¥Å’â€“
+	 * (2)Ã¨Â¨Â­Ã¥Â®Å¡Ã£Æ’â€“Ã£Æ’Â­Ã£Æ’Â¼Ã£Æ’â€°Ã£â€šÂ­Ã£Æ’Â£Ã£â€šÂ¹Ã£Æ’Ë†Ã£Æ’Â¬Ã£â€šÂ·Ã£Æ’Â¼Ã£Æ’ï¿½Ã£Æ’Â¼Ã£ï¿½Â®Ã¨Â¨Â­Ã¥Â®Å¡
+	 * (3)Ã¥Â®â€ºÃ¥â€¦Ë†Ã¦Å’â€¡Ã¥Â®Å¡Ã£Æ’Å“Ã£â€šÂ¿Ã£Æ’Â³Ã£ï¿½Â®Ã¨Â¨Â­Ã¥Â®Å¡
+	 * (4)Ã¨ÂªÂ­Ã£ï¿½Â¿Ã¥ï¿½â€“Ã£â€šÅ Ã£â€šÂ«Ã£Æ’Â©Ã£Æ’Â¼Ã©ï¿½Â¸Ã¦Å Å¾Ã£Æ’Å“Ã£â€šÂ¿Ã£Æ’Â³Ã£ï¿½Â®Ã¨Â¨Â­Ã¥Â®Å¡
+	 * (5)Ã£Æ’â€¢Ã£â€šÂ¡Ã£â€šÂ¤Ã£Æ’Â«Ã¥Â½Â¢Ã¥Â¼ï¿½Ã©ï¿½Â¸Ã¦Å Å¾Ã£Æ’Å“Ã£â€šÂ¿Ã£Æ’Â³Ã£ï¿½Â®Ã¨Â¨Â­Ã¥Â®Å¡
+	 * (6)Ã¥Å½Å¸Ã§Â¨Â¿Ã©ï¿½Â¢Ã©ï¿½Â¸Ã¦Å Å¾Ã£Æ’Å“Ã£â€šÂ¿Ã£Æ’Â³Ã£ï¿½Â®Ã¨Â¨Â­Ã¥Â®Å¡
+	 * (7)Ã£ï¿½ï¿½Ã£ï¿½Â®Ã¤Â»â€“Ã£ï¿½Â®Ã¨Â¨Â­Ã¥Â®Å¡Ã£Æ’Å“Ã£â€šÂ¿Ã£Æ’Â³Ã£ï¿½Â®Ã¨Â¨Â­Ã¥Â®Å¡ (8)Ã¨ÂªÂ­Ã¥ï¿½â€“Ã©â€“â€¹Ã¥Â§â€¹Ã£Æ’Å“Ã£â€šÂ¿Ã£Æ’Â³Ã£ï¿½Â®Ã¨Â¨Â­Ã¥Â®Å¡
+	 * (9)Ã¥ï¿½â€žÃ£Æ’Å“Ã£â€šÂ¿Ã£Æ’Â³Ã£ï¿½Â®Ã§â€žÂ¡Ã¥Å Â¹Ã¥Å’â€“ (10)Ã£Æ’ÂªÃ£â€šÂ¹Ã£Æ’Å Ã£Æ’Â¼Ã¥Ë†ï¿½Ã¦Å“Å¸Ã¥Å’â€“
 	 * 
 	 * Called when an activity is created. [Processes] (1) Initialize
 	 * application (2) Set setting broadcast receiver (3) Set destination
@@ -290,17 +290,37 @@ public class AppScanFragment extends Fragment implements IServiceListener {
 
 		// (5)
 		mButtonFileSetting = (Button) view.findViewById(R.id.btn_file);
+		//Hogo edited to use the scanresolution
+//		mButtonFileSetting.setOnClickListener(new View.OnClickListener() {
+//			@Override
+//			public void onClick(View v) {
+//				AlertDialog dialog = DialogUtil.createFileSettingDialog(
+//						getActivity(), mScanSettingDataHolder);
+//				dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+//					@Override
+//					public void onDismiss(DialogInterface paramDialogInterface) {
+//						String label = getResources().getString(
+//								mScanSettingDataHolder
+//										.getSelectedFileSettingLabel());
+//						mButtonFileSetting.setText(label);
+//					}
+//				});
+//				DialogUtil.showDialog(dialog);
+//			}
+//		});
+		
 		mButtonFileSetting.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				AlertDialog dialog = DialogUtil.createFileSettingDialog(
+				
+				AlertDialog dialog = DialogUtil.createResolutionSettingDialog(
 						getActivity(), mScanSettingDataHolder);
 				dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
 					@Override
 					public void onDismiss(DialogInterface paramDialogInterface) {
 						String label = getResources().getString(
 								mScanSettingDataHolder
-										.getSelectedFileSettingLabel());
+										.getSelectedResolutionLabel());
 						mButtonFileSetting.setText(label);
 					}
 				});
@@ -355,13 +375,13 @@ public class AppScanFragment extends Fragment implements IServiceListener {
 	}
 
 	/**
-	 * é�·ç§»å…ˆã�®ã‚¢ã‚¯ãƒ†ã‚£ãƒ“ãƒ†ã‚£ã�‹ã‚‰ã�®çµ�æžœã‚’å�—ã�‘å�–ã‚Šã�¾ã�™ã€‚
-	 * [å‡¦ç�†å†…å®¹]
-	 * (1)ãƒ—ãƒ¬ãƒ“ãƒ¥ãƒ¼ã�‹ã‚‰æˆ»ã�£ã�¦ã��ã�Ÿå ´å�ˆã€�çµ�æžœã�«å¿
-	 * œã�˜ã�¦ã‚¹ãƒ†ãƒ¼ãƒˆãƒžã‚·ãƒ³ã�«ã‚¤ãƒ™ãƒ³ãƒˆã‚’é€�ä¿¡ã�—ã�¾ã�™ã€‚
-	 * (2)å®›å…ˆè
-	 * ¨­å®šã�‹ã‚‰æˆ»ã�£ã�¦ã��ã�Ÿå ´å�ˆã�¯ã€�çµ�æžœã�«å¿œã�˜ã�¦å®›å…ˆè¡
-	 * ¨ç¤ºæ¬„ã�®è¡¨ç¤ºã‚’æ›´æ–°ã�—ã�¾ã�™ã€‚
+	 * Ã©ï¿½Â·Ã§Â§Â»Ã¥â€¦Ë†Ã£ï¿½Â®Ã£â€šÂ¢Ã£â€šÂ¯Ã£Æ’â€ Ã£â€šÂ£Ã£Æ’â€œÃ£Æ’â€ Ã£â€šÂ£Ã£ï¿½â€¹Ã£â€šâ€°Ã£ï¿½Â®Ã§Âµï¿½Ã¦Å¾Å“Ã£â€šâ€™Ã¥ï¿½â€”Ã£ï¿½â€˜Ã¥ï¿½â€“Ã£â€šÅ Ã£ï¿½Â¾Ã£ï¿½â„¢Ã£â‚¬â€š
+	 * [Ã¥â€¡Â¦Ã§ï¿½â€ Ã¥â€ â€¦Ã¥Â®Â¹]
+	 * (1)Ã£Æ’â€”Ã£Æ’Â¬Ã£Æ’â€œÃ£Æ’Â¥Ã£Æ’Â¼Ã£ï¿½â€¹Ã£â€šâ€°Ã¦Ë†Â»Ã£ï¿½Â£Ã£ï¿½Â¦Ã£ï¿½ï¿½Ã£ï¿½Å¸Ã¥Â Â´Ã¥ï¿½Ë†Ã£â‚¬ï¿½Ã§Âµï¿½Ã¦Å¾Å“Ã£ï¿½Â«Ã¥Â¿
+	 * Å“Ã£ï¿½ËœÃ£ï¿½Â¦Ã£â€šÂ¹Ã£Æ’â€ Ã£Æ’Â¼Ã£Æ’Ë†Ã£Æ’Å¾Ã£â€šÂ·Ã£Æ’Â³Ã£ï¿½Â«Ã£â€šÂ¤Ã£Æ’â„¢Ã£Æ’Â³Ã£Æ’Ë†Ã£â€šâ€™Ã©â‚¬ï¿½Ã¤Â¿Â¡Ã£ï¿½â€”Ã£ï¿½Â¾Ã£ï¿½â„¢Ã£â‚¬â€š
+	 * (2)Ã¥Â®â€ºÃ¥â€¦Ë†Ã¨
+	 * Â¨Â­Ã¥Â®Å¡Ã£ï¿½â€¹Ã£â€šâ€°Ã¦Ë†Â»Ã£ï¿½Â£Ã£ï¿½Â¦Ã£ï¿½ï¿½Ã£ï¿½Å¸Ã¥Â Â´Ã¥ï¿½Ë†Ã£ï¿½Â¯Ã£â‚¬ï¿½Ã§Âµï¿½Ã¦Å¾Å“Ã£ï¿½Â«Ã¥Â¿Å“Ã£ï¿½ËœÃ£ï¿½Â¦Ã¥Â®â€ºÃ¥â€¦Ë†Ã¨Â¡
+	 * Â¨Ã§Â¤ÂºÃ¦Â¬â€žÃ£ï¿½Â®Ã¨Â¡Â¨Ã§Â¤ÂºÃ£â€šâ€™Ã¦â€ºÂ´Ã¦â€“Â°Ã£ï¿½â€”Ã£ï¿½Â¾Ã£ï¿½â„¢Ã£â‚¬â€š
 	 * 
 	 * Receive the result from the activity of the changed state. [Processes]
 	 * (1) When returned from preview, sends event to the state machine
@@ -400,10 +420,10 @@ public class AppScanFragment extends Fragment implements IServiceListener {
 	}
 
 	/**
-	 * ã‚¢ã‚¯ãƒ†ã‚£ãƒ“ãƒ†ã‚£ã�®å†�é–‹æ™‚ã�«å‘¼ã�³å‡ºã�•ã‚Œã�¾ã�™ã€‚
-	 * ã‚¨ãƒ©ãƒ¼ã�®ç
-	 * ™ºç”Ÿæœ‰ç„¡ã‚’é�žå�ŒæœŸã�§æ¤œæŸ»ã�—ã€�å¿…è¦�ã�§ã�‚ã‚Œã�°ã‚·ã‚
-	 * ¹ãƒ†ãƒ è­¦å‘Šç”»é�¢åˆ‡æ›¿ã�ˆã�¾ã�™ã€‚ Called when the activity is
+	 * Ã£â€šÂ¢Ã£â€šÂ¯Ã£Æ’â€ Ã£â€šÂ£Ã£Æ’â€œÃ£Æ’â€ Ã£â€šÂ£Ã£ï¿½Â®Ã¥â€ ï¿½Ã©â€“â€¹Ã¦â„¢â€šÃ£ï¿½Â«Ã¥â€˜Â¼Ã£ï¿½Â³Ã¥â€¡ÂºÃ£ï¿½â€¢Ã£â€šÅ’Ã£ï¿½Â¾Ã£ï¿½â„¢Ã£â‚¬â€š
+	 * Ã£â€šÂ¨Ã£Æ’Â©Ã£Æ’Â¼Ã£ï¿½Â®Ã§
+	 * â„¢ÂºÃ§â€�Å¸Ã¦Å“â€°Ã§â€žÂ¡Ã£â€šâ€™Ã©ï¿½Å¾Ã¥ï¿½Å’Ã¦Å“Å¸Ã£ï¿½Â§Ã¦Â¤Å“Ã¦Å¸Â»Ã£ï¿½â€”Ã£â‚¬ï¿½Ã¥Â¿â€¦Ã¨Â¦ï¿½Ã£ï¿½Â§Ã£ï¿½â€šÃ£â€šÅ’Ã£ï¿½Â°Ã£â€šÂ·Ã£â€š
+	 * Â¹Ã£Æ’â€ Ã£Æ’Â Ã¨Â­Â¦Ã¥â€˜Å Ã§â€�Â»Ã©ï¿½Â¢Ã¥Ë†â€¡Ã¦â€ºÂ¿Ã£ï¿½Ë†Ã£ï¿½Â¾Ã£ï¿½â„¢Ã£â‚¬â€š Called when the activity is
 	 * resumed. Checks error occurrence asynchronously and switches to a system
 	 * warning screen if necessary.
 	 */
@@ -420,10 +440,10 @@ public class AppScanFragment extends Fragment implements IServiceListener {
 	}
 
 	/**
-	 * ã‚¢ã‚¯ãƒ†ã‚£ãƒ“ãƒ†ã‚£ã�®å�œæ­¢æ™‚ã�«å‘¼ã�³å‡ºã�•ã‚Œã�¾ã�™ã€‚
-	 * ã‚·ã‚¹ãƒ†ãƒ è­
-	 * ¦å‘Šç”»é�¢è¡¨ç¤ºã‚¿ã‚¹ã‚¯ã�Œå®Ÿè¡Œä¸­ã�§ã�‚ã‚Œã�°ã€�ã‚­ãƒ£ãƒ
-	 * ³ã‚»ãƒ«ã�—ã�¾ã�™ã€‚ Called when the activity is stopped. If the system
+	 * Ã£â€šÂ¢Ã£â€šÂ¯Ã£Æ’â€ Ã£â€šÂ£Ã£Æ’â€œÃ£Æ’â€ Ã£â€šÂ£Ã£ï¿½Â®Ã¥ï¿½Å“Ã¦Â­Â¢Ã¦â„¢â€šÃ£ï¿½Â«Ã¥â€˜Â¼Ã£ï¿½Â³Ã¥â€¡ÂºÃ£ï¿½â€¢Ã£â€šÅ’Ã£ï¿½Â¾Ã£ï¿½â„¢Ã£â‚¬â€š
+	 * Ã£â€šÂ·Ã£â€šÂ¹Ã£Æ’â€ Ã£Æ’Â Ã¨Â­
+	 * Â¦Ã¥â€˜Å Ã§â€�Â»Ã©ï¿½Â¢Ã¨Â¡Â¨Ã§Â¤ÂºÃ£â€šÂ¿Ã£â€šÂ¹Ã£â€šÂ¯Ã£ï¿½Å’Ã¥Â®Å¸Ã¨Â¡Å’Ã¤Â¸Â­Ã£ï¿½Â§Ã£ï¿½â€šÃ£â€šÅ’Ã£ï¿½Â°Ã£â‚¬ï¿½Ã£â€šÂ­Ã£Æ’Â£Ã£Æ’
+	 * Â³Ã£â€šÂ»Ã£Æ’Â«Ã£ï¿½â€”Ã£ï¿½Â¾Ã£ï¿½â„¢Ã£â‚¬â€š Called when the activity is stopped. If the system
 	 * warning screen display task is in process, the task is cancelled.
 	 */
 	@Override
@@ -435,17 +455,17 @@ public class AppScanFragment extends Fragment implements IServiceListener {
 	}
 
 	/**
-	 * ã‚¢ã‚¯ãƒ†ã‚£ãƒ“ãƒ†ã‚£ã�Œç ´æ£„ã�•ã‚Œã‚‹éš›ã�«å‘¼ã�³å‡ºã�•ã‚Œã�¾ã�™ã€‚
-	 * [å‡¦ç�†å†…å®¹]
-	 * (1)ãƒ¡ã‚¤ãƒ³ã‚¢ã‚¯ãƒ†ã‚£ãƒ“ãƒ†ã‚£çµ‚äº†ã‚¤ãƒ™ãƒ³ãƒˆã‚’ã‚¹ãƒ
-	 * †ãƒ¼ãƒˆãƒžã‚·ãƒ³ã�«é€�ã‚‹
-	 * èª­å�–ä¸­ã�§ã�‚ã‚Œã�°ã€�èª­å�–ã�Œã‚­ãƒ£ãƒ³ã‚»ãƒ«ã�•ã‚Œã�¾ã�™ã€‚
-	 * (2)ã‚µãƒ¼ãƒ
-	 * “ã‚¹ã�‹ã‚‰ã‚¤ãƒ™ãƒ³ãƒˆãƒªã‚¹ãƒŠãƒ¼ã�¨ãƒ–ãƒ­ãƒ¼ãƒ‰ã‚­ãƒ£ã‚¹ãƒˆãƒ
-	 * ¬ã‚·ãƒ¼ãƒ�ãƒ¼ã‚’é™¤åŽ»ã�™ã‚‹
-	 * (3)é�žå�ŒæœŸã‚¿ã‚¹ã‚¯ã�Œå®Ÿè¡Œä¸­ã� ã�£ã�Ÿå ´å�ˆã€�ã‚­ãƒ£ãƒ³ã‚»ãƒ«ã�™ã‚‹
-	 * (4)ã‚¢ãƒ—ãƒªã‚±ãƒ¼ã‚·ãƒ§ãƒ³ã�®ä¿�æŒ�ãƒ‡ãƒ¼ã‚¿ã‚’åˆ�æœŸåŒ–ã�™ã‚‹
-	 * (5)å�‚ç…§ã‚’ç ´æ£„ã�™ã‚‹
+	 * Ã£â€šÂ¢Ã£â€šÂ¯Ã£Æ’â€ Ã£â€šÂ£Ã£Æ’â€œÃ£Æ’â€ Ã£â€šÂ£Ã£ï¿½Å’Ã§Â Â´Ã¦Â£â€žÃ£ï¿½â€¢Ã£â€šÅ’Ã£â€šâ€¹Ã©Å¡â€ºÃ£ï¿½Â«Ã¥â€˜Â¼Ã£ï¿½Â³Ã¥â€¡ÂºÃ£ï¿½â€¢Ã£â€šÅ’Ã£ï¿½Â¾Ã£ï¿½â„¢Ã£â‚¬â€š
+	 * [Ã¥â€¡Â¦Ã§ï¿½â€ Ã¥â€ â€¦Ã¥Â®Â¹]
+	 * (1)Ã£Æ’Â¡Ã£â€šÂ¤Ã£Æ’Â³Ã£â€šÂ¢Ã£â€šÂ¯Ã£Æ’â€ Ã£â€šÂ£Ã£Æ’â€œÃ£Æ’â€ Ã£â€šÂ£Ã§Âµâ€šÃ¤Âºâ€ Ã£â€šÂ¤Ã£Æ’â„¢Ã£Æ’Â³Ã£Æ’Ë†Ã£â€šâ€™Ã£â€šÂ¹Ã£Æ’
+	 * â€ Ã£Æ’Â¼Ã£Æ’Ë†Ã£Æ’Å¾Ã£â€šÂ·Ã£Æ’Â³Ã£ï¿½Â«Ã©â‚¬ï¿½Ã£â€šâ€¹
+	 * Ã¨ÂªÂ­Ã¥ï¿½â€“Ã¤Â¸Â­Ã£ï¿½Â§Ã£ï¿½â€šÃ£â€šÅ’Ã£ï¿½Â°Ã£â‚¬ï¿½Ã¨ÂªÂ­Ã¥ï¿½â€“Ã£ï¿½Å’Ã£â€šÂ­Ã£Æ’Â£Ã£Æ’Â³Ã£â€šÂ»Ã£Æ’Â«Ã£ï¿½â€¢Ã£â€šÅ’Ã£ï¿½Â¾Ã£ï¿½â„¢Ã£â‚¬â€š
+	 * (2)Ã£â€šÂµÃ£Æ’Â¼Ã£Æ’
+	 * â€œÃ£â€šÂ¹Ã£ï¿½â€¹Ã£â€šâ€°Ã£â€šÂ¤Ã£Æ’â„¢Ã£Æ’Â³Ã£Æ’Ë†Ã£Æ’ÂªÃ£â€šÂ¹Ã£Æ’Å Ã£Æ’Â¼Ã£ï¿½Â¨Ã£Æ’â€“Ã£Æ’Â­Ã£Æ’Â¼Ã£Æ’â€°Ã£â€šÂ­Ã£Æ’Â£Ã£â€šÂ¹Ã£Æ’Ë†Ã£Æ’
+	 * Â¬Ã£â€šÂ·Ã£Æ’Â¼Ã£Æ’ï¿½Ã£Æ’Â¼Ã£â€šâ€™Ã©â„¢Â¤Ã¥Å½Â»Ã£ï¿½â„¢Ã£â€šâ€¹
+	 * (3)Ã©ï¿½Å¾Ã¥ï¿½Å’Ã¦Å“Å¸Ã£â€šÂ¿Ã£â€šÂ¹Ã£â€šÂ¯Ã£ï¿½Å’Ã¥Â®Å¸Ã¨Â¡Å’Ã¤Â¸Â­Ã£ï¿½Â Ã£ï¿½Â£Ã£ï¿½Å¸Ã¥Â Â´Ã¥ï¿½Ë†Ã£â‚¬ï¿½Ã£â€šÂ­Ã£Æ’Â£Ã£Æ’Â³Ã£â€šÂ»Ã£Æ’Â«Ã£ï¿½â„¢Ã£â€šâ€¹
+	 * (4)Ã£â€šÂ¢Ã£Æ’â€”Ã£Æ’ÂªÃ£â€šÂ±Ã£Æ’Â¼Ã£â€šÂ·Ã£Æ’Â§Ã£Æ’Â³Ã£ï¿½Â®Ã¤Â¿ï¿½Ã¦Å’ï¿½Ã£Æ’â€¡Ã£Æ’Â¼Ã£â€šÂ¿Ã£â€šâ€™Ã¥Ë†ï¿½Ã¦Å“Å¸Ã¥Å’â€“Ã£ï¿½â„¢Ã£â€šâ€¹
+	 * (5)Ã¥ï¿½â€šÃ§â€¦Â§Ã£â€šâ€™Ã§Â Â´Ã¦Â£â€žÃ£ï¿½â„¢Ã£â€šâ€¹
 	 * 
 	 * Called when the activity is destroyed. [Processes] (1) Send MainActivity
 	 * destoyed event to the state machine. If scanning is in process, scanning
@@ -503,13 +523,13 @@ public class AppScanFragment extends Fragment implements IServiceListener {
 	}
 
 	/**
-	 * å®›å…ˆè¡¨ç¤ºãƒ©ãƒ™ãƒ«ã‚’æ›´æ–°ã�—ã�¾ã�™ã€‚ [è¡¨ç¤ºã�®å½¢å¼�]
-	 * (1)ãƒ•ã‚©ãƒ«ãƒ€ï¼ˆç›´æŽ¥å…¥åŠ›ï¼‰ - ãƒ•ã‚©ãƒ«ãƒ€ã‚¢ã‚¤ã‚³ãƒ³ ï¼‹
-	 * ãƒ•ã‚©ãƒ«ãƒ€ãƒ‘ã‚¹ + ä»»æ„�æ–‡å­—åˆ— (2)ãƒ¡ãƒ¼ãƒ«ï¼ˆç›´æŽ¥å…¥åŠ›ï¼‰ -
-	 * ãƒ¡ãƒ¼ãƒ«ã‚¢ã‚¤ã‚³ãƒ³ + ãƒ¡ãƒ¼ãƒ«ã‚¢ãƒ‰ãƒ¬ã‚¹ + ä»»æ„�æ–‡å­—åˆ—
-	 * (3)ãƒ•ã‚©ãƒ«ãƒ€ï¼ˆã‚¢ãƒ‰ãƒ¬ã‚¹å¸³é�¸æŠžï¼‰ - ãƒ•ã‚©ãƒ«ãƒ€ã‚¢ã‚¤ã‚³ãƒ³ +
-	 * ä»»æ„�æ–‡å­—åˆ— (4)ãƒ¡ãƒ¼ãƒ«ï¼ˆã‚¢ãƒ‰ãƒ¬ã‚¹å¸³é�¸æŠžï¼‰ -
-	 * ãƒ¡ãƒ¼ãƒ«ã‚¢ã‚¤ã‚³ãƒ³ + ä»»æ„�æ–‡å­—åˆ—
+	 * Ã¥Â®â€ºÃ¥â€¦Ë†Ã¨Â¡Â¨Ã§Â¤ÂºÃ£Æ’Â©Ã£Æ’â„¢Ã£Æ’Â«Ã£â€šâ€™Ã¦â€ºÂ´Ã¦â€“Â°Ã£ï¿½â€”Ã£ï¿½Â¾Ã£ï¿½â„¢Ã£â‚¬â€š [Ã¨Â¡Â¨Ã§Â¤ÂºÃ£ï¿½Â®Ã¥Â½Â¢Ã¥Â¼ï¿½]
+	 * (1)Ã£Æ’â€¢Ã£â€šÂ©Ã£Æ’Â«Ã£Æ’â‚¬Ã¯Â¼Ë†Ã§â€ºÂ´Ã¦Å½Â¥Ã¥â€¦Â¥Ã¥Å â€ºÃ¯Â¼â€° - Ã£Æ’â€¢Ã£â€šÂ©Ã£Æ’Â«Ã£Æ’â‚¬Ã£â€šÂ¢Ã£â€šÂ¤Ã£â€šÂ³Ã£Æ’Â³ Ã¯Â¼â€¹
+	 * Ã£Æ’â€¢Ã£â€šÂ©Ã£Æ’Â«Ã£Æ’â‚¬Ã£Æ’â€˜Ã£â€šÂ¹ + Ã¤Â»Â»Ã¦â€žï¿½Ã¦â€“â€¡Ã¥Â­â€”Ã¥Ë†â€” (2)Ã£Æ’Â¡Ã£Æ’Â¼Ã£Æ’Â«Ã¯Â¼Ë†Ã§â€ºÂ´Ã¦Å½Â¥Ã¥â€¦Â¥Ã¥Å â€ºÃ¯Â¼â€° -
+	 * Ã£Æ’Â¡Ã£Æ’Â¼Ã£Æ’Â«Ã£â€šÂ¢Ã£â€šÂ¤Ã£â€šÂ³Ã£Æ’Â³ + Ã£Æ’Â¡Ã£Æ’Â¼Ã£Æ’Â«Ã£â€šÂ¢Ã£Æ’â€°Ã£Æ’Â¬Ã£â€šÂ¹ + Ã¤Â»Â»Ã¦â€žï¿½Ã¦â€“â€¡Ã¥Â­â€”Ã¥Ë†â€”
+	 * (3)Ã£Æ’â€¢Ã£â€šÂ©Ã£Æ’Â«Ã£Æ’â‚¬Ã¯Â¼Ë†Ã£â€šÂ¢Ã£Æ’â€°Ã£Æ’Â¬Ã£â€šÂ¹Ã¥Â¸Â³Ã©ï¿½Â¸Ã¦Å Å¾Ã¯Â¼â€° - Ã£Æ’â€¢Ã£â€šÂ©Ã£Æ’Â«Ã£Æ’â‚¬Ã£â€šÂ¢Ã£â€šÂ¤Ã£â€šÂ³Ã£Æ’Â³ +
+	 * Ã¤Â»Â»Ã¦â€žï¿½Ã¦â€“â€¡Ã¥Â­â€”Ã¥Ë†â€” (4)Ã£Æ’Â¡Ã£Æ’Â¼Ã£Æ’Â«Ã¯Â¼Ë†Ã£â€šÂ¢Ã£Æ’â€°Ã£Æ’Â¬Ã£â€šÂ¹Ã¥Â¸Â³Ã©ï¿½Â¸Ã¦Å Å¾Ã¯Â¼â€° -
+	 * Ã£Æ’Â¡Ã£Æ’Â¼Ã£Æ’Â«Ã£â€šÂ¢Ã£â€šÂ¤Ã£â€šÂ³Ã£Æ’Â³ + Ã¤Â»Â»Ã¦â€žï¿½Ã¦â€“â€¡Ã¥Â­â€”Ã¥Ë†â€”
 	 * 
 	 * Updates the destination display label. This method must be called from UI
 	 * thread. [Display format] (1) For email: address book - icon (folder) +
@@ -518,7 +538,7 @@ public class AppScanFragment extends Fragment implements IServiceListener {
 	 * folder: manual entry - icon (mail) + string
 	 * 
 	 * @param optStr
-	 *            : ä»»æ„�æ–‡å­—åˆ— Specified string
+	 *            : Ã¤Â»Â»Ã¦â€žï¿½Ã¦â€“â€¡Ã¥Â­â€”Ã¥Ë†â€” Specified string
 	 */
 	public void updateDestinationLabel(String optStr) {
 
@@ -579,8 +599,8 @@ public class AppScanFragment extends Fragment implements IServiceListener {
 	}
 
 	/**
-	 * å®›å…ˆè¡¨ç¤ºãƒ©ãƒ™ãƒ«ã‚’æ›´æ–°ã�—ã�¾ã�™ã€‚ è¡¨ç¤ºå½¢å¼�ã�¯
-	 * ã‚¢ã‚¤ã‚³ãƒ³(ãƒ•ã‚©ãƒ«ãƒ€/ãƒ¡ãƒ¼ãƒ«ï¼‰ï¼‹ æ–‡å­—åˆ— ã�§ã�™ã€‚ Updates the
+	 * Ã¥Â®â€ºÃ¥â€¦Ë†Ã¨Â¡Â¨Ã§Â¤ÂºÃ£Æ’Â©Ã£Æ’â„¢Ã£Æ’Â«Ã£â€šâ€™Ã¦â€ºÂ´Ã¦â€“Â°Ã£ï¿½â€”Ã£ï¿½Â¾Ã£ï¿½â„¢Ã£â‚¬â€š Ã¨Â¡Â¨Ã§Â¤ÂºÃ¥Â½Â¢Ã¥Â¼ï¿½Ã£ï¿½Â¯
+	 * Ã£â€šÂ¢Ã£â€šÂ¤Ã£â€šÂ³Ã£Æ’Â³(Ã£Æ’â€¢Ã£â€šÂ©Ã£Æ’Â«Ã£Æ’â‚¬/Ã£Æ’Â¡Ã£Æ’Â¼Ã£Æ’Â«Ã¯Â¼â€°Ã¯Â¼â€¹ Ã¦â€“â€¡Ã¥Â­â€”Ã¥Ë†â€” Ã£ï¿½Â§Ã£ï¿½â„¢Ã£â‚¬â€š Updates the
 	 * destination display label. Display format is
 	 * "icon (folder/email) + string".
 	 * 
@@ -611,13 +631,13 @@ public class AppScanFragment extends Fragment implements IServiceListener {
 	}
 
 	/**
-	 * ã‚·ã‚¹ãƒ†ãƒ è­¦å‘Šç”»é�¢è¡¨ç¤ºè¦�æ±‚ã�«æ¸¡ã�™çŠ¶æ…‹æ–‡å­—åˆ—ã‚’ç”Ÿæˆ�ã�—ã
-	 * �¾ã�™ã€‚ Creates the state string to be passed to system warning screen
+	 * Ã£â€šÂ·Ã£â€šÂ¹Ã£Æ’â€ Ã£Æ’Â Ã¨Â­Â¦Ã¥â€˜Å Ã§â€�Â»Ã©ï¿½Â¢Ã¨Â¡Â¨Ã§Â¤ÂºÃ¨Â¦ï¿½Ã¦Â±â€šÃ£ï¿½Â«Ã¦Â¸Â¡Ã£ï¿½â„¢Ã§Å Â¶Ã¦â€¦â€¹Ã¦â€“â€¡Ã¥Â­â€”Ã¥Ë†â€”Ã£â€šâ€™Ã§â€�Å¸Ã¦Ë†ï¿½Ã£ï¿½â€”Ã£
+	 * ï¿½Â¾Ã£ï¿½â„¢Ã£â‚¬â€š Creates the state string to be passed to system warning screen
 	 * display request.
 	 * 
 	 * @param state
-	 *            ã‚¹ã‚­ãƒ£ãƒ³ã‚µãƒ¼ãƒ“ã‚¹çŠ¶æ…‹ State of scan service
-	 * @return çŠ¶æ…‹æ–‡å­—åˆ— State string
+	 *            Ã£â€šÂ¹Ã£â€šÂ­Ã£Æ’Â£Ã£Æ’Â³Ã£â€šÂµÃ£Æ’Â¼Ã£Æ’â€œÃ£â€šÂ¹Ã§Å Â¶Ã¦â€¦â€¹ State of scan service
+	 * @return Ã§Å Â¶Ã¦â€¦â€¹Ã¦â€“â€¡Ã¥Â­â€”Ã¥Ë†â€” State string
 	 */
 	private String makeAlertStateString(ScannerState state) {
 		String stateString = "";
@@ -628,16 +648,16 @@ public class AppScanFragment extends Fragment implements IServiceListener {
 	}
 
 	/**
-	 * ã‚·ã‚¹ãƒ†ãƒ è­¦å‘Šç”»é�¢è¡¨ç¤ºè¦�æ±‚ã�«æ¸¡ã�™çŠ¶æ…‹ç�†ç”±æ–‡å­—åˆ—ã‚’ç”
-	 * Ÿæˆ�ã�—ã�¾ã�™ã€‚
-	 * è¤‡æ•°ã�®çŠ¶æ…‹ç�†ç”±ã�Œã�‚ã�£ã�Ÿå ´å�ˆã€�1ã�¤ç›®ã�®çŠ¶æ…
-	 * ‹ç�†ç”±ã�®ã�¿ã‚’æ¸¡ã�—ã�¾ã�™ã€‚ Creates the state reason string to be
+	 * Ã£â€šÂ·Ã£â€šÂ¹Ã£Æ’â€ Ã£Æ’Â Ã¨Â­Â¦Ã¥â€˜Å Ã§â€�Â»Ã©ï¿½Â¢Ã¨Â¡Â¨Ã§Â¤ÂºÃ¨Â¦ï¿½Ã¦Â±â€šÃ£ï¿½Â«Ã¦Â¸Â¡Ã£ï¿½â„¢Ã§Å Â¶Ã¦â€¦â€¹Ã§ï¿½â€ Ã§â€�Â±Ã¦â€“â€¡Ã¥Â­â€”Ã¥Ë†â€”Ã£â€šâ€™Ã§â€�
+	 * Å¸Ã¦Ë†ï¿½Ã£ï¿½â€”Ã£ï¿½Â¾Ã£ï¿½â„¢Ã£â‚¬â€š
+	 * Ã¨Â¤â€¡Ã¦â€¢Â°Ã£ï¿½Â®Ã§Å Â¶Ã¦â€¦â€¹Ã§ï¿½â€ Ã§â€�Â±Ã£ï¿½Å’Ã£ï¿½â€šÃ£ï¿½Â£Ã£ï¿½Å¸Ã¥Â Â´Ã¥ï¿½Ë†Ã£â‚¬ï¿½1Ã£ï¿½Â¤Ã§â€ºÂ®Ã£ï¿½Â®Ã§Å Â¶Ã¦â€¦
+	 * â€¹Ã§ï¿½â€ Ã§â€�Â±Ã£ï¿½Â®Ã£ï¿½Â¿Ã£â€šâ€™Ã¦Â¸Â¡Ã£ï¿½â€”Ã£ï¿½Â¾Ã£ï¿½â„¢Ã£â‚¬â€š Creates the state reason string to be
 	 * passed to the system warning screen display request. If multiple state
 	 * reasons exist, only the first state reason is passed.
 	 * 
 	 * @param stateReasons
-	 *            ã‚¹ã‚­ãƒ£ãƒŠã‚µãƒ¼ãƒ“ã‚¹çŠ¶æ…‹ç�†ç”± Scan service state reason
-	 * @return çŠ¶æ…‹ç�†ç”±æ–‡å­—åˆ— State reason string
+	 *            Ã£â€šÂ¹Ã£â€šÂ­Ã£Æ’Â£Ã£Æ’Å Ã£â€šÂµÃ£Æ’Â¼Ã£Æ’â€œÃ£â€šÂ¹Ã§Å Â¶Ã¦â€¦â€¹Ã§ï¿½â€ Ã§â€�Â± Scan service state reason
+	 * @return Ã§Å Â¶Ã¦â€¦â€¹Ã§ï¿½â€ Ã§â€�Â±Ã¦â€“â€¡Ã¥Â­â€”Ã¥Ë†â€” State reason string
 	 */
 	private String makeAlertStateReasonString(ScannerStateReasons stateReasons) {
 		String reasonString = "";
@@ -651,14 +671,14 @@ public class AppScanFragment extends Fragment implements IServiceListener {
 	}
 
 	/**
-	 * æŒ‡å®šã�•ã‚Œã�Ÿã‚¢ãƒ—ãƒªã‚±ãƒ¼ã‚·ãƒ§ãƒ³ã�Œãƒ•ã‚©ã‚¢ã‚°ãƒ©ãƒ³ãƒ‰çŠ¶æ…‹ã�«ã
-	 * �‚ã‚‹ã�‹ã‚’å�–å¾—ã�—ã�¾ã�™ã€‚ Obtains whether or not the specified
+	 * Ã¦Å’â€¡Ã¥Â®Å¡Ã£ï¿½â€¢Ã£â€šÅ’Ã£ï¿½Å¸Ã£â€šÂ¢Ã£Æ’â€”Ã£Æ’ÂªÃ£â€šÂ±Ã£Æ’Â¼Ã£â€šÂ·Ã£Æ’Â§Ã£Æ’Â³Ã£ï¿½Å’Ã£Æ’â€¢Ã£â€šÂ©Ã£â€šÂ¢Ã£â€šÂ°Ã£Æ’Â©Ã£Æ’Â³Ã£Æ’â€°Ã§Å Â¶Ã¦â€¦â€¹Ã£ï¿½Â«Ã£
+	 * ï¿½â€šÃ£â€šâ€¹Ã£ï¿½â€¹Ã£â€šâ€™Ã¥ï¿½â€“Ã¥Â¾â€”Ã£ï¿½â€”Ã£ï¿½Â¾Ã£ï¿½â„¢Ã£â‚¬â€š Obtains whether or not the specified
 	 * application is in the foreground state.
 	 * 
 	 * @param packageName
-	 *            ã‚¢ãƒ—ãƒªã‚±ãƒ¼ã‚·ãƒ§ãƒ³ã�®ãƒ‘ãƒƒã‚±ãƒ¼ã‚¸å�� Application
+	 *            Ã£â€šÂ¢Ã£Æ’â€”Ã£Æ’ÂªÃ£â€šÂ±Ã£Æ’Â¼Ã£â€šÂ·Ã£Æ’Â§Ã£Æ’Â³Ã£ï¿½Â®Ã£Æ’â€˜Ã£Æ’Æ’Ã£â€šÂ±Ã£Æ’Â¼Ã£â€šÂ¸Ã¥ï¿½ï¿½ Application
 	 *            package name
-	 * @return ãƒ•ã‚©ã‚¢ã‚°ãƒ©ã‚¦ãƒ³ãƒ‰çŠ¶æ…‹ã�«ã�‚ã‚‹å ´å�ˆã�«true If the
+	 * @return Ã£Æ’â€¢Ã£â€šÂ©Ã£â€šÂ¢Ã£â€šÂ°Ã£Æ’Â©Ã£â€šÂ¦Ã£Æ’Â³Ã£Æ’â€°Ã§Å Â¶Ã¦â€¦â€¹Ã£ï¿½Â«Ã£ï¿½â€šÃ£â€šâ€¹Ã¥Â Â´Ã¥ï¿½Ë†Ã£ï¿½Â«true If the
 	 *         application is in the foreground state, true is returned.
 	 */
 	private boolean isForegroundApp(String packageName) {
@@ -676,15 +696,15 @@ public class AppScanFragment extends Fragment implements IServiceListener {
 	}
 
 	/**
-	 * æŒ‡å®šã�•ã‚Œã�Ÿã‚¢ãƒ—ãƒªã‚±ãƒ¼ã‚·ãƒ§ãƒ³ã�®ã‚¢ã‚¯ãƒ†ã‚£ãƒ“ãƒ†ã‚£ã‚¹ã‚¿ãƒƒã
-	 * ‚¯ã�®æœ€ä¸Šä½�ã‚¯ãƒ©ã‚¹ã‚’å�–å¾—ã�—ã�¾ã�™ã€‚ Obtains the top class in the
+	 * Ã¦Å’â€¡Ã¥Â®Å¡Ã£ï¿½â€¢Ã£â€šÅ’Ã£ï¿½Å¸Ã£â€šÂ¢Ã£Æ’â€”Ã£Æ’ÂªÃ£â€šÂ±Ã£Æ’Â¼Ã£â€šÂ·Ã£Æ’Â§Ã£Æ’Â³Ã£ï¿½Â®Ã£â€šÂ¢Ã£â€šÂ¯Ã£Æ’â€ Ã£â€šÂ£Ã£Æ’â€œÃ£Æ’â€ Ã£â€šÂ£Ã£â€šÂ¹Ã£â€šÂ¿Ã£Æ’Æ’Ã£
+	 * â€šÂ¯Ã£ï¿½Â®Ã¦Å“â‚¬Ã¤Â¸Å Ã¤Â½ï¿½Ã£â€šÂ¯Ã£Æ’Â©Ã£â€šÂ¹Ã£â€šâ€™Ã¥ï¿½â€“Ã¥Â¾â€”Ã£ï¿½â€”Ã£ï¿½Â¾Ã£ï¿½â„¢Ã£â‚¬â€š Obtains the top class in the
 	 * activity stack of the specified application.
 	 * 
 	 * @param packageName
-	 *            ã‚¢ãƒ—ãƒªã‚±ãƒ¼ã‚·ãƒ§ãƒ³ã�®ãƒ‘ãƒƒã‚±ãƒ¼ã‚¸å�� Application
+	 *            Ã£â€šÂ¢Ã£Æ’â€”Ã£Æ’ÂªÃ£â€šÂ±Ã£Æ’Â¼Ã£â€šÂ·Ã£Æ’Â§Ã£Æ’Â³Ã£ï¿½Â®Ã£Æ’â€˜Ã£Æ’Æ’Ã£â€šÂ±Ã£Æ’Â¼Ã£â€šÂ¸Ã¥ï¿½ï¿½ Application
 	 *            package name
-	 * @return æœ€ä¸Šä½�ã‚¯ãƒ©ã‚¹ã�®FQCNã‚¯ãƒ©ã‚¹å��.
-	 *         å�–å¾—ã�§ã��ã�ªã�„å ´å�ˆã�¯null The name of the FQCN class name
+	 * @return Ã¦Å“â‚¬Ã¤Â¸Å Ã¤Â½ï¿½Ã£â€šÂ¯Ã£Æ’Â©Ã£â€šÂ¹Ã£ï¿½Â®FQCNÃ£â€šÂ¯Ã£Æ’Â©Ã£â€šÂ¹Ã¥ï¿½ï¿½.
+	 *         Ã¥ï¿½â€“Ã¥Â¾â€”Ã£ï¿½Â§Ã£ï¿½ï¿½Ã£ï¿½ÂªÃ£ï¿½â€žÃ¥Â Â´Ã¥ï¿½Ë†Ã£ï¿½Â¯null The name of the FQCN class name
 	 *         of the top class. If the name cannot be obtained, null is
 	 *         returned.
 	 */
@@ -701,14 +721,14 @@ public class AppScanFragment extends Fragment implements IServiceListener {
 	}
 
 	/**
-	 * æŒ‡å®šã�•ã‚Œã�Ÿã‚¢ãƒ—ãƒªã‚±ãƒ¼ã‚·ãƒ§ãƒ³ã�®ã‚¢ã‚¯ãƒ†ã‚£ãƒ“ãƒ†ã‚£ã‚¹ã‚¿ãƒƒã
-	 * ‚¯å†…ã�®ã‚¢ã‚¯ãƒ†ã‚£ãƒ“ãƒ†ã‚£æ•°ã‚’å�–å¾—ã�—ã�¾ã�™ã€‚ Obtains the number
+	 * Ã¦Å’â€¡Ã¥Â®Å¡Ã£ï¿½â€¢Ã£â€šÅ’Ã£ï¿½Å¸Ã£â€šÂ¢Ã£Æ’â€”Ã£Æ’ÂªÃ£â€šÂ±Ã£Æ’Â¼Ã£â€šÂ·Ã£Æ’Â§Ã£Æ’Â³Ã£ï¿½Â®Ã£â€šÂ¢Ã£â€šÂ¯Ã£Æ’â€ Ã£â€šÂ£Ã£Æ’â€œÃ£Æ’â€ Ã£â€šÂ£Ã£â€šÂ¹Ã£â€šÂ¿Ã£Æ’Æ’Ã£
+	 * â€šÂ¯Ã¥â€ â€¦Ã£ï¿½Â®Ã£â€šÂ¢Ã£â€šÂ¯Ã£Æ’â€ Ã£â€šÂ£Ã£Æ’â€œÃ£Æ’â€ Ã£â€šÂ£Ã¦â€¢Â°Ã£â€šâ€™Ã¥ï¿½â€“Ã¥Â¾â€”Ã£ï¿½â€”Ã£ï¿½Â¾Ã£ï¿½â„¢Ã£â‚¬â€š Obtains the number
 	 * of activities in the activity stack of the specified application.
 	 * 
 	 * @param packageName
-	 *            ã‚¢ãƒ—ãƒªã‚±ãƒ¼ã‚·ãƒ§ãƒ³ã�®ãƒ‘ãƒƒã‚±ãƒ¼ã‚¸å�� Application
+	 *            Ã£â€šÂ¢Ã£Æ’â€”Ã£Æ’ÂªÃ£â€šÂ±Ã£Æ’Â¼Ã£â€šÂ·Ã£Æ’Â§Ã£Æ’Â³Ã£ï¿½Â®Ã£Æ’â€˜Ã£Æ’Æ’Ã£â€šÂ±Ã£Æ’Â¼Ã£â€šÂ¸Ã¥ï¿½ï¿½ Application
 	 *            package name
-	 * @return ã‚¢ã‚¯ãƒ†ã‚£ãƒ“ãƒ†ã‚£æ•°. å�–å¾—ã�§ã��ã�ªã�„å ´å�ˆã�¯0 The number
+	 * @return Ã£â€šÂ¢Ã£â€šÂ¯Ã£Æ’â€ Ã£â€šÂ£Ã£Æ’â€œÃ£Æ’â€ Ã£â€šÂ£Ã¦â€¢Â°. Ã¥ï¿½â€“Ã¥Â¾â€”Ã£ï¿½Â§Ã£ï¿½ï¿½Ã£ï¿½ÂªÃ£ï¿½â€žÃ¥Â Â´Ã¥ï¿½Ë†Ã£ï¿½Â¯0 The number
 	 *         of activitys. If the number cannot be obtained, 0 is returned.
 	 */
 	private int getNumActivities(String packageName) {
@@ -737,11 +757,11 @@ public class AppScanFragment extends Fragment implements IServiceListener {
 	}
 
 	/**
-	 * ã‚¹ã‚­ãƒ£ãƒŠã‚µãƒ¼ãƒ“ã‚¹ã�®çŠ¶æ…‹å¤‰æ›´ç›£è¦–ãƒªã‚¹ãƒŠãƒ¼ã�§ã�™ã€‚
-	 * [å‡¦ç�†å†…å®¹]
-	 * (1)ã‚¹ã‚­ãƒ£ãƒ³ã‚µãƒ¼ãƒ“ã‚¹ã�®çŠ¶æ…‹ã�«ã‚ˆã�£ã�¦ã€�ã‚¹ã‚­ãƒ£ãƒ
-	 * ³ã‚µãƒ¼ãƒ“ã‚¹çŠ¶æ…‹è¡¨ç¤ºãƒ©ãƒ™ãƒ«ã‚’æ›¸ã��æ�›ã�ˆã�¾ã�™ã€‚
-	 * (2)ã‚¨ãƒ©ãƒ¼ç”»é�¢ã�®è¡¨ç¤ºãƒ»æ›´æ–°ãƒ»é�žè¡¨ç¤ºè¦�æ±‚ã‚’è¡Œã�„ã�¾ã�™ã€‚
+	 * Ã£â€šÂ¹Ã£â€šÂ­Ã£Æ’Â£Ã£Æ’Å Ã£â€šÂµÃ£Æ’Â¼Ã£Æ’â€œÃ£â€šÂ¹Ã£ï¿½Â®Ã§Å Â¶Ã¦â€¦â€¹Ã¥Â¤â€°Ã¦â€ºÂ´Ã§â€ºÂ£Ã¨Â¦â€“Ã£Æ’ÂªÃ£â€šÂ¹Ã£Æ’Å Ã£Æ’Â¼Ã£ï¿½Â§Ã£ï¿½â„¢Ã£â‚¬â€š
+	 * [Ã¥â€¡Â¦Ã§ï¿½â€ Ã¥â€ â€¦Ã¥Â®Â¹]
+	 * (1)Ã£â€šÂ¹Ã£â€šÂ­Ã£Æ’Â£Ã£Æ’Â³Ã£â€šÂµÃ£Æ’Â¼Ã£Æ’â€œÃ£â€šÂ¹Ã£ï¿½Â®Ã§Å Â¶Ã¦â€¦â€¹Ã£ï¿½Â«Ã£â€šË†Ã£ï¿½Â£Ã£ï¿½Â¦Ã£â‚¬ï¿½Ã£â€šÂ¹Ã£â€šÂ­Ã£Æ’Â£Ã£Æ’
+	 * Â³Ã£â€šÂµÃ£Æ’Â¼Ã£Æ’â€œÃ£â€šÂ¹Ã§Å Â¶Ã¦â€¦â€¹Ã¨Â¡Â¨Ã§Â¤ÂºÃ£Æ’Â©Ã£Æ’â„¢Ã£Æ’Â«Ã£â€šâ€™Ã¦â€ºÂ¸Ã£ï¿½ï¿½Ã¦ï¿½â€ºÃ£ï¿½Ë†Ã£ï¿½Â¾Ã£ï¿½â„¢Ã£â‚¬â€š
+	 * (2)Ã£â€šÂ¨Ã£Æ’Â©Ã£Æ’Â¼Ã§â€�Â»Ã©ï¿½Â¢Ã£ï¿½Â®Ã¨Â¡Â¨Ã§Â¤ÂºÃ£Æ’Â»Ã¦â€ºÂ´Ã¦â€“Â°Ã£Æ’Â»Ã©ï¿½Å¾Ã¨Â¡Â¨Ã§Â¤ÂºÃ¨Â¦ï¿½Ã¦Â±â€šÃ£â€šâ€™Ã¨Â¡Å’Ã£ï¿½â€žÃ£ï¿½Â¾Ã£ï¿½â„¢Ã£â‚¬â€š
 	 * The listener class to monitor scan service attribute changes. [Processes]
 	 * (1) Rewrites the scan service state display label accordingly to the scan
 	 * service state. (2) Requests to display/update/hide error screens.
@@ -873,18 +893,18 @@ public class AppScanFragment extends Fragment implements IServiceListener {
 	}
 
 	/**
-	 * é�žå�ŒæœŸã�§ã‚¹ã‚­ãƒ£ãƒ³ã‚µãƒ¼ãƒ“ã‚¹ã�¨ã�®æŽ¥ç¶šã‚’è¡Œã�„ã�¾ã�™ã€‚
-	 * [å‡¦ç�†å†…å®¹]
-	 * (1)ã‚¹ã‚­ãƒ£ãƒ³ã‚µãƒ¼ãƒ“ã‚¹ã�®ã‚¤ãƒ™ãƒ³ãƒˆã‚’å�—ä¿¡ã�™ã‚‹ãƒªã
-	 * ‚¹ãƒŠãƒ¼ã‚’è¨­å®šã�—ã�¾ã�™ã€‚
-	 * æ©Ÿå™¨ã�Œåˆ©ç”¨å�¯èƒ½ã�«ã�ªã‚‹ã�‹ã€�ã‚­ãƒ£ãƒ
-	 * ³ã‚»ãƒ«ã�ŒæŠ¼ã�•ã‚Œã‚‹ã�¾ã�§ãƒªãƒˆãƒ©ã‚¤ã�—ã�¾ã�™ã€‚
-	 * (2)é�žå�ŒæœŸã‚¤ãƒ™ãƒ³ãƒˆã�®æŽ¥ç¶šç¢ºèª�ã‚’è¡Œã�„ã�¾ã�™ã€‚
-	 * æŽ¥ç¶šå�¯èƒ½ã�«ã
-	 * �ªã‚‹ã�‹ã€�ã‚­ãƒ£ãƒ³ã‚»ãƒ«ã�ŒæŠ¼ã�•ã‚Œã‚‹ã�¾ã�§ãƒªãƒˆãƒ©ã‚¤ã�—ã�¾ã�™ã€‚
+	 * Ã©ï¿½Å¾Ã¥ï¿½Å’Ã¦Å“Å¸Ã£ï¿½Â§Ã£â€šÂ¹Ã£â€šÂ­Ã£Æ’Â£Ã£Æ’Â³Ã£â€šÂµÃ£Æ’Â¼Ã£Æ’â€œÃ£â€šÂ¹Ã£ï¿½Â¨Ã£ï¿½Â®Ã¦Å½Â¥Ã§Â¶Å¡Ã£â€šâ€™Ã¨Â¡Å’Ã£ï¿½â€žÃ£ï¿½Â¾Ã£ï¿½â„¢Ã£â‚¬â€š
+	 * [Ã¥â€¡Â¦Ã§ï¿½â€ Ã¥â€ â€¦Ã¥Â®Â¹]
+	 * (1)Ã£â€šÂ¹Ã£â€šÂ­Ã£Æ’Â£Ã£Æ’Â³Ã£â€šÂµÃ£Æ’Â¼Ã£Æ’â€œÃ£â€šÂ¹Ã£ï¿½Â®Ã£â€šÂ¤Ã£Æ’â„¢Ã£Æ’Â³Ã£Æ’Ë†Ã£â€šâ€™Ã¥ï¿½â€”Ã¤Â¿Â¡Ã£ï¿½â„¢Ã£â€šâ€¹Ã£Æ’ÂªÃ£
+	 * â€šÂ¹Ã£Æ’Å Ã£Æ’Â¼Ã£â€šâ€™Ã¨Â¨Â­Ã¥Â®Å¡Ã£ï¿½â€”Ã£ï¿½Â¾Ã£ï¿½â„¢Ã£â‚¬â€š
+	 * Ã¦Â©Å¸Ã¥â„¢Â¨Ã£ï¿½Å’Ã¥Ë†Â©Ã§â€�Â¨Ã¥ï¿½Â¯Ã¨Æ’Â½Ã£ï¿½Â«Ã£ï¿½ÂªÃ£â€šâ€¹Ã£ï¿½â€¹Ã£â‚¬ï¿½Ã£â€šÂ­Ã£Æ’Â£Ã£Æ’
+	 * Â³Ã£â€šÂ»Ã£Æ’Â«Ã£ï¿½Å’Ã¦Å Â¼Ã£ï¿½â€¢Ã£â€šÅ’Ã£â€šâ€¹Ã£ï¿½Â¾Ã£ï¿½Â§Ã£Æ’ÂªÃ£Æ’Ë†Ã£Æ’Â©Ã£â€šÂ¤Ã£ï¿½â€”Ã£ï¿½Â¾Ã£ï¿½â„¢Ã£â‚¬â€š
+	 * (2)Ã©ï¿½Å¾Ã¥ï¿½Å’Ã¦Å“Å¸Ã£â€šÂ¤Ã£Æ’â„¢Ã£Æ’Â³Ã£Æ’Ë†Ã£ï¿½Â®Ã¦Å½Â¥Ã§Â¶Å¡Ã§Â¢ÂºÃ¨Âªï¿½Ã£â€šâ€™Ã¨Â¡Å’Ã£ï¿½â€žÃ£ï¿½Â¾Ã£ï¿½â„¢Ã£â‚¬â€š
+	 * Ã¦Å½Â¥Ã§Â¶Å¡Ã¥ï¿½Â¯Ã¨Æ’Â½Ã£ï¿½Â«Ã£
+	 * ï¿½ÂªÃ£â€šâ€¹Ã£ï¿½â€¹Ã£â‚¬ï¿½Ã£â€šÂ­Ã£Æ’Â£Ã£Æ’Â³Ã£â€šÂ»Ã£Æ’Â«Ã£ï¿½Å’Ã¦Å Â¼Ã£ï¿½â€¢Ã£â€šÅ’Ã£â€šâ€¹Ã£ï¿½Â¾Ã£ï¿½Â§Ã£Æ’ÂªÃ£Æ’Ë†Ã£Æ’Â©Ã£â€šÂ¤Ã£ï¿½â€”Ã£ï¿½Â¾Ã£ï¿½â„¢Ã£â‚¬â€š
 	 * (3
-	 * )æŽ¥ç¶šã�«æˆ�åŠŸã�—ã�Ÿå ´å�ˆã�¯ã€�ã‚¹ã‚­ãƒ£ãƒ³ã‚µãƒ¼ãƒ“ã‚¹ã�‹ã‚‰å�„è¨­å®
-	 * šã�®è¨­å®šå�¯èƒ½å€¤ã‚’å�–å¾—ã�—ã�¾ã�™ã€‚
+	 * )Ã¦Å½Â¥Ã§Â¶Å¡Ã£ï¿½Â«Ã¦Ë†ï¿½Ã¥Å Å¸Ã£ï¿½â€”Ã£ï¿½Å¸Ã¥Â Â´Ã¥ï¿½Ë†Ã£ï¿½Â¯Ã£â‚¬ï¿½Ã£â€šÂ¹Ã£â€šÂ­Ã£Æ’Â£Ã£Æ’Â³Ã£â€šÂµÃ£Æ’Â¼Ã£Æ’â€œÃ£â€šÂ¹Ã£ï¿½â€¹Ã£â€šâ€°Ã¥ï¿½â€žÃ¨Â¨Â­Ã¥Â®
+	 * Å¡Ã£ï¿½Â®Ã¨Â¨Â­Ã¥Â®Å¡Ã¥ï¿½Â¯Ã¨Æ’Â½Ã¥â‚¬Â¤Ã£â€šâ€™Ã¥ï¿½â€“Ã¥Â¾â€”Ã£ï¿½â€”Ã£ï¿½Â¾Ã£ï¿½â„¢Ã£â‚¬â€š
 	 * 
 	 * Connects with the scan service asynchronously. [Processes] (1) Sets the
 	 * listener to receive scan service events. This task repeats until the
@@ -1006,7 +1026,7 @@ public class AppScanFragment extends Fragment implements IServiceListener {
 				mButtonColor.setText(mScanSettingDataHolder
 						.getSelectedColorLabel());
 				mButtonFileSetting.setText(mScanSettingDataHolder
-						.getSelectedFileSettingLabel());
+						.getSelectedResolutionLabel());
 				mButtonSide.setText(mScanSettingDataHolder
 						.getSelectedSideLabel());
 				enableSettingKey();
@@ -1019,8 +1039,8 @@ public class AppScanFragment extends Fragment implements IServiceListener {
 		}
 
 		/**
-		 * æŒ‡å®šã�•ã‚Œã�Ÿæ™‚é–“ã‚«ãƒ¬ãƒ³ãƒˆã‚¹ãƒ¬ãƒƒãƒ‰ã‚’ã‚¹ãƒªãƒ¼ãƒ—ã�—ã�¾ã�™
-		 * ã€‚ sleep for the whole of the specified interval
+		 * Ã¦Å’â€¡Ã¥Â®Å¡Ã£ï¿½â€¢Ã£â€šÅ’Ã£ï¿½Å¸Ã¦â„¢â€šÃ©â€“â€œÃ£â€šÂ«Ã£Æ’Â¬Ã£Æ’Â³Ã£Æ’Ë†Ã£â€šÂ¹Ã£Æ’Â¬Ã£Æ’Æ’Ã£Æ’â€°Ã£â€šâ€™Ã£â€šÂ¹Ã£Æ’ÂªÃ£Æ’Â¼Ã£Æ’â€”Ã£ï¿½â€”Ã£ï¿½Â¾Ã£ï¿½â„¢
+		 * Ã£â‚¬â€š sleep for the whole of the specified interval
 		 */
 		private void sleep(long time) {
 			try {
@@ -1032,21 +1052,21 @@ public class AppScanFragment extends Fragment implements IServiceListener {
 	}
 
 	/**
-	 * èª­å�–é–‹å§‹ãƒœã‚¿ãƒ³ã‚’æœ‰åŠ¹åŒ–ã�—ã�¾ã�™ã€‚ Enables the start button.
+	 * Ã¨ÂªÂ­Ã¥ï¿½â€“Ã©â€“â€¹Ã¥Â§â€¹Ã£Æ’Å“Ã£â€šÂ¿Ã£Æ’Â³Ã£â€šâ€™Ã¦Å“â€°Ã¥Å Â¹Ã¥Å’â€“Ã£ï¿½â€”Ã£ï¿½Â¾Ã£ï¿½â„¢Ã£â‚¬â€š Enables the start button.
 	 */
 	private void enableStartKey() {
 		mButtonStart.setEnabled(true);
 	}
 
 	/**
-	 * èª­å�–é–‹å§‹ãƒœã‚¿ãƒ³ã‚’ç„¡åŠ¹åŒ–ã�—ã�¾ã�™ã€‚ Disables the start button.
+	 * Ã¨ÂªÂ­Ã¥ï¿½â€“Ã©â€“â€¹Ã¥Â§â€¹Ã£Æ’Å“Ã£â€šÂ¿Ã£Æ’Â³Ã£â€šâ€™Ã§â€žÂ¡Ã¥Å Â¹Ã¥Å’â€“Ã£ï¿½â€”Ã£ï¿½Â¾Ã£ï¿½â„¢Ã£â‚¬â€š Disables the start button.
 	 */
 	private void disableStartKey() {
 		mButtonStart.setEnabled(false);
 	}
 
 	/**
-	 * å�„è¨­å®šãƒœã‚¿ãƒ³ã‚’æœ‰åŠ¹åŒ–ã�—ã�¾ã�™ã€‚ Enables setting buttons.
+	 * Ã¥ï¿½â€žÃ¨Â¨Â­Ã¥Â®Å¡Ã£Æ’Å“Ã£â€šÂ¿Ã£Æ’Â³Ã£â€šâ€™Ã¦Å“â€°Ã¥Å Â¹Ã¥Å’â€“Ã£ï¿½â€”Ã£ï¿½Â¾Ã£ï¿½â„¢Ã£â‚¬â€š Enables setting buttons.
 	 */
 	private void enableSettingKey() {
 		mButtonColor.setEnabled(true);
@@ -1056,7 +1076,7 @@ public class AppScanFragment extends Fragment implements IServiceListener {
 	}
 
 	/**
-	 * å�„è¨­å®šãƒœã‚¿ãƒ³ã‚’ç„¡åŠ¹åŒ–ã�—ã�¾ã�™ã€‚ Disables setting buttons.
+	 * Ã¥ï¿½â€žÃ¨Â¨Â­Ã¥Â®Å¡Ã£Æ’Å“Ã£â€šÂ¿Ã£Æ’Â³Ã£â€šâ€™Ã§â€žÂ¡Ã¥Å Â¹Ã¥Å’â€“Ã£ï¿½â€”Ã£ï¿½Â¾Ã£ï¿½â„¢Ã£â‚¬â€š Disables setting buttons.
 	 */
 	private void disableSettingKey() {
 		mButtonColor.setEnabled(false);
@@ -1066,7 +1086,7 @@ public class AppScanFragment extends Fragment implements IServiceListener {
 	}
 
 	/**
-	 * ã‚·ã‚¹ãƒ†ãƒ è­¦å‘Šç”»é�¢è¡¨ç¤ºã‚¿ã‚¹ã‚¯ã‚’é–‹å§‹ã�—ã�¾ã�™ã€‚ Starts the
+	 * Ã£â€šÂ·Ã£â€šÂ¹Ã£Æ’â€ Ã£Æ’Â Ã¨Â­Â¦Ã¥â€˜Å Ã§â€�Â»Ã©ï¿½Â¢Ã¨Â¡Â¨Ã§Â¤ÂºÃ£â€šÂ¿Ã£â€šÂ¹Ã£â€šÂ¯Ã£â€šâ€™Ã©â€“â€¹Ã¥Â§â€¹Ã£ï¿½â€”Ã£ï¿½Â¾Ã£ï¿½â„¢Ã£â‚¬â€š Starts the
 	 * alert dialog display task.
 	 */
 	private void startAlertDialogDisplayTask() {
@@ -1078,7 +1098,7 @@ public class AppScanFragment extends Fragment implements IServiceListener {
 	}
 
 	/**
-	 * ã‚·ã‚¹ãƒ†ãƒ è­¦å‘Šç”»é�¢è¡¨ç¤ºã‚¿ã‚¹ã‚¯ã‚’ã‚­ãƒ£ãƒ³ã‚»ãƒ«ã�—ã�¾ã�™ã€‚
+	 * Ã£â€šÂ·Ã£â€šÂ¹Ã£Æ’â€ Ã£Æ’Â Ã¨Â­Â¦Ã¥â€˜Å Ã§â€�Â»Ã©ï¿½Â¢Ã¨Â¡Â¨Ã§Â¤ÂºÃ£â€šÂ¿Ã£â€šÂ¹Ã£â€šÂ¯Ã£â€šâ€™Ã£â€šÂ­Ã£Æ’Â£Ã£Æ’Â³Ã£â€šÂ»Ã£Æ’Â«Ã£ï¿½â€”Ã£ï¿½Â¾Ã£ï¿½â„¢Ã£â‚¬â€š
 	 * Stop the alert dialog display task.
 	 */
 	private void stopAlertDialogDisplayTask() {
@@ -1089,8 +1109,8 @@ public class AppScanFragment extends Fragment implements IServiceListener {
 	}
 
 	/**
-	 * ã‚·ã‚¹ãƒ†ãƒ è­¦å‘Šç”»é�¢ã�®è¡¨ç¤ºæœ‰ç„¡ã‚’åˆ¤æ–­ã�—ã€�å¿…è¦�ã�ªå ´å�ˆã�¯è
-	 * ¡¨ç¤ºè¦�æ±‚ã‚’è¡Œã�†é�žå�ŒæœŸã‚¿ã‚¹ã‚¯ã�§ã�™ã€‚ The asynchronous task to
+	 * Ã£â€šÂ·Ã£â€šÂ¹Ã£Æ’â€ Ã£Æ’Â Ã¨Â­Â¦Ã¥â€˜Å Ã§â€�Â»Ã©ï¿½Â¢Ã£ï¿½Â®Ã¨Â¡Â¨Ã§Â¤ÂºÃ¦Å“â€°Ã§â€žÂ¡Ã£â€šâ€™Ã¥Ë†Â¤Ã¦â€“Â­Ã£ï¿½â€”Ã£â‚¬ï¿½Ã¥Â¿â€¦Ã¨Â¦ï¿½Ã£ï¿½ÂªÃ¥Â Â´Ã¥ï¿½Ë†Ã£ï¿½Â¯Ã¨
+	 * Â¡Â¨Ã§Â¤ÂºÃ¨Â¦ï¿½Ã¦Â±â€šÃ£â€šâ€™Ã¨Â¡Å’Ã£ï¿½â€ Ã©ï¿½Å¾Ã¥ï¿½Å’Ã¦Å“Å¸Ã£â€šÂ¿Ã£â€šÂ¹Ã£â€šÂ¯Ã£ï¿½Â§Ã£ï¿½â„¢Ã£â‚¬â€š The asynchronous task to
 	 * judge to display system warning screen and to request to display the
 	 * screen if necessary.
 	 */

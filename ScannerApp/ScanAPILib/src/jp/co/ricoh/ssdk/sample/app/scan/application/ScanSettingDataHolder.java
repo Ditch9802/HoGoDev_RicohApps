@@ -11,6 +11,7 @@ import jp.co.ricoh.ssdk.sample.function.scan.attribute.standard.FileSetting.File
 import jp.co.ricoh.ssdk.sample.function.scan.attribute.standard.OriginalPreview;
 import jp.co.ricoh.ssdk.sample.function.scan.attribute.standard.OriginalSide;
 import jp.co.ricoh.ssdk.sample.function.scan.attribute.standard.ScanColor;
+import jp.co.ricoh.ssdk.sample.function.scan.attribute.standard.ScanResolution;
 import jp.co.ricoh.ssdk.sample.function.scan.supported.FileSettingSupported;
 
 import java.util.ArrayList;
@@ -32,7 +33,11 @@ public class ScanSettingDataHolder {
      * Map of scan color display string ID and setting values.
      */
 	private final LinkedHashMap<Integer, ScanColor> mAllColorMap;
+	
 
+	
+	private final LinkedHashMap<Integer, ScanResolution> mAllScanResolutionMap;
+	
     /**
      * ãƒ•ã‚¡ã‚¤ãƒ«å½¢å¼�ã�®è¡¨ç¤ºæ–‡å­—åˆ—IDã�¨è¨­å®šå€¤ã�®ãƒžãƒƒãƒ—ã�§ã�™ã€‚
      * Map of file format display string ID and setting values.
@@ -64,6 +69,10 @@ public class ScanSettingDataHolder {
      * List of display string ID for the available scan color setting values.
      */
 	private List<Integer> mSupportedColorLabelList;
+	
+	
+	//Resolution
+	private List<Integer> mSupportedResolutionLabelList;
 
     /**
      * ãƒ•ã‚¡ã‚¤ãƒ«è¨­å®šã�®è¨­å®šå�¯èƒ½å€¤ã�®è¡¨ç¤ºæ–‡å­—åˆ—IDã�®ãƒªã‚¹ãƒˆã�§ã�™ã€‚
@@ -90,6 +99,8 @@ public class ScanSettingDataHolder {
      * Display string ID of the selected scan color setting value.
      */
 	private int mSelectedColorLabel;
+	
+	private int mSelectedResolutionLabel;
 
     /**
      * é�¸æŠžä¸­ã�®ãƒ•ã‚¡ã‚¤ãƒ«è¨­å®šå€¤ã�®è¡¨ç¤ºæ–‡å­—åˆ—IDã�§ã�™ã€‚
@@ -146,6 +157,18 @@ public class ScanSettingDataHolder {
 			}
 		};
 
+		mAllScanResolutionMap = new LinkedHashMap<Integer, ScanResolution>(){
+			{
+				put(R.string.txid_scan_b_top_100, ScanResolution.DPI_100);
+				put(R.string.txid_scan_b_top_150, ScanResolution.DPI_150);
+				put(R.string.txid_scan_b_top_200, ScanResolution.DPI_200);
+				put(R.string.txid_scan_b_top_300, ScanResolution.DPI_300);
+				put(R.string.txid_scan_b_top_400, ScanResolution.DPI_400);
+				put(R.string.txid_scan_b_top_600, ScanResolution.DPI_600);
+				put(R.string.txid_scan_b_top_auto_resolution_select, ScanResolution.DPI_200);
+			}
+		};
+		
 		//(2)
 		mAllFileFormatMap = new LinkedHashMap<Integer, FileFormat>(){
 			{
@@ -186,11 +209,13 @@ public class ScanSettingDataHolder {
 
 		//(6)
 		mSelectedColorLabel = R.string.txid_scan_b_top_mono_text;
+		mSelectedResolutionLabel = R.string.txid_scan_b_top_200;
 		mSelectedFileSettingLabel = R.string.txid_scan_b_top_file_mpdf;
 		mSelectedSideLabel = R.string.txid_scan_b_top_one_sided;
 		mSelectedPreviewLabel = R.string.txid_scan_b_other_preview_on;
 
 		mSupportedColorLabelList = new ArrayList<Integer>();
+		mSupportedResolutionLabelList = new ArrayList<Integer>();
 		mSupportedFileSettingLabelList = new ArrayList<Integer>();
 		mSupportedSideLabelList = new ArrayList<Integer>();
 		mSupportedPreviewLabelList = new ArrayList<Integer>();
@@ -217,6 +242,11 @@ public class ScanSettingDataHolder {
         @SuppressWarnings("unchecked")
         List<ScanColor> colorList = (List<ScanColor>)scanService.getSupportedAttributeValues(ScanColor.class);
         setSupportedColorList(colorList);
+        
+        //Resolutions
+        @SuppressWarnings("unchecked")
+		List<ScanResolution> resolutionList = (List<ScanResolution>)scanService.getSupportedAttributeValues(ScanResolution.class);
+        setSupportedResolutionList(resolutionList);
 
         //(2)
         FileSettingSupported fileSettingSupported = (FileSettingSupported)scanService.getSupportedAttributeValues(FileSetting.class);
@@ -256,6 +286,21 @@ public class ScanSettingDataHolder {
 	            Map.Entry<Integer, ScanColor> entry = it.next();
 	            if(colorList.contains(entry.getValue())) {
 	                mSupportedColorLabelList.add(entry.getKey());
+	            }
+	        }
+	    }
+	}
+	
+	private void setSupportedResolutionList(List<ScanResolution> resolutionList) {
+	    mSupportedResolutionLabelList.clear();
+	    if (resolutionList != null) {
+	        Set<Map.Entry<Integer, ScanResolution>> entrySet = mAllScanResolutionMap.entrySet();
+	        Iterator<Map.Entry<Integer, ScanResolution>> it = entrySet.iterator();
+	        while(it.hasNext())
+	        {
+	            Map.Entry<Integer, ScanResolution> entry = it.next();
+	            if(resolutionList.contains(entry.getValue())) {
+	            	mSupportedResolutionLabelList.add(entry.getKey());
 	            }
 	        }
 	    }
@@ -351,6 +396,10 @@ public class ScanSettingDataHolder {
 	public Integer getSelectedColorLabel() {
 		return mSelectedColorLabel;
 	}
+	
+	public Integer getSelectedResolutionLabel() {
+		return mSelectedResolutionLabel;
+	}
 
     /**
      * é�¸æŠžä¸­ã�®èª­å�–ã‚«ãƒ©ãƒ¼è¨­å®šå€¤ã‚’å�–å¾—ã�—ã�¾ã�™ã€‚
@@ -360,6 +409,9 @@ public class ScanSettingDataHolder {
 		return mAllColorMap.get(mSelectedColorLabel);
 	}
 
+	public ScanResolution getSelectedResolutionValue() {
+		return mAllScanResolutionMap.get(mSelectedResolutionLabel);
+	}
     /**
      * æŒ‡å®šã�•ã‚Œã�Ÿèª­å�–ã‚«ãƒ©ãƒ¼è¨­å®šå€¤ã‚’é�¸æŠžçŠ¶æ…‹ã�«ã�—ã�¾ã�™ã€‚
      * Changes the selection state of the specified scan color setting value to "selected."
@@ -368,6 +420,12 @@ public class ScanSettingDataHolder {
 	public void setSelectedColor(Integer id) {
 		if(mSupportedColorLabelList.contains(id)) {
 			mSelectedColorLabel = id;
+		}
+	}
+	
+	public void setSelectedResolution(Integer id) {
+		if(mSupportedResolutionLabelList.contains(id)) {
+			mSelectedResolutionLabel = id;
 		}
 	}
 
@@ -470,6 +528,10 @@ public class ScanSettingDataHolder {
      */
 	public List<Integer> getColorLabelList() {
 		return mSupportedColorLabelList;
+	}
+	
+	public List<Integer> getResolutionLabelList() {
+		return mSupportedResolutionLabelList;
 	}
 
     /**

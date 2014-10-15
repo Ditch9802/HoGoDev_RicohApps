@@ -17,8 +17,11 @@ import java.util.List;
 
 import jp.co.ricoh.ssdk.sample.app.scan.activity.ScanActivity;
 import jp.co.ricoh.ssdk.sample.app.scan.application.ScanSampleApplication;
+import jp.co.ricoh.ssdk.sample.app.scan.application.ScanSettingDataHolder;
+import jp.co.ricoh.ssdk.sample.app.scan.application.ScanStateMachine;
 import jp.co.ricoh.ssdk.sample.function.scan.ScanImage;
 import jp.co.ricoh.ssdk.sample.function.scan.ScanPDF;
+import jp.co.ricoh.ssdk.sample.function.scan.attribute.standard.OriginalPreview;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.ProtocolException;
@@ -39,6 +42,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.FrameLayout;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.gso.hogoapi.fragement.AddFileSuccessfulFragment;
@@ -90,6 +94,7 @@ public class MainActivity extends ScanActivity implements
 	private final String TAG_FRAGMENT_PREVIEW = "TAG_FRAGMENT_PREVIEW";
 	private final String TAG_FRAGMENT_HISTORY = "TAG_FRAGMENT_HISTORY";
 	//end 
+	private TextView mTvTitle;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -102,6 +107,7 @@ public class MainActivity extends ScanActivity implements
 		mFramentManager = getSupportFragmentManager();
 		mPrBar = (ProgressBar) findViewById(R.id.pr_bar);
 		mTopBar = findViewById(R.id.top_bar);
+		mTvTitle = (TextView)findViewById(R.id.tv_title_view);
 		mBottomBar = findViewById(R.id.bottom_bar);
 		mContent = (FrameLayout) findViewById(R.id.content);
 		initBottomBar();
@@ -149,6 +155,7 @@ public class MainActivity extends ScanActivity implements
 
 	private void initContent() {
 		// TODO Auto-generated method stub
+		clearlyBackStack();
 		if (HoGoApplication.instace().getToken(this) != null) {
 //			gotoScanScreen();
 			onStartScreen();
@@ -175,22 +182,24 @@ public class MainActivity extends ScanActivity implements
 	public void gotoUpdateScreen() {
 		UploadFileFragment fragement = new UploadFileFragment();
 		FragmentTransaction transaction = mFramentManager.beginTransaction();
+		transaction.replace(R.id.content, fragement);
 //		transaction.addToBackStack(null);
-		transaction.replace(R.id.content, fragement).commit();
-
+		transaction.commit();
 		setHeaderVisibility(true);
 
 	}
 
-	public void gotoUpdateScreen(FileUpload file) {
+	public void gotoUpdateScreen(FileUpload file, OriginalPreview originalPreview) {
 		UploadFileFragment fragement = new UploadFileFragment();
 		FragmentTransaction transaction = mFramentManager.beginTransaction();
 		Bundle bundle = new Bundle();
 		bundle.putSerializable("file", file);
+		bundle.putBoolean("is_preview", originalPreview.getValue().equals(true));
 		fragement.setArguments(bundle);
+		transaction.replace(R.id.content, fragement);
 //		transaction.addToBackStack(null);
-		transaction.replace(R.id.content, fragement).commit();
-
+		transaction.commit();
+		mTvTitle.setText(mContent.getResources().getString(R.string.title_activity_preview));
 		setHeaderVisibility(true);
 
 	}
@@ -216,10 +225,11 @@ public class MainActivity extends ScanActivity implements
 		bundle.putSerializable("file", parseData);
 		fragement.setArguments(bundle);
 		FragmentTransaction transaction = mFramentManager.beginTransaction();
+		transaction.replace(R.id.content, fragement);
 //		transaction.addToBackStack(null);
-		transaction.replace(R.id.content, fragement).commit();
+		transaction.commit();
 		findViewById(R.id.top_bar).setVisibility(View.VISIBLE);
-		
+		mTvTitle.setText(mContent.getResources().getString(R.string.title_activity_preview));
 		setHeaderVisibility(true);
 	}
 
@@ -296,7 +306,7 @@ public class MainActivity extends ScanActivity implements
 		Bundle bundle = new Bundle();
 		bundle.putSerializable("send_data", sendData);
 		fragement.setArguments(bundle);
-//		transaction.addToBackStack(null);
+		transaction.addToBackStack(null);
 		transaction.replace(R.id.content, fragement).commit();
 		findViewById(R.id.top_bar).setVisibility(View.GONE);
 	}
@@ -328,15 +338,26 @@ public class MainActivity extends ScanActivity implements
 		findViewById(R.id.action_add).setVisibility(View.VISIBLE);
 	}
 
+//	@Override
+//	public boolean onKeyDown(int keyCode, KeyEvent event) {
+//		// TODO Auto-generated method stub
+//		if (keyCode == event.KEYCODE_BACK) {
+//			//findViewById(R.id.top_bar).setVisibility(View.VISIBLE);
+////			System.exit(1);
+////			 onBackPressesd();
+//		}
+//		setProgressVisibility(false);
+//		return super.onKeyDown(keyCode, event);
+//	}
+	
 	@Override
-	public boolean onKeyDown(int keyCode, KeyEvent event) {
-		// TODO Auto-generated method stub
-		if (keyCode == event.KEYCODE_BACK) {
-			//findViewById(R.id.top_bar).setVisibility(View.VISIBLE);
-//			System.exit(1);
-//			 onBackPressesd();
+	public void onBackPressed() {
+		setProgressVisibility(false);
+		if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
+			getSupportFragmentManager().popBackStack();
+		} else {
+			super.onBackPressed();
 		}
-		return super.onKeyDown(keyCode, event);
 	}
 
 	public void gotoScanScreen() {
@@ -344,6 +365,7 @@ public class MainActivity extends ScanActivity implements
 		getSupportFragmentManager().popBackStack();
 		AppScanFragment fragement = new AppScanFragment();
 		FragmentTransaction transaction = mFramentManager.beginTransaction();
+//		transaction.addToBackStack(null);
 		transaction.replace(R.id.content, fragement).commit();
 		setHeaderVisibility(false);
 	}
@@ -444,7 +466,8 @@ public class MainActivity extends ScanActivity implements
 			protected void onPostExecute(FileUpload result) {
 				super.onPostExecute(result);
 				if (result != null) {
-					gotoUpdateScreen(result);
+					ScanSettingDataHolder scanSetDataHolder = ScanStateMachine.mApplication.getScanSettingDataHolder();
+					gotoUpdateScreen(result, scanSetDataHolder.getSelectedPreviewValue());
 				}
 			}
 		}.execute();
@@ -601,6 +624,7 @@ public class MainActivity extends ScanActivity implements
 		} else if (tag == TAG_FRAGMENT_START_SCREEN) {
 			setHeaderVisibility(false);
 			fragContent = new StartScreenFragment();
+			clearlyBackStack();
 		} else if (tag == TAG_FRAGMENT_SCAN_SETTINGS) {
 			fragContent = new AppScanFragment();
 		}else if (tag == TAG_FRAGMENT_HISTORY) {
@@ -622,6 +646,13 @@ public class MainActivity extends ScanActivity implements
 				mTransaction.addToBackStack(null);
 
 			mTransaction.commit();
+		}
+	}
+
+	private void clearlyBackStack() {
+		// TODO Auto-generated method stub
+		if(getSupportFragmentManager().getBackStackEntryCount() > 0){
+			getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
 		}
 	}
 

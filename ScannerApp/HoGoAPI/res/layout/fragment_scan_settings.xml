@@ -5,6 +5,7 @@
     android:baselineAligned="true"
     android:orientation="horizontal"
     android:padding="@dimen/activity_horizontal_margin"
+    android:background="@color/background"
     android:weightSum="10" >
 
     <LinearLayout
@@ -29,6 +30,7 @@
                 android:text="Source" />
 
             <Button
+                style="@style/AppButton"
                 android:id="@+id/btn_destination"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -52,12 +54,12 @@
                 android:text="Paper Size" />
 
             <Button
+                style="@style/AppButton"
                 android:id="@+id/btn_side"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="6"
                 android:text="Letter"
-                android:textColor="@color/black"
                 android:textSize="20px" />
         </LinearLayout>
 
@@ -76,12 +78,13 @@
                 android:text="Quality" />
 
             <Button
+                style="@style/AppButton"
                 android:id="@+id/btn_file"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="6"
                 android:text="Normal - 300dpi"
-                android:textColor="@color/black"
+              
                 android:textSize="20px" />
         </LinearLayout>
 
@@ -101,11 +104,12 @@
                 android:text="Color / Monochrone" />
 
             <Button
+                style="@style/AppButton"
                 android:id="@+id/btn_color"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="6"
-                android:textColor="@color/black"
+          
                 android:textSize="20px" />
         </LinearLayout>
 
@@ -145,11 +149,12 @@
 
             <RelativeLayout
                 android:id="@+id/btn_start"
-                android:layout_width="170dp"
-                android:layout_height="100dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:layout_centerInParent="true"
-                android:background="@drawable/selector_bt_scan_start" >
+                android:layout_marginTop="50dp"
+                android:layout_marginLeft="15dp"
+                android:background="@drawable/img_btn_start" >
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -163,6 +168,7 @@
         </RelativeLayout>
 
         <Button
+            style="@style/AppButton"
             android:id="@+id/btn_save_scan_settings"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
