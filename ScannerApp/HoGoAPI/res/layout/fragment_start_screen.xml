@@ -23,6 +23,7 @@
         <Button
             android:id="@+id/btn_send_start_screen"
             style="@style/AppButton"
+            android:background="@drawable/ic_btn_orange_normal"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_toLeftOf="@+id/view_dummy_start_screen"
@@ -33,6 +34,7 @@
         <Button
             android:id="@+id/btn_history_start_screen"
             style="@style/AppButton"
+            android:background="@drawable/ic_btn_orange_normal"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@+id/view_dummy_start_screen"
@@ -45,6 +47,7 @@
         android:id="@+id/btn_about_start_screen"
         style="@style/AppButton"
         android:layout_width="200dp"
+        android:background="@drawable/ic_btn_orange_normal"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/rl_main_container"

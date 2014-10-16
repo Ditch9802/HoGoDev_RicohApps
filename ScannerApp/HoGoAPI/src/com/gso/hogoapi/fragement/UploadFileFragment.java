@@ -266,6 +266,8 @@ public class UploadFileFragment extends MuPDFFragment implements OnClickListener
 					parseData.setFileTitle(""+mEtFilePath.getText().toString());
 				}
 				((MainActivity) getActivity()).deleteFile(mFileUpload);
+				
+				getActivity().getSupportFragmentManager().beginTransaction().remove(this).commit();
 				((MainActivity) getActivity()).gotoEncodeScreen(parseData);
 			} else if ("SessionIdNotFound".equalsIgnoreCase(resData.getStatus())) {
 				HoGoApplication.instace().setToken(getActivity(), null);

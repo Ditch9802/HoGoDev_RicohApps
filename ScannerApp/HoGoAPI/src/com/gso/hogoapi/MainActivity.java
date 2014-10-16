@@ -93,6 +93,10 @@ public class MainActivity extends ScanActivity implements
 	private final String TAG_FRAGMENT_START_SCREEN = "TAG_FRAGMENT_START_SCREEN";
 	private final String TAG_FRAGMENT_PREVIEW = "TAG_FRAGMENT_PREVIEW";
 	private final String TAG_FRAGMENT_HISTORY = "TAG_FRAGMENT_HISTORY";
+	private final String TAG_FRAGMENT_ENCODE = "TAG_FRAGMENT_ENCODE";
+	private final String TAG_FRAGMENT_UPLOAD = "TAG_FRAGMENT_UPLOAD";
+	private final String TAG_FRAGMENT_SEND = "TAG_FRAGMENT_SEND";
+	
 	//end 
 	private TextView mTvTitle;
 	
@@ -197,7 +201,7 @@ public class MainActivity extends ScanActivity implements
 		bundle.putSerializable("file", file);
 		bundle.putBoolean("is_preview", originalPreview.getValue().equals(true));
 		fragement.setArguments(bundle);
-		transaction.replace(R.id.content, fragement);
+		transaction.replace(R.id.content, fragement,TAG_FRAGMENT_UPLOAD);
 		transaction.addToBackStack(null);
 		transaction.commit();
 		
@@ -230,7 +234,7 @@ public class MainActivity extends ScanActivity implements
 		bundle.putSerializable("file", parseData);
 		fragement.setArguments(bundle);
 		FragmentTransaction transaction = mFramentManager.beginTransaction();
-		transaction.replace(R.id.content, fragement);
+		transaction.replace(R.id.content, fragement, TAG_FRAGMENT_ENCODE);
 		transaction.addToBackStack(null);
 		transaction.commit();
 		findViewById(R.id.top_bar).setVisibility(View.VISIBLE);
@@ -320,7 +324,7 @@ public class MainActivity extends ScanActivity implements
 		bundle.putSerializable("send_data", sendData);
 		fragement.setArguments(bundle);
 		transaction.addToBackStack(null);
-		transaction.replace(R.id.content, fragement).commit();
+		transaction.replace(R.id.content, fragement, TAG_FRAGMENT_SEND).commit();
 		
 		setScreenTitle((mContent.getResources().getString(R.string.title_activity_send_settings)));
 	}

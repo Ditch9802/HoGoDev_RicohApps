@@ -396,6 +396,7 @@ public class SendFileFragment extends Fragment implements OnClickListener,
 					Toast.makeText(getActivity(), "Send Successful",
 							Toast.LENGTH_LONG).show();
 
+					getActivity().getSupportFragmentManager().beginTransaction().remove(this).commit();
 					((MainActivity) getActivity()).gotoStartScreen();
 				} else if (resData.getStatus().equalsIgnoreCase(
 						"SessionIdNotFound")) {
