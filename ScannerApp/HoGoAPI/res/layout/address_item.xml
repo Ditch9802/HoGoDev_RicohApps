@@ -1,23 +1,82 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content" >
+    android:layout_height="wrap_content"
+    android:orientation="horizontal" >
 
     <TextView
-        android:id="@+id/tvName"
-        android:layout_width="match_parent"
+        android:id="@+id/tvFirstName"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_marginLeft="5dp"
         android:layout_toLeftOf="@+id/cbxTag"
+        android:layout_weight="1"
+        android:gravity="center"
         android:maxLines="2"
+        android:text="@string/define_first_name"
         android:textColor="@color/black" />
 
-    <CheckBox
-        android:id="@+id/cbxTag"
-        android:layout_width="40dp"
+    <TextView
+        android:id="@+id/tvLastName"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:checked="false" />
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="5dp"
+        android:layout_toLeftOf="@+id/cbxTag"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:maxLines="2"
+        android:text="@string/define_last_name"
+        android:textColor="@color/black" />
 
-</RelativeLayout>
+    <TextView
+        android:id="@+id/tvCompany"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="5dp"
+        android:layout_toLeftOf="@+id/cbxTag"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:maxLines="2"
+        android:text="@string/define_company"
+        android:textColor="@color/black" />
+
+    <TextView
+        android:id="@+id/tvEmail"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="5dp"
+        android:layout_toLeftOf="@+id/cbxTag"
+        android:layout_weight="1.5"
+        android:gravity="center"
+        android:maxLines="2"
+        android:text="@string/define_email"
+        android:textColor="@color/black" />
+
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1" >
+
+        <TextView
+            android:id="@+id/tvSelect"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:maxLines="2"
+            android:text="@string/define_select"
+            android:textColor="@color/black" />
+
+        <CheckBox
+            android:id="@+id/cbxTag"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:checked="false" />
+    </RelativeLayout>
+
+</LinearLayout>

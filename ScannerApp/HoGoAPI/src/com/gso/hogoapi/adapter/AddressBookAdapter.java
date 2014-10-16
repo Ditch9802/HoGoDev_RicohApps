@@ -7,7 +7,9 @@ import java.util.Map;
 import com.gso.hogoapi.R;
 import com.gso.hogoapi.model.AddressBookItem;
 
+import android.R.color;
 import android.content.Context;
+import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -57,8 +59,11 @@ public class AddressBookAdapter extends BaseAdapter {
 			Log.d("getView", "new");
 			convertView = LayoutInflater.from(context)
 					.inflate(R.layout.address_item, parent, false);
+			convertView.findViewById(R.id.tvSelect).setVisibility(View.GONE);
 			holder = new Holder();
-			holder.tvName = (TextView) convertView.findViewById(R.id.tvName);
+			holder.tvFirstname = (TextView) convertView.findViewById(R.id.tvFirstName);
+			holder.tvLastName = (TextView) convertView.findViewById(R.id.tvLastName);
+			holder.tvCompany = (TextView) convertView.findViewById(R.id.tvCompany);
 			holder.cbxTag = (CheckBox) convertView.findViewById(R.id.cbxTag);
 			holder.cbxTag.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 
@@ -68,6 +73,7 @@ public class AddressBookAdapter extends BaseAdapter {
 					item.setSelected(isChecked);
 				}
 			});
+			convertView.setBackgroundColor(position%2==0?Color.TRANSPARENT:Color.GRAY);
 			convertView.setTag(holder);
 
 		} else {
@@ -76,16 +82,19 @@ public class AddressBookAdapter extends BaseAdapter {
 
 		holder.email = item.getEmail();
 		holder.cbxTag.setChecked(item.isSelected());
-		holder.tvName.setText(item.getFirstName() + " "+item.getMiddleName() + " "+item.getLastName());
-
+		holder.tvFirstname.setText(item.getMiddleName()+" "+item.getFirstName());
+		holder.tvLastName.setText(item.getLastName());
+		holder.tvCompany.setText(item.getCompany());
+		
 		holder.cbxTag.setTag(item);
 		convertView.setTag(holder);
+		
 		return convertView;
 
 	}
 
 	public class Holder {
-		private TextView tvName;
+		private TextView tvFirstname, tvLastName, tvCompany;
 		private CheckBox cbxTag;
 		private String email;
 	}
@@ -93,5 +102,9 @@ public class AddressBookAdapter extends BaseAdapter {
 	public List<AddressBookItem> getData() {
 		// TODO Auto-generated method stub
 		return list;
+	}
+	
+	public void changeData(List<AddressBookItem> datas){
+		this.list = datas;
 	}
 }

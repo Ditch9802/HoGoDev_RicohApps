@@ -34,7 +34,7 @@
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:layout_marginRight="@dimen/margin_16px"
-        android:src="@drawable/ic_action_add"
+        android:src="@drawable/img_btn_exit"
         android:visibility="visible" />
 
 </RelativeLayout>

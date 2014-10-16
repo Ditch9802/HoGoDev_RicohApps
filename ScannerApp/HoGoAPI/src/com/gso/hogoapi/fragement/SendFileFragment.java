@@ -55,6 +55,7 @@ public class SendFileFragment extends Fragment implements OnClickListener,
 	private String mailTo;
 	private EditText etMailto;
 	private String mLocalCopies = "2";
+	private String mPrintNumbder = "2";
 	private String mFolder = "Folder";
 	private boolean isPrint = true;
 	private Button btnDateExprid;
@@ -67,6 +68,8 @@ public class SendFileFragment extends Fragment implements OnClickListener,
 	private Button btnAddressBook;
 	private EditText etFolder;
 	private EditText etCopyNumbder;
+	private EditText etFileTitle;
+	private CheckBox cbxIsSendNotifyEmail;
 
 	/**
 	 * @param args
@@ -95,6 +98,7 @@ public class SendFileFragment extends Fragment implements OnClickListener,
 		btnDateExprid = (Button) v.findViewById(R.id.btn_doc_exquiry_date);
 		rLDateExprid = (RelativeLayout) v.findViewById(R.id.rl_doc_exprid_date);
 		btnAddressBook = (Button) v.findViewById(R.id.btn_address_book);
+		etFileTitle = (EditText)v.findViewById(R.id.et_file_title);
 		btnSendFile.setOnClickListener(this);
 		btnDateExprid.setOnClickListener(this);
 		rLDateExprid.setOnClickListener(this);
@@ -112,6 +116,22 @@ public class SendFileFragment extends Fragment implements OnClickListener,
 					}
 				});
 
+		
+		cbxIsSendNotifyEmail = (CheckBox) v.findViewById(R.id.chx_send_notification_email);
+		cbxIsSendNotifyEmail
+				.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
+					private boolean isSendNotifyEmail;
+
+					@Override
+					public void onCheckedChanged(CompoundButton buttonView,
+							boolean isChecked) {
+						// TODO Auto-generated method stub
+						isSendNotifyEmail = isChecked;
+
+					}
+				});
+		
 		Spinner spinner = (Spinner) v.findViewById(R.id.sp_copy_number);
 		final String[] items = new String[] { "2", "3", "4",
 				"5","6","7","8","9","10" };
@@ -139,6 +159,33 @@ public class SendFileFragment extends Fragment implements OnClickListener,
 			}
 		});
 
+		
+		Spinner spinnerPrint = (Spinner) v.findViewById(R.id.sp_print_number);
+		final String[] itemsPrint = new String[] { "2", "3", "4",
+				"5","6","7","8","9","10" };
+
+		ArrayAdapter<String> adPrint = new ArrayAdapter<String>(getActivity(),
+				android.R.layout.simple_spinner_item, itemsPrint);
+
+		ad.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+		spinnerPrint.setAdapter(adPrint);
+		
+		spinnerPrint.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+			@Override
+			public void onItemSelected(AdapterView<?> arg0, View arg1,
+					int arg2, long arg3) {
+				// TODO Auto-generated method stub
+				mPrintNumbder = ((TextView) arg1).getText().toString();
+			}
+
+			@Override
+			public void onNothingSelected(AdapterView<?> arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
 		// SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
 		// currentDateandTime = sdf.format(new Date());
 
@@ -149,6 +196,8 @@ public class SendFileFragment extends Fragment implements OnClickListener,
 
 		currentDateandTime = year + "/" + month + "/" + day;
 		btnDateExprid.setText(currentDateandTime);
+		
+		etFileTitle.setText(getDocumentListName());
 		return v;
 	}
 
@@ -251,6 +300,8 @@ public class SendFileFragment extends Fragment implements OnClickListener,
 			params.put("Documents", "" + stringDataSend);
 			params.put("Method", "1");
 			params.put("LocalCopies", "" + mLocalCopies);
+//			params.put("NumberPrintAllowed", mPrintNumbder);
+//			params.put("SendNotifyEmail", cbxIsSendNotifyEmail.isChecked());
 			params.put("Folder", "" + folder);
 			params.put("status_desc", "Test");
 			params.put("Recipients", "" + mailTo);
@@ -284,6 +335,25 @@ public class SendFileFragment extends Fragment implements OnClickListener,
 			e.printStackTrace();
 		}
 		Log.d("getDocumentListId", "getDocumentListId " + result);
+		return result;
+	}
+	
+	private String getDocumentListName() {
+		// TODO Auto-generated method stub
+		String result = null;
+		try {
+			for (FileData item : sendData.getDataList()) {
+				if (result == null) {
+					result = "" + item.getFileName()+".pdf";
+				} else {
+					result += "," + item.getFileName()+".pdf";
+				}
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		Log.d("getDocumentListName", "getDocumentListName " + result);
 		return result;
 	}
 
@@ -326,7 +396,7 @@ public class SendFileFragment extends Fragment implements OnClickListener,
 					Toast.makeText(getActivity(), "Send Successful",
 							Toast.LENGTH_LONG).show();
 
-					((MainActivity) getActivity()).gotoScanScreen();
+					((MainActivity) getActivity()).gotoStartScreen();
 				} else if (resData.getStatus().equalsIgnoreCase(
 						"SessionIdNotFound")) {
 					HoGoApplication.instace().setToken(getActivity(), null);
