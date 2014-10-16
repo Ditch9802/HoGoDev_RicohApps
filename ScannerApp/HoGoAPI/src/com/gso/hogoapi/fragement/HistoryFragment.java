@@ -101,7 +101,6 @@ public class HistoryFragment extends Fragment implements IServiceListener {
 			return null;
 		}
 		
-		
 		return Observable.from(query).map(new Func1<String, List<History>>() {
 
 			@Override
