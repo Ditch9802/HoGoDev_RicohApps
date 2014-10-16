@@ -184,6 +184,7 @@ public class EncodeFileFragment extends DialogFragment implements
 				FileData shareData = (FileData)encodeStatus.getData();
 				shareData.setFileName(mFile.getFileTitle());
 				((MainActivity) getActivity()).setProgressVisibility(false);
+				getActivity().getSupportFragmentManager().beginTransaction().remove(this).commit();
 				((MainActivity) getActivity()).gotoAddScreen(shareData);
 			} else if (encodeStatus.getStatus()!=null && "4".equals(encodeStatus.getStatus())) {
 				if(timer!=null){
