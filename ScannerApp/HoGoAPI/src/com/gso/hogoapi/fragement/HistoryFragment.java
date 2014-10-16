@@ -10,14 +10,12 @@ import java.util.concurrent.TimeUnit;
 import org.json.JSONObject;
 
 import retrofit.client.Response;
-import rx.Observable;
-import rx.Observable.OnSubscribe;
-import rx.Subscriber;
 import rx.Subscription;
-import rx.android.observables.AndroidObservable;
 import rx.android.observables.ViewObservable;
+import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
 import rx.functions.Func1;
+import rx.schedulers.Schedulers;
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -56,7 +54,6 @@ public class HistoryFragment extends Fragment implements IServiceListener {
 	private ProgressDialog mDialog;
 	private List<History> data;
 	private Subscription subscription;
-	Observable<List<History>> requestStream;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -73,7 +70,7 @@ public class HistoryFragment extends Fragment implements IServiceListener {
 		adapter = new HistoryAdapter(getActivity().getApplicationContext());
 		listView.setAdapter(adapter);
 		
-		requestStream = ViewObservable.text((EditText) view.findViewById(R.id.etSearch), false)
+		subscription = ViewObservable.text((EditText) view.findViewById(R.id.etSearch), false)
 			.debounce(400, TimeUnit.MILLISECONDS)
 			.map(new Func1<EditText, String>() {
 
@@ -82,52 +79,44 @@ public class HistoryFragment extends Fragment implements IServiceListener {
 					return arg0.getText().toString();
 				}
 			})
-			.flatMap(new Func1<String, Observable<? extends List<History>>>() {
+			.observeOn(Schedulers.newThread())
+			.map(new Func1<String, List<History>>() {
 
 				@Override
-				public Observable<? extends List<History>> call(String query) {
-					return search(query);
+				public List<History> call(String arg0) {
+					return search(arg0);
 				}
+			})
+			.observeOn(AndroidSchedulers.mainThread())
+			.subscribe(new Action1<List<History>>() {
 
+				@Override
+				public void call(List<History> arg0) {
+					adapter.changeDataSet(arg0);
+				}
 			});
-		
-		AndroidObservable.bindFragment(this, requestStream);
 		
 	}
 	
-	private Observable<? extends List<History>> search(String query) {
+	private List<History> search(String query) {
 		Log.d(TAG, "Query: " + query);
 		if(data == null || data.size() == 0) {
 			return null;
 		}
 		
-		return Observable.from(query).map(new Func1<String, List<History>>() {
-
-			@Override
-			public List<History> call(String query) {
-				final List<History> result = new ArrayList<History>();
-				for (History history : result) {
-					if(TextUtils.isEmpty(query) || history.recipientEmail.contains(query)) {
-						result.add(history);
-					}
-				}
-				return result;
+		final List<History> result = new ArrayList<History>();
+		for (History history : data) {
+			if(TextUtils.isEmpty(query) || history.recipientEmail.contains(query)) {
+				result.add(history);
 			}
-		});
+		}
+		return result;
 	}
 
 	@Override
 	public void onResume() {
 		super.onResume();
 		refreshHistory();
-		subscription = requestStream
-				.subscribe(new Action1<List<History>>() {
-
-				@Override
-				public void call(List<History> result) {
-					adapter.changeDataSet(result);
-				}
-			});
 	}
 
 	@Override
@@ -136,9 +125,6 @@ public class HistoryFragment extends Fragment implements IServiceListener {
 		if (task != null) {
 			task.cancel(true);
 		}
-		if(subscription != null && !subscription.isUnsubscribed()) {
-			subscription.unsubscribe();
-		}
 	}
 	
 	@Override
@@ -146,6 +132,9 @@ public class HistoryFragment extends Fragment implements IServiceListener {
 		super.onStop();
 		if(mDialog != null) {
 			mDialog.dismiss();	
+		}
+		if(subscription != null && !subscription.isUnsubscribed()) {
+			subscription.unsubscribe();
 		}
 		
 	}
