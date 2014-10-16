@@ -5,11 +5,19 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import org.json.JSONObject;
 
 import retrofit.client.Response;
-
+import rx.Observable;
+import rx.Observable.OnSubscribe;
+import rx.Subscriber;
+import rx.Subscription;
+import rx.android.observables.AndroidObservable;
+import rx.android.observables.ViewObservable;
+import rx.functions.Action1;
+import rx.functions.Func1;
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -19,6 +27,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ListView;
 
 import com.gso.hogoapi.HoGoApplication;
@@ -40,10 +49,14 @@ import com.gso.serviceapilib.ServiceResponse;
 
 public class HistoryFragment extends Fragment implements IServiceListener {
 
+	private static final String TAG = HistoryFragment.class.getSimpleName();
 	private final Api api = new ApiImpl();
 	private HistoryAdapter adapter;
 	private AsyncTask<Void, Void, List<History>> task;
 	private ProgressDialog mDialog;
+	private List<History> data;
+	private Subscription subscription;
+	Observable<List<History>> requestStream;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -59,12 +72,63 @@ public class HistoryFragment extends Fragment implements IServiceListener {
 		listView.setEmptyView(empty);
 		adapter = new HistoryAdapter(getActivity().getApplicationContext());
 		listView.setAdapter(adapter);
+		
+		requestStream = ViewObservable.text((EditText) view.findViewById(R.id.etSearch), false)
+			.debounce(400, TimeUnit.MILLISECONDS)
+			.map(new Func1<EditText, String>() {
+
+				@Override
+				public String call(EditText arg0) {
+					return arg0.getText().toString();
+				}
+			})
+			.flatMap(new Func1<String, Observable<? extends List<History>>>() {
+
+				@Override
+				public Observable<? extends List<History>> call(String query) {
+					return search(query);
+				}
+
+			});
+		
+		AndroidObservable.bindFragment(this, requestStream);
+		
+	}
+	
+	private Observable<? extends List<History>> search(String query) {
+		Log.d(TAG, "Query: " + query);
+		if(data == null || data.size() == 0) {
+			return null;
+		}
+		
+		
+		return Observable.from(query).map(new Func1<String, List<History>>() {
+
+			@Override
+			public List<History> call(String query) {
+				final List<History> result = new ArrayList<History>();
+				for (History history : result) {
+					if(TextUtils.isEmpty(query) || history.recipientEmail.contains(query)) {
+						result.add(history);
+					}
+				}
+				return result;
+			}
+		});
 	}
 
 	@Override
 	public void onResume() {
 		super.onResume();
 		refreshHistory();
+		subscription = requestStream
+				.subscribe(new Action1<List<History>>() {
+
+				@Override
+				public void call(List<History> result) {
+					adapter.changeDataSet(result);
+				}
+			});
 	}
 
 	@Override
@@ -72,6 +136,9 @@ public class HistoryFragment extends Fragment implements IServiceListener {
 		super.onPause();
 		if (task != null) {
 			task.cancel(true);
+		}
+		if(subscription != null && !subscription.isUnsubscribed()) {
+			subscription.unsubscribe();
 		}
 	}
 	
@@ -187,6 +254,10 @@ public class HistoryFragment extends Fragment implements IServiceListener {
 				}
 				if (result != null) {
 					adapter.changeDataSet(result);
+					data = new ArrayList<History>();
+					for (History history : result) {
+						data.add(history);
+					}
 				} else {
 					showAlert("Error", "Can not get data");
 				}

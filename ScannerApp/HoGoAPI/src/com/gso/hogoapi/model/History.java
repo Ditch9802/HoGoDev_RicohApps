@@ -16,4 +16,5 @@ public class History {
 	public String be_download_id;//": "425381832db04ef98c9f5ca8162c756f",
 	public int opened_status;//": 1,
 	public String opened_date;//": "2014/09/18 14:27:04"
+
 }

@@ -38,6 +38,7 @@
             android:textSize="16sp" />
 
         <EditText
+            android:id="@+id/etSearch"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:drawableLeft="@android:drawable/ic_search_category_default"
