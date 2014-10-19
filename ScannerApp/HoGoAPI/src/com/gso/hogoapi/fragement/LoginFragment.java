@@ -52,6 +52,7 @@ public class LoginFragment extends Fragment implements IServiceListener {
 
 	OnLoginFragmentListener mLoginFragmentListener;
 	private CheckBox cbxKeepMeLogedIn;
+	private Button btnLogin;
 
 	public interface OnLoginFragmentListener {
 		public void onCreateAccount();
@@ -82,7 +83,8 @@ public class LoginFragment extends Fragment implements IServiceListener {
 		View v = inflater.inflate(R.layout.login_fragment, container, false);
 		mEtUsername = (EditText) v.findViewById(R.id.et_user_name);
 		mEtUserpassword = (EditText) v.findViewById(R.id.et_user_password);
-		btnCreateAccount = (Button) v.findViewById(R.id.btnLogin);
+		btnCreateAccount = (Button) v.findViewById(R.id.btnSignup);
+		btnLogin = (Button) v.findViewById(R.id.btnLogin);
 		cbxKeepMeLogedIn = (CheckBox) v.findViewById(R.id.chk_keep_login);
 
 		// set listeners
@@ -104,6 +106,14 @@ public class LoginFragment extends Fragment implements IServiceListener {
 			}
 		});
 
+		btnLogin.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+				exeLogin();
+			}
+		});
 		return v;
 	}
 

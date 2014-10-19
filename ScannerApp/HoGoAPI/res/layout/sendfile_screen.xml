@@ -108,8 +108,9 @@
                     <Button
                         android:id="@+id/btn_address_book"
                         style="@style/AppButton"
-                        android:layout_width="120dp"
-                        android:layout_height="35dp"
+                        android:background="@drawable/bg_button_address_book"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:layout_alignParentRight="true"
                         android:layout_gravity="right"

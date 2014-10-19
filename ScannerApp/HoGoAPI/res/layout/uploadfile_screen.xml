@@ -19,7 +19,7 @@
     <LinearLayout
         android:id="@+id/ln_back_next"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:layout_alignParentBottom="true"
         android:visibility="invisible"
@@ -27,18 +27,18 @@
 
         <Button
             android:id="@+id/btn_back"
-            android:layout_width="100dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/bg_button"
-            android:text="Back"
+            android:background="@drawable/img_back"
+            android:text=""
             android:visibility="visible" />
 
         <Button
             android:id="@+id/btn_upload_file_exe"
-            android:layout_width="100dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/bg_button"
-            android:text="Encode"
+            android:background="@drawable/img_next"
+            android:text=""
             android:visibility="visible" />
     </LinearLayout>
 

@@ -7,10 +7,9 @@
     android:paddingBottom="@dimen/top_bar_padding_bottom"
     android:paddingTop="@dimen/top_bar_padding_top" >
 
-
     <TextView
-        style="@style/TextTitle"
         android:id="@+id/tv_title_view"
+        style="@style/TextTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
@@ -35,6 +34,16 @@
         android:layout_centerVertical="true"
         android:layout_marginRight="@dimen/margin_16px"
         android:src="@drawable/img_btn_exit"
+        android:visibility="visible" />
+
+    <ImageView
+        android:id="@+id/action_about"
+        android:layout_width="@dimen/ic_add_size"
+        android:layout_height="@dimen/ic_add_size"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="@dimen/margin_16px"
+        android:layout_toLeftOf="@+id/action_add"
+        android:src="@drawable/img_about"
         android:visibility="visible" />
 
 </RelativeLayout>
