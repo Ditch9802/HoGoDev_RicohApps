@@ -3,7 +3,9 @@ package com.gso.hogoapi.fragement;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -139,13 +141,14 @@ public class HistoryFragment extends Fragment implements IServiceListener {
 		
 	}
 
+	private static final SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
 	private void refreshHistory() {
 		final String sEcho = "2";
 		final String displayStart = "0";
 		final String displayLength = "10";
 		final String Type = "405,406,407,411,412";
 		final String StartDate = "01/01/1970 00:00:00";
-		final String StopDate = "09/21/2014 23:59:59";
+		final String StopDate = sdf.format(new Date());
 		final String SessionID = HoGoApplication.instace().getToken(
 				getActivity().getApplicationContext());
 		task = new AsyncTask<Void, Void, List<History>>() {

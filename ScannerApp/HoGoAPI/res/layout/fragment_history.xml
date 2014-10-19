@@ -6,28 +6,12 @@
     android:orientation="vertical"
     android:padding="@dimen/activity_horizontal_margin" >
 
-    <TextView
-        android:id="@+id/title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:text="Send History"
-        android:textSize="22sp"
-        android:textStyle="bold" />
-
-    <ImageView
-        android:id="@+id/ivLogout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:src="@drawable/ic_printer" />
-
+   
     <LinearLayout
         android:id="@+id/llSearch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:layout_below="@id/ivLogout"
         android:gravity="center_vertical"
         android:orientation="horizontal" >
 
@@ -76,17 +60,9 @@
     
   	<View
   	    android:id="@+id/divider"
-  	    android:layout_above="@+id/ivPrinter"
+  	    android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
         android:layout_height="2dip"
         android:background="#000000" />
     
-    <ImageView
-        android:id="@+id/ivPrinter"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:src="@drawable/ic_printer" />
-
 </RelativeLayout>

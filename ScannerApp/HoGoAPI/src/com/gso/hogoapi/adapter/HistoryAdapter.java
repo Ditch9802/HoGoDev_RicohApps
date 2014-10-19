@@ -46,6 +46,8 @@ public class HistoryAdapter extends TypedListAdapter<History> {
 			tvTitle = (TextView) view.findViewById(R.id.tvTitle);
 			tvRecipient = (TextView) view.findViewById(R.id.tvRecipient);
 			tvStatus = (TextView) view.findViewById(R.id.tvStatus);
+			final int padding = (int) (view.getContext().getResources().getDisplayMetrics().density * 8);
+			tvStatus.setCompoundDrawablePadding(padding);
 			view.setTag(this);
 		}
 
@@ -53,7 +55,13 @@ public class HistoryAdapter extends TypedListAdapter<History> {
 			tvDate.setText(item.createDate);
 			tvTitle.setText(item.documentName);
 			tvRecipient.setText(item.recipientName);
-			tvStatus.setText("opened");
+			if(item.opened_status == 1) {
+				tvStatus.setCompoundDrawablesWithIntrinsicBounds(R.drawable.mail_open, 0, 0, 0);
+				tvStatus.setText("Opened");
+			} else {
+				tvStatus.setCompoundDrawablesWithIntrinsicBounds(R.drawable.mail, 0, 0, 0);
+				tvStatus.setText("Not Opened");
+			}
 		}
 	}
 

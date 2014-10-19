@@ -2,6 +2,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="#FFFFFF"
+    android:gravity="center_vertical"
     android:orientation="horizontal">
 
     <TextView
@@ -32,14 +33,15 @@
         android:padding="5.0dip"
         android:textColor="#000000"
         android:textSize="16sp" />
+    
     <TextView
         android:id="@+id/tvStatus"
         android:layout_width="0dip"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:text="Status"
-        android:drawableLeft="@drawable/ic_status_normal"
-        android:padding="5.0dip"
+        android:drawablePadding="5dip"
+        android:drawableLeft="@drawable/mail"
         android:textColor="#000000"
         android:textSize="16sp" />
 </LinearLayout>
