@@ -235,7 +235,7 @@ public class MainActivity extends ScanActivity implements
 		fragement.setArguments(bundle);
 		FragmentTransaction transaction = mFramentManager.beginTransaction();
 		transaction.replace(R.id.content, fragement, TAG_FRAGMENT_ENCODE);
-		transaction.addToBackStack(null);
+//		transaction.addToBackStack(null);
 		transaction.commit();
 		findViewById(R.id.top_bar).setVisibility(View.VISIBLE);
 //		setScreenTitle(mContent.getResources().getString(R.string.title_activity_preview));
@@ -323,7 +323,7 @@ public class MainActivity extends ScanActivity implements
 		Bundle bundle = new Bundle();
 		bundle.putSerializable("send_data", sendData);
 		fragement.setArguments(bundle);
-		transaction.addToBackStack(null);
+//		transaction.addToBackStack(null);
 		transaction.replace(R.id.content, fragement, TAG_FRAGMENT_SEND).commit();
 		
 //		setScreenTitle((mContent.getResources().getString(R.string.title_activity_send_settings)));
@@ -672,7 +672,7 @@ public class MainActivity extends ScanActivity implements
 			FragmentTransaction mTransaction = getSupportFragmentManager()
 					.beginTransaction();
 			mTransaction.replace(R.id.content, fragContent, tag);
-			if (backward || tag == TAG_FRAGMENT_START_SCREEN)
+			if (backward)// || tag == TAG_FRAGMENT_START_SCREEN
 				mTransaction.addToBackStack(null);
 
 			mTransaction.commit();
