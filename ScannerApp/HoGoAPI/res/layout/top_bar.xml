@@ -44,6 +44,7 @@
         android:layout_marginRight="@dimen/margin_16px"
         android:layout_toLeftOf="@+id/action_add"
         android:src="@drawable/img_about"
+        android:onClick="onBoutClicked"
         android:visibility="visible" />
 
 </RelativeLayout>

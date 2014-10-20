@@ -1,13 +1,10 @@
 package com.gso.hogoapi;
 
-import java.io.BufferedOutputStream;
-import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
@@ -19,24 +16,21 @@ import jp.co.ricoh.ssdk.sample.app.scan.activity.ScanActivity;
 import jp.co.ricoh.ssdk.sample.app.scan.application.ScanSampleApplication;
 import jp.co.ricoh.ssdk.sample.app.scan.application.ScanSettingDataHolder;
 import jp.co.ricoh.ssdk.sample.app.scan.application.ScanStateMachine;
-import jp.co.ricoh.ssdk.sample.function.scan.ScanImage;
 import jp.co.ricoh.ssdk.sample.function.scan.ScanPDF;
 import jp.co.ricoh.ssdk.sample.function.scan.attribute.standard.OriginalPreview;
 
-import org.apache.http.HttpEntity;
-import org.apache.http.ProtocolException;
 import org.apache.http.entity.mime.MultipartEntity;
 import org.apache.http.entity.mime.content.FileBody;
 import org.apache.http.entity.mime.content.StringBody;
 
-import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -47,19 +41,19 @@ import android.widget.Toast;
 
 import com.gso.hogoapi.fragement.AddFileSuccessfulFragment;
 import com.gso.hogoapi.fragement.AppScanFragment;
+import com.gso.hogoapi.fragement.AppScanFragment.OnFinishedScanningListener;
 import com.gso.hogoapi.fragement.BookShelfFragment;
 import com.gso.hogoapi.fragement.EncodeFileFragment;
 import com.gso.hogoapi.fragement.HistoryFragment;
 import com.gso.hogoapi.fragement.LoginFragment;
+import com.gso.hogoapi.fragement.LoginFragment.OnLoginFragmentListener;
 import com.gso.hogoapi.fragement.PreviewFragment;
 import com.gso.hogoapi.fragement.SendFileFragment;
 import com.gso.hogoapi.fragement.SendHistoryFragment;
 import com.gso.hogoapi.fragement.SignUpFragment;
 import com.gso.hogoapi.fragement.StartScreenFragment;
-import com.gso.hogoapi.fragement.UploadFileFragment;
-import com.gso.hogoapi.fragement.AppScanFragment.OnFinishedScanningListener;
-import com.gso.hogoapi.fragement.LoginFragment.OnLoginFragmentListener;
 import com.gso.hogoapi.fragement.StartScreenFragment.OnStartScreenListener;
+import com.gso.hogoapi.fragement.UploadFileFragment;
 import com.gso.hogoapi.model.FileData;
 import com.gso.hogoapi.model.FileUpload;
 import com.gso.hogoapi.model.SendData;
@@ -720,6 +714,12 @@ public class MainActivity extends ScanActivity implements
 		// TODO Auto-generated method stub
 		clearlyBackStack();
 		addFragment(TAG_FRAGMENT_START_SCREEN, null, false);
+	}
+	
+	public void onBoutClicked(View v){
+		String url = "http://www.hogodoc.com";
+		Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(""+url));
+		startActivity(browserIntent);
 	}
 
 }
