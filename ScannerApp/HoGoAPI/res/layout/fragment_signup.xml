@@ -42,7 +42,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="7"
-                    android:hint="Enter your first name" />
+                    android:hint="Enter your First Name" />
             </LinearLayout>
 
             <LinearLayout
@@ -65,7 +65,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="7"
-                    android:hint="Enter your last name" />
+                    android:hint="Enter your Last Name" />
             </LinearLayout>
 
             <LinearLayout
@@ -88,7 +88,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="7"
-                    android:hint="Enter your company" />
+                    android:hint="Enter your Company" />
             </LinearLayout>
 
             <LinearLayout
@@ -111,7 +111,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="7"
-                    android:hint="E-mail address" />
+                    android:hint="Enter your E-mail address" />
             </LinearLayout>
 
             <LinearLayout
@@ -157,6 +157,7 @@
                     android:id="@+id/et_password_confirm"
                     style="@style/TextBox"
                     android:layout_width="0dp"
+                    android:hint="Enter confirm your password"
                     android:layout_height="wrap_content"
                     android:layout_weight="7" />
             </LinearLayout>
@@ -179,6 +180,7 @@
                     android:id="@+id/et_reference_email"
                     style="@style/TextBox"
                     android:layout_width="0dp"
+                    android:hint="Enter your reference E-mail"
                     android:layout_height="wrap_content"
                     android:layout_weight="7" />
             </LinearLayout>
@@ -195,7 +197,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="3"
                     android:gravity="left"
-                    android:text="By Clicking &quot;Submit&quot;" />
+                    android:text="By Clicking &quot;Signup&quot;" />
 
                 <TextView
                     android:id="@+id/tv_terms_and_conditions"
@@ -226,7 +228,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="7"
                     android:gravity="center"
-                    android:text="CREATE MY ACCOUNT"
+                    android:text="SIGNUP"
                     android:textStyle="bold" />
             </LinearLayout>
         </LinearLayout>
