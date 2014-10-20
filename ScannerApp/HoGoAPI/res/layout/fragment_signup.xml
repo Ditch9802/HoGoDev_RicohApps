@@ -197,7 +197,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="3"
                     android:gravity="left"
-                    android:text="By Clicking &quot;Signup&quot;" />
+                    android:text="By Clicking &quot;Sign up&quot;" />
 
                 <TextView
                     android:id="@+id/tv_terms_and_conditions"
@@ -228,7 +228,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="7"
                     android:gravity="center"
-                    android:text="SIGNUP"
+                    android:text="SIGN UP"
                     android:textStyle="bold" />
             </LinearLayout>
         </LinearLayout>

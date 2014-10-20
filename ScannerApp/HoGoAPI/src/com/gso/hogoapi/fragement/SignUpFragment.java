@@ -90,22 +90,22 @@ public class SignUpFragment extends Fragment implements IServiceListener {
 		String passwordConfirm = etPasswordConfirm.getText().toString();
 
 		if (firstName.length() == 0) {
-			etFirstName.setError("please enter your first name");
+			etFirstName.setError("please enter your First Name");
 			valid = false;
 		} else if (lastName.length() == 0) {
-			etLastName.setError("please enter your last name");
+			etLastName.setError("please enter your Last Name");
 			valid = false;
 		} else if (email.length() == 0
 				|| !android.util.Patterns.EMAIL_ADDRESS.matcher(email)
 						.matches()) {
-			etEmail.setError("Email is not valid");
+			etEmail.setError("E-mail is not valid");
 			valid = false;
 		} else if (password.length() < 6 || password.contains(" ")) {
 			etPassword
 					.setError("Password should be at least 6 characters and must not contain space character");
 			valid = false;
 		} else if (!password.equals(passwordConfirm)) {
-			etPassword.setError("Passwords must match");
+			etPassword.setError("Passwords does not match");
 			valid = false;
 		}
 
