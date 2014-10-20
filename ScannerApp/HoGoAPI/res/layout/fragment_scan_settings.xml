@@ -162,7 +162,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:layout_centerVertical="true"
-                    android:text="@string/txid_cmn_b_start"
+                    android:text=""
                     android:textColor="@color/white"
                     android:textSize="26px" />
             </RelativeLayout>

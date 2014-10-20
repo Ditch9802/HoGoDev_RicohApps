@@ -51,7 +51,7 @@
                     android:layout_weight="7"
                     android:drawableLeft="@drawable/ic_account"
                     android:hint="Enter your e-mail address"
-                    android:text="lxanh@tma.com.vn" />
+                    />
             </LinearLayout>
 
             <LinearLayout
@@ -77,7 +77,7 @@
                     android:drawableLeft="@drawable/ic_password"
                     android:hint="Enter your password"
                     android:inputType="textPassword"
-                    android:text="123456" />
+                 />
             </LinearLayout>
 
             <RelativeLayout
