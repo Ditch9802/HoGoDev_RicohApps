@@ -19,9 +19,11 @@ import rx.functions.Action1;
 import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -31,6 +33,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 
 import com.gso.hogoapi.HoGoApplication;
+import com.gso.hogoapi.MainActivity;
 import com.gso.hogoapi.R;
 import com.gso.hogoapi.adapter.HistoryAdapter;
 import com.gso.hogoapi.model.Document;
@@ -56,6 +59,7 @@ public class HistoryFragment extends Fragment implements IServiceListener {
 	private ProgressDialog mDialog;
 	private List<History> data;
 	private Subscription subscription;
+	private Context mContext;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -63,6 +67,13 @@ public class HistoryFragment extends Fragment implements IServiceListener {
 		return inflater.inflate(R.layout.fragment_history, container, false);
 	}
 
+	@Override
+	public void onActivityCreated(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onActivityCreated(savedInstanceState);
+		mContext =getActivity();
+		((MainActivity)mContext).setScreenTitle(mContext.getResources().getString(R.string.title_activity_send_history));
+	}
 	@Override
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);

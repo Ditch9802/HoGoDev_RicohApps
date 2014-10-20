@@ -3,8 +3,10 @@ package com.gso.hogoapi.fragement;
 import java.util.HashMap;
 import java.util.Map;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -40,12 +42,21 @@ public class SendHistoryFragment extends Fragment implements IServiceListener {
 	private EditText mEtUserpassword;
 	private ProgressBar mPrBar;
 	private Button mBtnLogin;
+	private Context mContext;
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
 	}
 
+	@Override
+	public void onActivityCreated(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onActivityCreated(savedInstanceState);
+		mContext = getActivity();
+		((MainActivity) mContext).setScreenTitle(mContext.getResources().getString(R.string.title_activity_send_history));
+	}
+	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {

@@ -6,8 +6,10 @@ import java.util.Map;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -53,6 +55,7 @@ public class LoginFragment extends Fragment implements IServiceListener {
 	OnLoginFragmentListener mLoginFragmentListener;
 	private CheckBox cbxKeepMeLogedIn;
 	private Button btnLogin;
+	private Context mContext;
 
 	public interface OnLoginFragmentListener {
 		public void onCreateAccount();
@@ -70,6 +73,15 @@ public class LoginFragment extends Fragment implements IServiceListener {
 		}
 	}
 
+	@Override
+	public void onActivityCreated(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onActivityCreated(savedInstanceState);
+		mContext = getActivity();
+		((MainActivity)mContext).setScreenTitle(mContext.getResources().getString(R.string.title_activity_login));
+		
+	}
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);

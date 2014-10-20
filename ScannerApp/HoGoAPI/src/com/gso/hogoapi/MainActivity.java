@@ -205,7 +205,7 @@ public class MainActivity extends ScanActivity implements
 		transaction.addToBackStack(null);
 		transaction.commit();
 		
-		setScreenTitle(mContent.getResources().getString(R.string.title_activity_preview));
+//		setScreenTitle(mContent.getResources().getString(R.string.title_activity_preview));
 		setHeaderVisibility(true);
 
 	}
@@ -238,7 +238,7 @@ public class MainActivity extends ScanActivity implements
 		transaction.addToBackStack(null);
 		transaction.commit();
 		findViewById(R.id.top_bar).setVisibility(View.VISIBLE);
-		setScreenTitle(mContent.getResources().getString(R.string.title_activity_preview));
+//		setScreenTitle(mContent.getResources().getString(R.string.title_activity_preview));
 		setHeaderVisibility(true);
 	}
 
@@ -259,7 +259,7 @@ public class MainActivity extends ScanActivity implements
 		SendHistoryFragment fragement = new SendHistoryFragment();
 		FragmentTransaction transaction = mFramentManager.beginTransaction();
 		transaction.replace(R.id.content, fragement).commit();
-		setScreenTitle(mContent.getResources().getString(R.string.title_activity_send_history));
+//		setScreenTitle(mContent.getResources().getString(R.string.title_activity_send_history));
 	}
 
 	public void gotoAddScreen(FileData fileData) {
@@ -276,7 +276,7 @@ public class MainActivity extends ScanActivity implements
 		// transaction.addToBackStack(null);
 		transaction.commit();
 
-		setScreenTitle(mContent.getResources().getString(R.string.title_activity_address_book));
+//		setScreenTitle(mContent.getResources().getString(R.string.title_activity_address_book));
 		
 		gotoSendDocumentScreen(sendData);
 	}
@@ -326,7 +326,7 @@ public class MainActivity extends ScanActivity implements
 		transaction.addToBackStack(null);
 		transaction.replace(R.id.content, fragement, TAG_FRAGMENT_SEND).commit();
 		
-		setScreenTitle((mContent.getResources().getString(R.string.title_activity_send_settings)));
+//		setScreenTitle((mContent.getResources().getString(R.string.title_activity_send_settings)));
 	}
 
 
@@ -350,7 +350,7 @@ public class MainActivity extends ScanActivity implements
 		FragmentTransaction transaction = mFramentManager.beginTransaction();
 		transaction.replace(R.id.content, fragement).commit();
 		
-		setScreenTitle(mContent.getResources().getString(R.string.title_activity_login));
+//		setScreenTitle(mContent.getResources().getString(R.string.title_activity_login));
 	}
 
 	public void changeToAdd() {
@@ -389,7 +389,7 @@ public class MainActivity extends ScanActivity implements
 //		transaction.addToBackStack(null);
 		transaction.replace(R.id.content, fragement).commit();
 		
-		setScreenTitle(mContent.getResources().getString(R.string.title_activity_scan_settings));
+//		setScreenTitle(mContent.getResources().getString(R.string.title_activity_scan_settings));
 		setHeaderVisibility(true);
 	}
 
@@ -668,7 +668,7 @@ public class MainActivity extends ScanActivity implements
 
 		if (fragContent != null) {
 			
-			setScreenTitle(screenTitle);
+//			setScreenTitle(screenTitle);
 			FragmentTransaction mTransaction = getSupportFragmentManager()
 					.beginTransaction();
 			mTransaction.replace(R.id.content, fragContent, tag);
@@ -711,7 +711,7 @@ public class MainActivity extends ScanActivity implements
 		}
 	}
 	
-	private void setScreenTitle(String string) {
+	public void setScreenTitle(String string) {
 		// TODO Auto-generated method stub
 		mTvTitle.setText(string);
 	}

@@ -49,6 +49,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -62,6 +63,7 @@ import android.widget.Toast;
 
 import com.gso.hogoapi.APIType;
 import com.gso.hogoapi.HoGoApplication;
+import com.gso.hogoapi.MainActivity;
 import com.gso.hogoapi.R;
 import com.gso.hogoapi.model.FileData;
 import com.gso.hogoapi.model.FileUpload;
@@ -74,6 +76,16 @@ import com.gso.serviceapilib.ServiceResponse;
 
 public class AppScanFragment extends Fragment implements IServiceListener {
 
+	private Context mContext;
+
+	@Override
+	public void onActivityCreated(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onActivityCreated(savedInstanceState);
+		mContext = getActivity();
+		((MainActivity)mContext).setScreenTitle(mContext.getResources().getString(R.string.title_activity_scan_settings));
+	}
+	
 	private final static String TAG = ScanFragment.class.getSimpleName();
 	public static boolean IS_PREVIEW;
 	/**

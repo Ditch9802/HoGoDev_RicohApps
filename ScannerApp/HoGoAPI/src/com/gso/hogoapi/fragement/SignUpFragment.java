@@ -6,9 +6,11 @@ import java.util.TimeZone;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,6 +22,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.gso.hogoapi.APIType;
+import com.gso.hogoapi.MainActivity;
 import com.gso.hogoapi.R;
 import com.gso.hogoapi.model.SignUpData;
 import com.gso.hogoapi.service.DataParser;
@@ -40,6 +43,7 @@ public class SignUpFragment extends Fragment implements IServiceListener {
 	private Button btnCreateUser;
 
 	private ProgressDialog mDialog;
+	private Context mContext;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -79,6 +83,8 @@ public class SignUpFragment extends Fragment implements IServiceListener {
 				}
 			}
 		});
+		mContext = getActivity();
+		((MainActivity)mContext).setScreenTitle(mContext.getResources().getString(R.string.title_activity_signup));
 	}
 
 	private boolean checkInputData() {

@@ -9,10 +9,12 @@ import java.util.Map;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.text.Editable;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -70,6 +72,7 @@ public class SendFileFragment extends Fragment implements OnClickListener,
 	private EditText etCopyNumbder;
 	private EditText etFileTitle;
 	private CheckBox cbxIsSendNotifyEmail;
+	private Context mContext;
 
 	/**
 	 * @param args
@@ -86,6 +89,13 @@ public class SendFileFragment extends Fragment implements OnClickListener,
 		sendData = (SendData) getArguments().getSerializable("send_data");
 	}
 
+	@Override
+	public void onActivityCreated(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onActivityCreated(savedInstanceState);
+		mContext = getActivity();
+		((MainActivity)mContext).setScreenTitle((mContext.getResources().getString(R.string.title_activity_send_settings)));
+	}
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {

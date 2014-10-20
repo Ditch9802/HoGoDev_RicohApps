@@ -3,6 +3,7 @@ package com.gso.hogoapi.fragement;
 import java.io.File;
 
 import com.artifex.mupdf.MuPDFFragment;
+import com.gso.hogoapi.MainActivity;
 import com.gso.hogoapi.R;
 import com.gso.hogoapi.model.FileUpload;
 import com.squareup.picasso.Picasso;
@@ -37,11 +38,14 @@ public class PreviewFragment extends MuPDFFragment implements OnClickListener {
 		core = openFile(Uri.decode(mFileUpload.getPdfPath()));
 	}
 
+	
+	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		View v = inflater.inflate(R.layout.fragment_preview, null);
 
+		((MainActivity)mContext).setScreenTitle(mContext.getResources().getString(R.string.title_activity_preview));
 		if (core == null) {
 			ImageView imgPreview = (ImageView) v.findViewById(R.id.img_preview);
 			imgPreview.setVisibility(View.VISIBLE);

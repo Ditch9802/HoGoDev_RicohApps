@@ -7,6 +7,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.util.Log;
@@ -47,6 +48,7 @@ public class EncodeFileFragment extends DialogFragment implements
 	private TextView tvFileName;
 	private EditText etFileDes;
 	private Timer timer;
+	private Context mContext;
 
 	@Override
 	public void onAttach(Activity activity) {
@@ -55,6 +57,7 @@ public class EncodeFileFragment extends DialogFragment implements
 		try {
 			mFile = (FileData)getArguments()
 					.getSerializable("file");
+			mContext = activity;
 
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -68,6 +71,7 @@ public class EncodeFileFragment extends DialogFragment implements
 			Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		View v = inflater.inflate(R.layout.encode_screen, container, false);
+		((MainActivity)mContext).setScreenTitle(mContext.getResources().getString(R.string.title_activity_preview));
 		timer = new Timer();
 		tvFileName = (TextView) v.findViewById(R.id.tv_filename);
 		etFileDes = (EditText) v.findViewById(R.id.et_des_file);

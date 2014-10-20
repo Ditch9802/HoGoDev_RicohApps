@@ -1,10 +1,13 @@
 package com.gso.hogoapi.fragement;
 
+import com.gso.hogoapi.MainActivity;
 import com.gso.hogoapi.R;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -22,6 +25,7 @@ public class StartScreenFragment extends Fragment implements OnClickListener {
 	private Button btnAbout;
 
 	private OnStartScreenListener mListener;
+	private Context mContext;
 
 	public interface OnStartScreenListener {
 		public void onStartScreenButtonClicked(int button);
@@ -38,6 +42,13 @@ public class StartScreenFragment extends Fragment implements OnClickListener {
 
 	}
 
+	@Override
+	public void onActivityCreated(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onActivityCreated(savedInstanceState);
+		mContext = getActivity();
+		((MainActivity)mContext).setScreenTitle(mContext.getResources().getString(R.string.title_activity_start_screen));
+	}
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
