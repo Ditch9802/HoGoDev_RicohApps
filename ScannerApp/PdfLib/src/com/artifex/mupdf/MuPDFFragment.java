@@ -717,13 +717,5 @@ public class MuPDFFragment extends Fragment
 			searchModeOff();
 		} 
 		super.onPrepareOptionsMenu(menu);
-	}
-	
-	@Override
-	public void onActivityCreated(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
-		super.onActivityCreated(savedInstanceState);
-		mContext = getActivity();
-		
-	}
+	}	
 }
