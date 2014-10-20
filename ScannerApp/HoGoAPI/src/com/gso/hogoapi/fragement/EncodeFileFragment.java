@@ -67,11 +67,19 @@ public class EncodeFileFragment extends DialogFragment implements
 	}
 
 	@Override
+	public void onActivityCreated(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onActivityCreated(savedInstanceState);
+		mContext = getActivity();
+		((MainActivity)mContext).setScreenTitle(mContext.getResources().getString(R.string.title_activity_preview));
+		
+	}
+	
+	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		View v = inflater.inflate(R.layout.encode_screen, container, false);
-		((MainActivity)mContext).setScreenTitle(mContext.getResources().getString(R.string.title_activity_preview));
 		timer = new Timer();
 		tvFileName = (TextView) v.findViewById(R.id.tv_filename);
 		etFileDes = (EditText) v.findViewById(R.id.et_des_file);

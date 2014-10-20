@@ -80,8 +80,6 @@ public class UploadFileFragment extends MuPDFFragment implements OnClickListener
 		// TODO Auto-generated method stub
 		View v = inflater.inflate(R.layout.uploadfile_screen, container, false);
 		
-		((MainActivity)mContext).setScreenTitle(mContext.getResources().getString(R.string.title_activity_preview));
-		
 		ImageButton btnUpload = (ImageButton) v
 				.findViewById(R.id.btn_upload_file);
 		Button btnUploadExe = (Button) v.findViewById(R.id.btn_upload_file_exe);
@@ -158,6 +156,15 @@ public class UploadFileFragment extends MuPDFFragment implements OnClickListener
 
 	}
 
+	@Override
+	public void onActivityCreated(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onActivityCreated(savedInstanceState);
+		mContext = getActivity();
+		((MainActivity)mContext).setScreenTitle(mContext.getResources().getString(R.string.title_activity_preview));
+		
+	}
+	
 	private void loadFileList() {
 		// TODO Auto-generated method stub
 		// Intent intent = new Intent();
