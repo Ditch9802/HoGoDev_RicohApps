@@ -10,6 +10,7 @@ import android.graphics.RectF;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.text.method.PasswordTransformationMethod;
@@ -101,6 +102,7 @@ public class MuPDFFragment extends Fragment
 	private AlertDialog.Builder mAlertBuilder;
 	private LinkState    mLinkState = LinkState.DEFAULT;
 	private final Handler mHandler = new Handler();
+	public Context mContext;
 
 	protected MuPDFCore openFile(String path)
 	{
@@ -715,5 +717,13 @@ public class MuPDFFragment extends Fragment
 			searchModeOff();
 		} 
 		super.onPrepareOptionsMenu(menu);
+	}
+	
+	@Override
+	public void onActivityCreated(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onActivityCreated(savedInstanceState);
+		mContext = getActivity();
+		
 	}
 }
