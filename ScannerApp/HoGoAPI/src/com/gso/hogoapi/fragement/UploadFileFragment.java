@@ -1,6 +1,7 @@
 package com.gso.hogoapi.fragement;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -103,9 +104,14 @@ public class UploadFileFragment extends MuPDFFragment implements OnClickListener
 		int second = c.get(Calendar.SECOND);
 		
 		mCurrentDateandTime = year + "-" + month + "-" + day;
-		mEtFilePath.setText(
-                "" + mFileName + "_" + mCurrentDateandTime + "_" + hours + "-" + minutes + "-"
-                        + second);
+//		mEtFilePath.setText(
+//                "" + mFileName + "_" + mCurrentDateandTime + "_" + hours + "-" + minutes + "-"
+//                        + second);
+		SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+		String now = sdf.format(new Date());
+		now = now.replace(" ", "_");
+		mEtFilePath.setText(mFileName+"_"+now);
+		Log.d("date","date now: "+sdf.format(new Date()));
 
 		if (core == null) {
 			ImageView imgPreview = (ImageView) v.findViewById(R.id.img_preview);
