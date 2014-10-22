@@ -174,7 +174,7 @@ public class HistoryFragment extends Fragment implements IServiceListener {
 				ResponseHistory responseHistory = api.getAllHistory(sEcho, displayStart, displayLength,
 						Type, StartDate, StopDate, SessionID);
 				if (responseHistory != null && "OK".equals(responseHistory.status)) {
-					
+                    List<History> result = new ArrayList<History>();
 					for (History history : responseHistory.history_detail) {
 						PackageDistributionHeaderResponse packageDistributionHeaderResponse = api.getPackageDistributionHeader(SessionID, history.packID);
 						if("OK".equals(packageDistributionHeaderResponse.status)) {
@@ -193,7 +193,7 @@ public class HistoryFragment extends Fragment implements IServiceListener {
 									if(detailObject == null) {
 										return null;
 									}
-									List<History> result = new ArrayList<History>();
+
 									for (Document document : packageDistributionHeaderResponse.documents) {
 										JSONObject documentObject = JsonHelper.getJsonObject(detailObject, document.id);
 										if(documentObject == null) continue;
@@ -223,7 +223,7 @@ public class HistoryFragment extends Fragment implements IServiceListener {
 											result.add(item);
 										}
 									}	
-									return result;
+
 								}
 							} catch (IOException e) {
 								e.printStackTrace();
@@ -232,6 +232,7 @@ public class HistoryFragment extends Fragment implements IServiceListener {
 							
 						}
 					}
+                    return result;
 				}
 				return null;
 			}
