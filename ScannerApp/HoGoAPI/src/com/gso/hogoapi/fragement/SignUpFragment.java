@@ -89,6 +89,7 @@ public class SignUpFragment extends Fragment implements IServiceListener {
 
 	private boolean checkInputData() {
 		boolean valid = true;
+		resetErrorChecking();
 		String firstName = etFirstName.getText().toString().trim();
 		String lastName = etLastName.getText().toString().trim();
 		String email = etEmail.getText().toString();
@@ -116,6 +117,14 @@ public class SignUpFragment extends Fragment implements IServiceListener {
 		}
 
 		return valid;
+	}
+
+	private void resetErrorChecking() {
+		// TODO Auto-generated method stub
+		etFirstName.setError(null);
+		etLastName.setError(null);
+		etEmail.setError(null);
+		etPassword.setError(null);
 	}
 
 	private void exeSignUp() {
