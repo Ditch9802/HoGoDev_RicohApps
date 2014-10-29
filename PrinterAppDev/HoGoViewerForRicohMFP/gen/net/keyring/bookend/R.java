@@ -11,27 +11,27 @@ public final class R {
     public static final class attr {
     }
     public static final class color {
-        public static final int background_list=0x7f060013;
+        public static final int background_list=0x7f060009;
         public static final int black=0x7f060000;
         public static final int blue=0x7f060004;
         public static final int btn_back=0x7f060014;
         public static final int cyan=0x7f060005;
-        public static final int dark_gray=0x7f06000d;
-        public static final int deep_green=0x7f060009;
+        public static final int dark_gray=0x7f06000e;
+        public static final int deep_green=0x7f06000a;
         public static final int gold=0x7f060008;
-        public static final int gray=0x7f06000e;
+        public static final int gray=0x7f06000f;
         public static final int green=0x7f060003;
-        public static final int header_list=0x7f060011;
-        public static final int item_checked=0x7f060012;
-        public static final int lavender=0x7f060010;
-        public static final int lighte_green=0x7f06000a;
-        public static final int lite_gray=0x7f06000c;
+        public static final int header_list=0x7f060012;
+        public static final int item_checked=0x7f060013;
+        public static final int lavender=0x7f060011;
+        public static final int lighte_green=0x7f06000b;
+        public static final int lite_gray=0x7f06000d;
         public static final int magenta=0x7f060006;
         public static final int red=0x7f060002;
         public static final int white=0x7f060001;
-        public static final int whitesmoke=0x7f06000f;
+        public static final int whitesmoke=0x7f060010;
         public static final int yellow=0x7f060007;
-        public static final int yellow_green=0x7f06000b;
+        public static final int yellow_green=0x7f06000c;
     }
     public static final class drawable {
         public static final int back=0x7f020000;
@@ -46,24 +46,41 @@ public final class R {
         public static final int bt_shelf=0x7f020009;
         public static final int bt_shop=0x7f02000a;
         public static final int bt_sync=0x7f02000b;
-        public static final int gray_button=0x7f02000c;
-        public static final int ic_action_refresh=0x7f02000d;
-        public static final int ic_delete=0x7f02000e;
-        public static final int ic_download=0x7f02000f;
-        public static final int ic_launcher=0x7f020010;
-        public static final int ic_logout=0x7f020011;
-        public static final int ic_print=0x7f020012;
-        public static final int ic_refresh=0x7f020013;
-        public static final int icon=0x7f020014;
-        public static final int menu_button=0x7f020015;
-        public static final int rectangle_brown=0x7f020016;
-        public static final int selector_button_address_tag=0x7f020017;
-        public static final int selector_list_setting=0x7f020018;
-        public static final int splash=0x7f020019;
-        public static final int status_background=0x7f02001a;
-        public static final int timecard_back_in=0x7f02001b;
-        public static final int timecard_bt_in_sub_normal=0x7f02001c;
-        public static final int timecard_bt_in_sub_select=0x7f02001d;
+        public static final int btn_delete_nor_sel=0x7f02000c;
+        public static final int btn_exit_nor_sel=0x7f02000d;
+        public static final int btn_print_nor_sel=0x7f02000e;
+        public static final int btn_start_nor_sel=0x7f02000f;
+        public static final int btn_sync_nor_sel=0x7f020010;
+        public static final int delete_icon=0x7f020011;
+        public static final int delete_press_icon=0x7f020012;
+        public static final int exit_icon=0x7f020013;
+        public static final int exit_press_icon=0x7f020014;
+        public static final int gray_button=0x7f020015;
+        public static final int ic_action_refresh=0x7f020016;
+        public static final int ic_delete=0x7f020017;
+        public static final int ic_download=0x7f020018;
+        public static final int ic_launcher=0x7f020019;
+        public static final int ic_logout=0x7f02001a;
+        public static final int ic_print=0x7f02001b;
+        public static final int ic_refresh=0x7f02001c;
+        public static final int icon=0x7f02001d;
+        public static final int img_about=0x7f02001e;
+        public static final int img_back=0x7f02001f;
+        public static final int menu_button=0x7f020020;
+        public static final int print_icon=0x7f020021;
+        public static final int print_press_icon=0x7f020022;
+        public static final int rectangle_brown=0x7f020023;
+        public static final int selector_button_address_tag=0x7f020024;
+        public static final int selector_list_setting=0x7f020025;
+        public static final int splash=0x7f020026;
+        public static final int start=0x7f020027;
+        public static final int start_press=0x7f020028;
+        public static final int status_background=0x7f020029;
+        public static final int sync_icon=0x7f02002a;
+        public static final int sync_press_icon=0x7f02002b;
+        public static final int timecard_back_in=0x7f02002c;
+        public static final int timecard_bt_in_sub_normal=0x7f02002d;
+        public static final int timecard_bt_in_sub_select=0x7f02002e;
     }
     public static final class id {
         public static final int RelativeLayout1=0x7f0a0044;
@@ -193,25 +210,26 @@ public final class R {
     }
     public static final class layout {
         public static final int activity_document_list=0x7f030000;
-        public static final int activity_print_setting=0x7f030001;
-        public static final int alert=0x7f030002;
-        public static final int dl_dialog=0x7f030003;
-        public static final int dlg_setting_other=0x7f030004;
-        public static final int hogo_web_book_shelf=0x7f030005;
-        public static final int layout_item_document=0x7f030006;
-        public static final int list_row_setting_category=0x7f030007;
-        public static final int list_row_setting_detail=0x7f030008;
-        public static final int mail_address_regist=0x7f030009;
-        public static final int main=0x7f03000a;
-        public static final int main_list=0x7f03000b;
-        public static final int menu_bar=0x7f03000c;
-        public static final int option=0x7f03000d;
-        public static final int print_count_dialog=0x7f03000e;
-        public static final int start=0x7f03000f;
-        public static final int store=0x7f030010;
-        public static final int store_list=0x7f030011;
-        public static final int web_book=0x7f030012;
-        public static final int web_book_shelf=0x7f030013;
+        public static final int activity_hogo_main=0x7f030001;
+        public static final int activity_print_setting=0x7f030002;
+        public static final int alert=0x7f030003;
+        public static final int dl_dialog=0x7f030004;
+        public static final int dlg_setting_other=0x7f030005;
+        public static final int hogo_web_book_shelf=0x7f030006;
+        public static final int layout_item_document=0x7f030007;
+        public static final int list_row_setting_category=0x7f030008;
+        public static final int list_row_setting_detail=0x7f030009;
+        public static final int mail_address_regist=0x7f03000a;
+        public static final int main=0x7f03000b;
+        public static final int main_list=0x7f03000c;
+        public static final int menu_bar=0x7f03000d;
+        public static final int option=0x7f03000e;
+        public static final int print_count_dialog=0x7f03000f;
+        public static final int start=0x7f030010;
+        public static final int store=0x7f030011;
+        public static final int store_list=0x7f030012;
+        public static final int web_book=0x7f030013;
+        public static final int web_book_shelf=0x7f030014;
     }
     public static final class menu {
         public static final int menu_main=0x7f090000;
@@ -224,237 +242,237 @@ public final class R {
         public static final int test_password=0x7f050003;
     }
     public static final class string {
-        public static final int activation_false=0x7f0700a3;
+        public static final int activation_false=0x7f0700c9;
         /**  Activate2 
  Activate2 
          */
-        public static final int activation_status_20011=0x7f07004f;
-        public static final int activation_status_20012=0x7f070050;
-        public static final int activation_status_20013=0x7f070051;
-        public static final int activation_status_20014=0x7f070052;
-        public static final int after=0x7f0700ab;
-        public static final int already_downloaded_error=0x7f0700d0;
+        public static final int activation_status_20011=0x7f070075;
+        public static final int activation_status_20012=0x7f070076;
+        public static final int activation_status_20013=0x7f070077;
+        public static final int activation_status_20014=0x7f070078;
+        public static final int after=0x7f0700d1;
+        public static final int already_downloaded_error=0x7f0700f6;
         /**  InAppBilling 
  InAppBilling 
          */
-        public static final int appMarket_connect_error=0x7f07007e;
+        public static final int appMarket_connect_error=0x7f0700a4;
         /**  言語依存のある設定のみこちらに記述します
     	言語依存の無い設定は custom_settings2.xml に記述してください 
  アプリ名 
  アプリ名 
          */
         public static final int app_name=0x7f070000;
-        public static final int ascend_date=0x7f070093;
-        public static final int ascend_title=0x7f070095;
-        /**  <string name="color_red_and_black">Red and Black</string> 
- <string name="color_two_color">Two Color</string> 
- <string name="color_single_color">Single Color</string> 
- Sample file name 
+        public static final int ascend_date=0x7f0700b9;
+        public static final int ascend_title=0x7f0700bb;
+        /**  Sample file name 
          */
-        public static final int assets_file_sample_01=0x7f07001c;
-        public static final int assets_file_sample_02=0x7f07001d;
-        public static final int authkey_error_contentsid=0x7f0700d1;
-        public static final int authkey_error_host=0x7f0700d2;
-        public static final int authkey_error_key=0x7f0700d3;
+        public static final int assets_file_sample_01=0x7f070042;
+        public static final int assets_file_sample_02=0x7f070043;
+        public static final int authkey_error_contentsid=0x7f0700f7;
+        public static final int authkey_error_host=0x7f0700f8;
+        public static final int authkey_error_key=0x7f0700f9;
         /**  AuthWebSite 
  AuthWebSite 
          */
-        public static final int authwebsite_75011=0x7f07006a;
-        public static final int authwebsite_75012=0x7f07006b;
-        public static final int authwebsite_75013=0x7f07006c;
-        public static final int back=0x7f070077;
-        public static final int billing_help_url=0x7f070080;
-        public static final int billing_not_supported_message=0x7f070083;
-        public static final int billing_not_supported_title=0x7f070082;
+        public static final int authwebsite_75011=0x7f070090;
+        public static final int authwebsite_75012=0x7f070091;
+        public static final int authwebsite_75013=0x7f070092;
+        public static final int back=0x7f07009d;
+        public static final int billing_help_url=0x7f0700a6;
+        public static final int billing_not_supported_message=0x7f0700a9;
+        public static final int billing_not_supported_title=0x7f0700a8;
         /**  BookendMail 
  BookendMail 
          */
-        public static final int bookendmail_status_73011=0x7f07005f;
-        public static final int bookendmail_status_73012=0x7f070060;
-        public static final int bookendmail_status_73013=0x7f070061;
+        public static final int bookendmail_status_73011=0x7f070085;
+        public static final int bookendmail_status_73012=0x7f070086;
+        public static final int bookendmail_status_73013=0x7f070087;
         /**  BookendPin2 
  BookendPin2 
          */
-        public static final int bookendpin2_status_60011=0x7f070062;
-        public static final int bookendpin2_status_60012=0x7f070063;
-        public static final int bookendpin2_status_60013=0x7f070064;
-        public static final int bookendpin2_status_60014=0x7f070065;
-        public static final int bookendpin2_status_60015=0x7f070066;
-        public static final int bookendpin2_status_60016=0x7f070067;
-        public static final int bookshelf_regist_message=0x7f0700e8;
-        public static final int browse_count_error=0x7f07008c;
+        public static final int bookendpin2_status_60011=0x7f070088;
+        public static final int bookendpin2_status_60012=0x7f070089;
+        public static final int bookendpin2_status_60013=0x7f07008a;
+        public static final int bookendpin2_status_60014=0x7f07008b;
+        public static final int bookendpin2_status_60015=0x7f07008c;
+        public static final int bookendpin2_status_60016=0x7f07008d;
+        public static final int bookshelf_regist_message=0x7f07010e;
+        public static final int browse_count_error=0x7f0700b2;
         public static final int btn_cancel=0x7f070002;
         public static final int btn_close=0x7f070003;
         /**  Dialog button 
          */
         public static final int btn_ok=0x7f070001;
-        public static final int cancel=0x7f070073;
-        public static final int cancel_btn_tag=0x7f0700f2;
-        public static final int cannot_connect_message=0x7f070085;
-        public static final int cannot_connect_title=0x7f070084;
-        public static final int caution_adobereader=0x7f07009c;
-        public static final int caution_epubviewer=0x7f07009d;
+        public static final int cancel=0x7f070099;
+        public static final int cancel_btn_tag=0x7f070118;
+        public static final int cannot_connect_message=0x7f0700ab;
+        public static final int cannot_connect_title=0x7f0700aa;
+        public static final int caution_adobereader=0x7f0700c2;
+        public static final int caution_epubviewer=0x7f0700c3;
         /**  MainActivity 
  MainActivity 
          */
-        public static final int caution_sdcard=0x7f070099;
-        public static final int change=0x7f0700db;
-        public static final int change_address_message=0x7f0700e9;
+        public static final int caution_sdcard=0x7f0700bf;
+        public static final int change=0x7f070101;
+        public static final int change_address_message=0x7f07010f;
         /**  ChangeUserId 
  ChangeUserId 
          */
-        public static final int change_userid_status_error=0x7f070055;
+        public static final int change_userid_status_error=0x7f07007b;
         /**  CheckActivation 
  CheckActivation 
          */
-        public static final int check_activation_23001=0x7f070053;
-        public static final int check_activation_23012=0x7f070054;
+        public static final int check_activation_23001=0x7f070079;
+        public static final int check_activation_23012=0x7f07007a;
         /**  Progressbar 
  Progressbar 
          */
-        public static final int checking=0x7f0700c0;
-        public static final int clock_check_error=0x7f0700ba;
+        public static final int checking=0x7f0700e6;
+        public static final int clock_check_error=0x7f0700e0;
         /**  共通 
  共通 
          */
-        public static final int close=0x7f070071;
+        public static final int close=0x7f070097;
         /**  Color setting 
- <string name="color_auto_color">Auto Color</string> 
- <string name="color_monochrome">Monochrome</string> 
          */
-        public static final int color_color=0x7f07001b;
-        public static final int connected=0x7f070078;
-        public static final int contents_delete_message=0x7f0700e2;
-        public static final int contents_no=0x7f070089;
+        public static final int color_auto_color=0x7f07001e;
+        public static final int color_color=0x7f070020;
+        public static final int color_monochrome=0x7f07001f;
+        public static final int color_red_and_black=0x7f070021;
+        public static final int color_single_color=0x7f070023;
+        public static final int color_two_color=0x7f070022;
+        public static final int connected=0x7f07009e;
+        public static final int contents_delete_message=0x7f070108;
+        public static final int contents_no=0x7f0700af;
         /**  カスタム名 
          */
-        public static final int custom_name=0x7f07003c;
-        public static final int db_error=0x7f0700cf;
+        public static final int custom_name=0x7f070062;
+        public static final int db_error=0x7f0700f5;
         /**  MainActivity AlertDialog ERROR 
  MainActivity AlertDialog ERROR 
          */
-        public static final int debug_mode_message=0x7f0700b9;
+        public static final int debug_mode_message=0x7f0700df;
         /**  Default value 
  <string name="default_copies">3</string> 
          */
-        public static final int default_copies=0x7f070036;
-        public static final int delete=0x7f070074;
-        public static final int delete_capture=0x7f0700a4;
-        public static final int descend_date=0x7f070092;
-        public static final int descend_title=0x7f070094;
+        public static final int default_copies=0x7f07005c;
+        public static final int delete=0x7f07009a;
+        public static final int delete_capture=0x7f0700ca;
+        public static final int descend_date=0x7f0700b8;
+        public static final int descend_title=0x7f0700ba;
         /**  Contents Detail Dialog 
  Contents Detail Dialog 
          */
-        public static final int detail=0x7f0700b0;
-        public static final int detail_auther=0x7f0700b2;
-        public static final int detail_distributor_name=0x7f0700b3;
-        public static final int detail_distributor_url=0x7f0700b4;
-        public static final int detail_downloadDate=0x7f0700b5;
-        public static final int detail_expiry_date=0x7f0700b8;
-        public static final int detail_lastAccessDate=0x7f0700b6;
-        public static final int detail_shared_device=0x7f0700b7;
-        public static final int detail_title=0x7f0700b1;
-        public static final int dl_btn_tag=0x7f0700f0;
-        public static final int dl_error_no_dir=0x7f070090;
-        public static final int dl_error_set_tag=0x7f0700f7;
-        public static final int dl_error_tag=0x7f0700f3;
-        public static final int dl_ing_set_tag=0x7f0700f6;
-        public static final int dl_init_set_tag=0x7f0700f5;
+        public static final int detail=0x7f0700d6;
+        public static final int detail_auther=0x7f0700d8;
+        public static final int detail_distributor_name=0x7f0700d9;
+        public static final int detail_distributor_url=0x7f0700da;
+        public static final int detail_downloadDate=0x7f0700db;
+        public static final int detail_expiry_date=0x7f0700de;
+        public static final int detail_lastAccessDate=0x7f0700dc;
+        public static final int detail_shared_device=0x7f0700dd;
+        public static final int detail_title=0x7f0700d7;
+        public static final int dl_btn_tag=0x7f070116;
+        public static final int dl_error_no_dir=0x7f0700b6;
+        public static final int dl_error_set_tag=0x7f07011d;
+        public static final int dl_error_tag=0x7f070119;
+        public static final int dl_ing_set_tag=0x7f07011c;
+        public static final int dl_init_set_tag=0x7f07011b;
         /**  New Contents DL ERROR 
  New Contents DL ERROR 
          */
-        public static final int dl_offline_error=0x7f0700cc;
-        public static final int dl_url_error=0x7f0700cd;
-        public static final int dlg_printing_button_cancel=0x7f070034;
-        public static final int dlg_printing_message_printing=0x7f070033;
-        public static final int dlg_printing_message_printing_stopped=0x7f070035;
-        public static final int dlg_printing_message_send_file=0x7f070032;
+        public static final int dl_offline_error=0x7f0700f2;
+        public static final int dl_url_error=0x7f0700f3;
+        public static final int dlg_printing_button_cancel=0x7f07005a;
+        public static final int dlg_printing_message_printing=0x7f070059;
+        public static final int dlg_printing_message_printing_stopped=0x7f07005b;
+        public static final int dlg_printing_message_send_file=0x7f070058;
         /**  Printing dialog 
          */
-        public static final int dlg_printing_title=0x7f070031;
+        public static final int dlg_printing_title=0x7f070057;
         /** Please wait dialog
          */
-        public static final int dlg_waiting_message=0x7f070030;
-        public static final int download=0x7f07007c;
-        public static final int download_confirm=0x7f0700c5;
-        public static final int download_count_ng=0x7f0700e1;
-        public static final int download_error=0x7f0700ce;
-        public static final int download_fail=0x7f0700c9;
-        public static final int download_finish=0x7f0700c8;
-        public static final int download_service_error=0x7f0700d5;
-        public static final int download_wait=0x7f0700c6;
+        public static final int dlg_waiting_message=0x7f070056;
+        public static final int download=0x7f0700a2;
+        public static final int download_confirm=0x7f0700eb;
+        public static final int download_count_ng=0x7f070107;
+        public static final int download_error=0x7f0700f4;
+        public static final int download_fail=0x7f0700ef;
+        public static final int download_finish=0x7f0700ee;
+        public static final int download_service_error=0x7f0700fb;
+        public static final int download_wait=0x7f0700ec;
         /**  Contents Status error 
  Contents Status error 
          */
-        public static final int downloaded=0x7f070088;
-        public static final int downloading=0x7f0700c7;
-        public static final int epubviewer_versionup=0x7f07009e;
-        public static final int error_cannot_connect=0x7f07002f;
-        public static final int error_inappbilling_publicKey=0x7f07007f;
-        public static final int error_pdl_not_found=0x7f07002d;
-        public static final int error_remove_layer=0x7f0700bb;
-        public static final int error_send_market=0x7f0700bf;
-        public static final int error_settings_not_found=0x7f07002e;
+        public static final int downloaded=0x7f0700ae;
+        public static final int downloading=0x7f0700ed;
+        public static final int epubviewer_versionup=0x7f0700c4;
+        public static final int error_cannot_connect=0x7f070055;
+        public static final int error_inappbilling_publicKey=0x7f0700a5;
+        public static final int error_pdl_not_found=0x7f070053;
+        public static final int error_remove_layer=0x7f0700e1;
+        public static final int error_send_market=0x7f0700e5;
+        public static final int error_settings_not_found=0x7f070054;
         /**  Error message
          */
-        public static final int error_title=0x7f07002c;
-        public static final int error_view_pdf=0x7f0700bd;
-        public static final int expiry_date_error=0x7f07008b;
+        public static final int error_title=0x7f070052;
+        public static final int error_view_pdf=0x7f0700e3;
+        public static final int expiry_date_error=0x7f0700b1;
         /**  File extension 
          */
-        public static final int file_extension_PDF=0x7f07001e;
-        public static final int file_extension_PRN=0x7f07001f;
-        public static final int file_extension_XPS=0x7f070020;
-        public static final int filetype_error=0x7f07008e;
-        public static final int first_activation_offline=0x7f0700a2;
+        public static final int file_extension_PDF=0x7f070044;
+        public static final int file_extension_PRN=0x7f070045;
+        public static final int file_extension_XPS=0x7f070046;
+        public static final int filetype_error=0x7f0700b4;
+        public static final int first_activation_offline=0x7f0700c8;
         /**  GetStoreList 
  GetStoreList 
          */
-        public static final int getStoreList_status_92020=0x7f070057;
-        public static final int get_store=0x7f0700d7;
+        public static final int getStoreList_status_92020=0x7f07007d;
+        public static final int get_store=0x7f0700fd;
         /**  GetAwsInfo 
  GetAwsInfo 
          */
-        public static final int getawsinfo_status_50011=0x7f070058;
-        public static final int getawsinfo_status_50012=0x7f070059;
-        public static final int getcontents=0x7f0700e0;
-        public static final int getcontents_error=0x7f0700df;
+        public static final int getawsinfo_status_50011=0x7f07007e;
+        public static final int getawsinfo_status_50012=0x7f07007f;
+        public static final int getcontents=0x7f070106;
+        public static final int getcontents_error=0x7f070105;
         /**  GetContentsInfo 
  GetContentsInfo 
          */
-        public static final int getcontentsinfo_11112=0x7f070068;
-        public static final int getcontentsinfo_11113=0x7f070069;
-        public static final int getting=0x7f0700c1;
+        public static final int getcontentsinfo_11112=0x7f07008e;
+        public static final int getcontentsinfo_11113=0x7f07008f;
+        public static final int getting=0x7f0700e7;
         /**  ヘルプフラグ = 0:標準, 1:専用URL(要help_url設定) 
          */
-        public static final int help_flag=0x7f07003f;
+        public static final int help_flag=0x7f070065;
         /**  ヘルプURL 
          */
-        public static final int help_url=0x7f070040;
-        public static final int http_error=0x7f0700d4;
+        public static final int help_url=0x7f070066;
+        public static final int http_error=0x7f0700fa;
         /**  InAppBilling base64EncodedPublicKey 
     	アプリを公開するGoogleアカウントの公開鍵を指定する必要があります　
          */
-        public static final int inAppBilling_publicKey=0x7f070044;
-        public static final int indefinitely=0x7f07007a;
-        public static final int invalid_platform_error=0x7f07008a;
-        public static final int invalid_userid=0x7f07004e;
+        public static final int inAppBilling_publicKey=0x7f07006a;
+        public static final int indefinitely=0x7f0700a0;
+        public static final int invalid_platform_error=0x7f0700b0;
+        public static final int invalid_userid=0x7f070074;
         /**  Job state 
          */
-        public static final int job_status_aborted=0x7f070021;
-        public static final int job_status_canceled=0x7f070022;
-        public static final int job_status_completed=0x7f070023;
-        public static final int job_status_pending=0x7f070024;
-        public static final int job_status_processing=0x7f070025;
-        public static final int job_status_processing_stopped=0x7f070026;
-        public static final int key_fail=0x7f0700be;
-        public static final int learn_more=0x7f070081;
-        public static final int library_not_registered=0x7f07004d;
-        public static final int list_auther=0x7f0700ae;
-        public static final int list_contents_title=0x7f0700ad;
-        public static final int list_title=0x7f0700ac;
-        public static final int mail_address_none=0x7f0700eb;
-        public static final int mailaddress_false=0x7f0700ec;
+        public static final int job_status_aborted=0x7f070047;
+        public static final int job_status_canceled=0x7f070048;
+        public static final int job_status_completed=0x7f070049;
+        public static final int job_status_pending=0x7f07004a;
+        public static final int job_status_processing=0x7f07004b;
+        public static final int job_status_processing_stopped=0x7f07004c;
+        public static final int key_fail=0x7f0700e4;
+        public static final int learn_more=0x7f0700a7;
+        public static final int library_not_registered=0x7f070073;
+        public static final int list_auther=0x7f0700d4;
+        public static final int list_contents_title=0x7f0700d3;
+        public static final int list_title=0x7f0700d2;
+        public static final int mail_address_none=0x7f070111;
+        public static final int mailaddress_false=0x7f070112;
         public static final int main_btn_other_settings=0x7f070009;
         public static final int main_btn_print_color=0x7f070008;
         public static final int main_btn_print_pages=0x7f070007;
@@ -464,168 +482,207 @@ public final class R {
          */
         public static final int main_label_app_name=0x7f070004;
         public static final int main_label_other_settings=0x7f070005;
-        public static final int menu_bookshelf=0x7f070039;
-        public static final int menu_filter=0x7f070096;
-        public static final int menu_filter_all=0x7f070098;
-        public static final int menu_filter_yet=0x7f070097;
-        public static final int menu_help=0x7f07003b;
+        public static final int menu_bookshelf=0x7f07005f;
+        public static final int menu_filter=0x7f0700bc;
+        public static final int menu_filter_all=0x7f0700be;
+        public static final int menu_filter_yet=0x7f0700bd;
+        public static final int menu_help=0x7f070061;
         /**  Menu 
  Menu 
          */
-        public static final int menu_main=0x7f070037;
-        public static final int menu_option=0x7f07003a;
+        public static final int menu_main=0x7f07005d;
+        public static final int menu_option=0x7f070060;
         /**  Menu 
  Menu 
          */
-        public static final int menu_sort=0x7f070091;
-        public static final int menu_store=0x7f070038;
-        public static final int must_purchased=0x7f070087;
-        public static final int naviUrl_null=0x7f0700bc;
-        public static final int network_retry_count=0x7f070046;
+        public static final int menu_sort=0x7f0700b7;
+        public static final int menu_store=0x7f07005e;
+        public static final int must_purchased=0x7f0700ad;
+        public static final int naviUrl_null=0x7f0700e2;
+        public static final int network_retry_count=0x7f07006c;
         /**  NetWork 
          */
-        public static final int network_retry_interval=0x7f070045;
-        public static final int network_timeout=0x7f070047;
-        public static final int new_ver=0x7f0700a6;
-        public static final int now_ver=0x7f0700a7;
-        public static final int offline_browse_count_error=0x7f07008f;
-        public static final int ok=0x7f070072;
-        public static final int open_fail_updatepage=0x7f0700af;
-        public static final int option_confirm_address_title=0x7f0700d9;
+        public static final int network_retry_interval=0x7f07006b;
+        public static final int network_timeout=0x7f07006d;
+        public static final int new_ver=0x7f0700cc;
+        public static final int now_ver=0x7f0700cd;
+        public static final int offline_browse_count_error=0x7f0700b5;
+        public static final int ok=0x7f070098;
+        public static final int open_fail_updatepage=0x7f0700d5;
+        public static final int option_confirm_address_title=0x7f0700ff;
         /**  Other setting dialog 
          */
         public static final int other_settings_dlg_title=0x7f07000c;
         /**  オーナーID 
          */
-        public static final int owner_id=0x7f07003e;
-        public static final int pin=0x7f0700e6;
-        public static final int pin_false=0x7f0700ed;
+        public static final int owner_id=0x7f070064;
+        /**  PageSource setting 
+         */
+        public static final int page_source_auto=0x7f070024;
+        public static final int page_source_large_capacity=0x7f070025;
+        public static final int page_source_manual=0x7f070026;
+        public static final int page_source_tray1=0x7f070027;
+        public static final int page_source_tray2=0x7f070028;
+        public static final int page_source_tray3=0x7f070029;
+        public static final int page_source_tray4=0x7f07002a;
+        public static final int page_source_tray5=0x7f07002b;
+        public static final int page_source_tray6=0x7f07002c;
+        public static final int page_source_tray7=0x7f07002d;
+        public static final int page_source_tray8=0x7f07002e;
+        public static final int page_source_tray9=0x7f07002f;
+        public static final int paper_side_booklet_left=0x7f070035;
+        public static final int paper_side_booklet_right=0x7f070036;
+        public static final int paper_side_magazine_left=0x7f070033;
+        public static final int paper_side_magazine_right=0x7f070034;
+        /**  PageSide setting 
+         */
+        public static final int paper_side_one_sided=0x7f070030;
+        public static final int paper_side_top_to_bottom=0x7f070032;
+        public static final int paper_side_top_to_top=0x7f070031;
+        public static final int pin=0x7f07010c;
+        public static final int pin_false=0x7f070113;
         /**  Print color setting dialog 
          */
         public static final int print_color_dlg_title=0x7f07000f;
         /**  Copies setting dialog 
          */
         public static final int print_count_dlg_title=0x7f07000e;
+        public static final int print_paper_side_dlg_title=0x7f070011;
+        public static final int print_print_resolution_dlg_title=0x7f070012;
+        public static final int print_source_dlg_title=0x7f070010;
         /**  Printer state 
          */
-        public static final int printer_status_idle=0x7f070027;
-        public static final int printer_status_maintenance=0x7f070028;
-        public static final int printer_status_processing=0x7f070029;
-        public static final int printer_status_stopped=0x7f07002a;
-        public static final int printer_status_unknown=0x7f07002b;
-        public static final int progress_processing=0x7f0700c3;
-        public static final int progress_tag=0x7f0700f1;
-        public static final int purchased=0x7f070086;
-        public static final int regist_address_msg=0x7f0700e4;
-        public static final int regist_check=0x7f0700cb;
+        public static final int printer_status_idle=0x7f07004d;
+        public static final int printer_status_maintenance=0x7f07004e;
+        public static final int printer_status_processing=0x7f07004f;
+        public static final int printer_status_stopped=0x7f070050;
+        public static final int printer_status_unknown=0x7f070051;
+        public static final int progress_processing=0x7f0700e9;
+        public static final int progress_tag=0x7f070117;
+        public static final int purchased=0x7f0700ac;
+        public static final int regist_address_msg=0x7f07010a;
+        public static final int regist_check=0x7f0700f1;
         /**  RegistMailAddress2 
  RegistMailAddress2 
          */
-        public static final int regist_mailaddress2_status_71001=0x7f07005a;
-        public static final int regist_mailaddress2_status_71002=0x7f07005b;
-        public static final int regist_mailaddress2_status_71012=0x7f07005c;
-        public static final int regist_mailaddress2_status_71013=0x7f07005d;
-        public static final int regist_mailaddress2_status_71014=0x7f07005e;
-        public static final int regist_pin_msg=0x7f0700e7;
+        public static final int regist_mailaddress2_status_71001=0x7f070080;
+        public static final int regist_mailaddress2_status_71002=0x7f070081;
+        public static final int regist_mailaddress2_status_71012=0x7f070082;
+        public static final int regist_mailaddress2_status_71013=0x7f070083;
+        public static final int regist_mailaddress2_status_71014=0x7f070084;
+        public static final int regist_pin_msg=0x7f07010d;
         /**  Regist MailAddress 
  Regist MailAddress 
          */
-        public static final int regist_title1=0x7f0700e3;
-        public static final int regist_title2=0x7f0700e5;
-        public static final int registration=0x7f0700ca;
-        public static final int reset=0x7f0700dc;
-        public static final int reset_complete=0x7f0700a0;
-        public static final int reset_finish=0x7f07009f;
-        public static final int reset_init_restart=0x7f0700a1;
-        public static final int reset_message=0x7f0700dd;
+        public static final int regist_title1=0x7f070109;
+        public static final int regist_title2=0x7f07010b;
+        public static final int registration=0x7f0700f0;
+        public static final int reset=0x7f070102;
+        public static final int reset_complete=0x7f0700c6;
+        public static final int reset_finish=0x7f0700c5;
+        public static final int reset_init_restart=0x7f0700c7;
+        public static final int reset_message=0x7f070103;
         /**  Reset 
  Reset 
          */
-        public static final int reset_status_22012=0x7f070056;
-        public static final int retry=0x7f07007d;
-        public static final int retry_btn_tag=0x7f0700f4;
+        public static final int reset_status_22012=0x7f07007c;
+        /**  PrintResolution setting 
+         */
+        public static final int resolution_1200_1200_1=0x7f070037;
+        public static final int resolution_1200_1200_2=0x7f070038;
+        public static final int resolution_1200_600_1=0x7f070039;
+        public static final int resolution_200_200_1=0x7f07003a;
+        public static final int resolution_300_300_1=0x7f07003b;
+        public static final int resolution_400_400_1=0x7f07003c;
+        public static final int resolution_600_1200_1=0x7f07003d;
+        public static final int resolution_600_600_1=0x7f07003e;
+        public static final int resolution_600_600_2=0x7f07003f;
+        public static final int resolution_600_600_4=0x7f070040;
+        public static final int resolution_600_600_8=0x7f070041;
+        public static final int retry=0x7f0700a3;
+        public static final int retry_btn_tag=0x7f07011a;
         /**  Print file setting dialog 
          */
         public static final int select_file_dlg_title=0x7f07000b;
-        public static final int send=0x7f070076;
-        public static final int sendding=0x7f0700c2;
+        public static final int send=0x7f07009c;
+        public static final int sendding=0x7f0700e8;
         /**  サービスバインド用カテゴリー名 ※マニフェストは参照が効かないので修正すること 
          */
-        public static final int service_category=0x7f07003d;
-        public static final int setcontents_002=0x7f07006f;
-        public static final int setcontents_003=0x7f070070;
+        public static final int service_category=0x7f070063;
+        public static final int setcontents_002=0x7f070095;
+        public static final int setcontents_003=0x7f070096;
         /**  SetContents 
  SetContents 
          */
-        public static final int setcontents_10012=0x7f07006e;
-        public static final int shared_device_error=0x7f07008d;
-        public static final int shareddevice_tag=0x7f0700f8;
-        public static final int shelf_regist_after_mes=0x7f0700ea;
+        public static final int setcontents_10012=0x7f070094;
+        public static final int shared_device_error=0x7f0700b3;
+        public static final int shareddevice_tag=0x7f07011e;
+        public static final int shelf_regist_after_mes=0x7f070110;
         /**  Splash画像の下の背景を白にするかどうかフラグ = 0:そのまま(黒), 1:白 
          */
-        public static final int splash_background_white=0x7f070043;
-        public static final int staple_bottom_left=0x7f070018;
-        public static final int staple_bottom_left_slant=0x7f070019;
+        public static final int splash_background_white=0x7f070069;
+        public static final int staple_bottom_left=0x7f07001b;
+        public static final int staple_bottom_left_slant=0x7f07001c;
         /**  Staple setting dialog
          */
         public static final int staple_dlg_title=0x7f07000d;
         /**  Staple setting 
          */
-        public static final int staple_dual_left=0x7f070010;
-        public static final int staple_dual_right=0x7f070011;
-        public static final int staple_dual_top=0x7f070012;
-        public static final int staple_none=0x7f07001a;
-        public static final int staple_saddle_stitch=0x7f070013;
-        public static final int staple_top_left=0x7f070014;
-        public static final int staple_top_left_slant=0x7f070015;
-        public static final int staple_top_right=0x7f070016;
-        public static final int staple_top_right_slant=0x7f070017;
-        public static final int starting=0x7f070079;
-        public static final int status_false=0x7f070049;
-        public static final int status_io_exception=0x7f07004a;
+        public static final int staple_dual_left=0x7f070013;
+        public static final int staple_dual_right=0x7f070014;
+        public static final int staple_dual_top=0x7f070015;
+        public static final int staple_none=0x7f07001d;
+        public static final int staple_saddle_stitch=0x7f070016;
+        public static final int staple_top_left=0x7f070017;
+        public static final int staple_top_left_slant=0x7f070018;
+        public static final int staple_top_right=0x7f070019;
+        public static final int staple_top_right_slant=0x7f07001a;
+        public static final int starting=0x7f07009f;
+        public static final int status_false=0x7f07006f;
+        public static final int status_io_exception=0x7f070070;
         /**  View Tag 
  View Tag 
          */
-        public static final int status_main_tag=0x7f0700ee;
+        public static final int status_main_tag=0x7f070114;
         /**  Request Description 共通 
  Request Description 共通 
          */
-        public static final int status_null=0x7f070048;
-        public static final int status_parameter_error=0x7f07004b;
-        public static final int status_server_internal_error=0x7f07004c;
-        public static final int status_web_tag=0x7f0700ef;
+        public static final int status_null=0x7f07006e;
+        public static final int status_parameter_error=0x7f070071;
+        public static final int status_server_internal_error=0x7f070072;
+        public static final int status_web_tag=0x7f070115;
         /**  メニューのストアボタン表示有無フラグ = 0:標準, 1:なし, 2:専用 
          */
-        public static final int store_flag=0x7f070041;
+        public static final int store_flag=0x7f070067;
         /**  StoreActivity 
  StoreActivity 
          */
-        public static final int store_type_NG=0x7f0700d6;
-        public static final int unlimited=0x7f07007b;
-        public static final int unregistered=0x7f0700da;
+        public static final int store_type_NG=0x7f0700fc;
+        public static final int unlimited=0x7f0700a1;
+        public static final int unregistered=0x7f070100;
         /**  UpdateLicense 
  UpdateLicense 
          */
-        public static final int updatelicense_16012=0x7f07006d;
-        public static final int ver_dialog_title=0x7f0700a5;
-        public static final int ver_force_message=0x7f0700aa;
-        public static final int ver_refer_url_1=0x7f0700a8;
-        public static final int ver_refer_url_2=0x7f0700a9;
+        public static final int updatelicense_16012=0x7f070093;
+        public static final int ver_dialog_title=0x7f0700cb;
+        public static final int ver_force_message=0x7f0700d0;
+        public static final int ver_refer_url_1=0x7f0700ce;
+        public static final int ver_refer_url_2=0x7f0700cf;
         /**  OptionActivity 
  OptionActivity 
          */
-        public static final int version=0x7f0700d8;
-        public static final int viewer_install=0x7f07009a;
-        public static final int viewer_start=0x7f0700c4;
-        public static final int viewer_update=0x7f07009b;
-        public static final int web_delete=0x7f070075;
+        public static final int version=0x7f0700fe;
+        public static final int viewer_install=0x7f0700c0;
+        public static final int viewer_start=0x7f0700ea;
+        public static final int viewer_update=0x7f0700c1;
+        public static final int web_delete=0x7f07009b;
         /**  メニューのWeb書庫ボタン表示有無フラグ = 0:有り（標準）, 1:無し 
          */
-        public static final int webshelf_btn_flag=0x7f070042;
+        public static final int webshelf_btn_flag=0x7f070068;
         /**  WebBookShelf 
  WebBookShelf 
          */
-        public static final int webshelf_title=0x7f0700de;
+        public static final int webshelf_title=0x7f070104;
     }
     public static final class style {
         public static final int Theme_CustomDialog=0x7f080000;

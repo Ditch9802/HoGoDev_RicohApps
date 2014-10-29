@@ -25,15 +25,22 @@ public final class R {
     public static final class drawable {
         public static int border=0x7f020000;
         public static int border_selected=0x7f020001;
-        public static int ic_launcher=0x7f020002;
-        public static int ic_logout=0x7f020003;
-        public static int rectangle_brown=0x7f020004;
-        public static int selector_button_address_tag=0x7f020005;
-        public static int selector_list_setting=0x7f020006;
-        public static int status_background=0x7f020007;
-        public static int timecard_back_in=0x7f020008;
-        public static int timecard_bt_in_sub_normal=0x7f020009;
-        public static int timecard_bt_in_sub_select=0x7f02000a;
+        public static int btn_exit_nor_sel=0x7f020002;
+        public static int btn_start_nor_sel=0x7f020003;
+        public static int exit_icon=0x7f020004;
+        public static int exit_press_icon=0x7f020005;
+        public static int ic_launcher=0x7f020006;
+        public static int ic_logout=0x7f020007;
+        public static int img_back=0x7f020008;
+        public static int rectangle_brown=0x7f020009;
+        public static int selector_button_address_tag=0x7f02000a;
+        public static int selector_list_setting=0x7f02000b;
+        public static int start=0x7f02000c;
+        public static int start_press=0x7f02000d;
+        public static int status_background=0x7f02000e;
+        public static int timecard_back_in=0x7f02000f;
+        public static int timecard_bt_in_sub_normal=0x7f020010;
+        public static int timecard_bt_in_sub_select=0x7f020011;
     }
     public static final class id {
         public static int btnBack=0x7f06000a;
@@ -82,56 +89,56 @@ public final class R {
     }
     public static final class string {
         public static int app_name=0x7f050000;
-        /**  <string name="color_red_and_black">Red and Black</string> 
- <string name="color_two_color">Two Color</string> 
- <string name="color_single_color">Single Color</string> 
- Sample file name 
+        /**  Sample file name 
          */
-        public static int assets_file_sample_01=0x7f05001c;
-        public static int assets_file_sample_02=0x7f05001d;
+        public static int assets_file_sample_01=0x7f050042;
+        public static int assets_file_sample_02=0x7f050043;
         public static int btn_cancel=0x7f050002;
         public static int btn_close=0x7f050003;
         /**  Dialog button 
          */
         public static int btn_ok=0x7f050001;
         /**  Color setting 
- <string name="color_auto_color">Auto Color</string> 
- <string name="color_monochrome">Monochrome</string> 
          */
-        public static int color_color=0x7f05001b;
+        public static int color_auto_color=0x7f05001e;
+        public static int color_color=0x7f050020;
+        public static int color_monochrome=0x7f05001f;
+        public static int color_red_and_black=0x7f050021;
+        public static int color_single_color=0x7f050023;
+        public static int color_two_color=0x7f050022;
         /**  Default value 
  <string name="default_copies">3</string> 
          */
-        public static int default_copies=0x7f050036;
-        public static int dlg_printing_button_cancel=0x7f050034;
-        public static int dlg_printing_message_printing=0x7f050033;
-        public static int dlg_printing_message_printing_stopped=0x7f050035;
-        public static int dlg_printing_message_send_file=0x7f050032;
+        public static int default_copies=0x7f05005c;
+        public static int dlg_printing_button_cancel=0x7f05005a;
+        public static int dlg_printing_message_printing=0x7f050059;
+        public static int dlg_printing_message_printing_stopped=0x7f05005b;
+        public static int dlg_printing_message_send_file=0x7f050058;
         /**  Printing dialog 
          */
-        public static int dlg_printing_title=0x7f050031;
+        public static int dlg_printing_title=0x7f050057;
         /** Please wait dialog
          */
-        public static int dlg_waiting_message=0x7f050030;
-        public static int error_cannot_connect=0x7f05002f;
-        public static int error_pdl_not_found=0x7f05002d;
-        public static int error_settings_not_found=0x7f05002e;
+        public static int dlg_waiting_message=0x7f050056;
+        public static int error_cannot_connect=0x7f050055;
+        public static int error_pdl_not_found=0x7f050053;
+        public static int error_settings_not_found=0x7f050054;
         /**  Error message
          */
-        public static int error_title=0x7f05002c;
+        public static int error_title=0x7f050052;
         /**  File extension 
          */
-        public static int file_extension_PDF=0x7f05001e;
-        public static int file_extension_PRN=0x7f05001f;
-        public static int file_extension_XPS=0x7f050020;
+        public static int file_extension_PDF=0x7f050044;
+        public static int file_extension_PRN=0x7f050045;
+        public static int file_extension_XPS=0x7f050046;
         /**  Job state 
          */
-        public static int job_status_aborted=0x7f050021;
-        public static int job_status_canceled=0x7f050022;
-        public static int job_status_completed=0x7f050023;
-        public static int job_status_pending=0x7f050024;
-        public static int job_status_processing=0x7f050025;
-        public static int job_status_processing_stopped=0x7f050026;
+        public static int job_status_aborted=0x7f050047;
+        public static int job_status_canceled=0x7f050048;
+        public static int job_status_completed=0x7f050049;
+        public static int job_status_pending=0x7f05004a;
+        public static int job_status_processing=0x7f05004b;
+        public static int job_status_processing_stopped=0x7f05004c;
         public static int main_btn_other_settings=0x7f050009;
         public static int main_btn_print_color=0x7f050008;
         public static int main_btn_print_pages=0x7f050007;
@@ -144,37 +151,76 @@ public final class R {
         /**  Other setting dialog 
          */
         public static int other_settings_dlg_title=0x7f05000c;
+        /**  PageSource setting 
+         */
+        public static int page_source_auto=0x7f050024;
+        public static int page_source_large_capacity=0x7f050025;
+        public static int page_source_manual=0x7f050026;
+        public static int page_source_tray1=0x7f050027;
+        public static int page_source_tray2=0x7f050028;
+        public static int page_source_tray3=0x7f050029;
+        public static int page_source_tray4=0x7f05002a;
+        public static int page_source_tray5=0x7f05002b;
+        public static int page_source_tray6=0x7f05002c;
+        public static int page_source_tray7=0x7f05002d;
+        public static int page_source_tray8=0x7f05002e;
+        public static int page_source_tray9=0x7f05002f;
+        public static int paper_side_booklet_left=0x7f050035;
+        public static int paper_side_booklet_right=0x7f050036;
+        public static int paper_side_magazine_left=0x7f050033;
+        public static int paper_side_magazine_right=0x7f050034;
+        /**  PageSide setting 
+         */
+        public static int paper_side_one_sided=0x7f050030;
+        public static int paper_side_top_to_bottom=0x7f050032;
+        public static int paper_side_top_to_top=0x7f050031;
         /**  Print color setting dialog 
          */
         public static int print_color_dlg_title=0x7f05000f;
         /**  Copies setting dialog 
          */
         public static int print_count_dlg_title=0x7f05000e;
+        public static int print_paper_side_dlg_title=0x7f050011;
+        public static int print_print_resolution_dlg_title=0x7f050012;
+        public static int print_source_dlg_title=0x7f050010;
         /**  Printer state 
          */
-        public static int printer_status_idle=0x7f050027;
-        public static int printer_status_maintenance=0x7f050028;
-        public static int printer_status_processing=0x7f050029;
-        public static int printer_status_stopped=0x7f05002a;
-        public static int printer_status_unknown=0x7f05002b;
+        public static int printer_status_idle=0x7f05004d;
+        public static int printer_status_maintenance=0x7f05004e;
+        public static int printer_status_processing=0x7f05004f;
+        public static int printer_status_stopped=0x7f050050;
+        public static int printer_status_unknown=0x7f050051;
+        /**  PrintResolution setting 
+         */
+        public static int resolution_1200_1200_1=0x7f050037;
+        public static int resolution_1200_1200_2=0x7f050038;
+        public static int resolution_1200_600_1=0x7f050039;
+        public static int resolution_200_200_1=0x7f05003a;
+        public static int resolution_300_300_1=0x7f05003b;
+        public static int resolution_400_400_1=0x7f05003c;
+        public static int resolution_600_1200_1=0x7f05003d;
+        public static int resolution_600_600_1=0x7f05003e;
+        public static int resolution_600_600_2=0x7f05003f;
+        public static int resolution_600_600_4=0x7f050040;
+        public static int resolution_600_600_8=0x7f050041;
         /**  Print file setting dialog 
          */
         public static int select_file_dlg_title=0x7f05000b;
-        public static int staple_bottom_left=0x7f050018;
-        public static int staple_bottom_left_slant=0x7f050019;
+        public static int staple_bottom_left=0x7f05001b;
+        public static int staple_bottom_left_slant=0x7f05001c;
         /**  Staple setting dialog
          */
         public static int staple_dlg_title=0x7f05000d;
         /**  Staple setting 
          */
-        public static int staple_dual_left=0x7f050010;
-        public static int staple_dual_right=0x7f050011;
-        public static int staple_dual_top=0x7f050012;
-        public static int staple_none=0x7f05001a;
-        public static int staple_saddle_stitch=0x7f050013;
-        public static int staple_top_left=0x7f050014;
-        public static int staple_top_left_slant=0x7f050015;
-        public static int staple_top_right=0x7f050016;
-        public static int staple_top_right_slant=0x7f050017;
+        public static int staple_dual_left=0x7f050013;
+        public static int staple_dual_right=0x7f050014;
+        public static int staple_dual_top=0x7f050015;
+        public static int staple_none=0x7f05001d;
+        public static int staple_saddle_stitch=0x7f050016;
+        public static int staple_top_left=0x7f050017;
+        public static int staple_top_left_slant=0x7f050018;
+        public static int staple_top_right=0x7f050019;
+        public static int staple_top_right_slant=0x7f05001a;
     }
 }

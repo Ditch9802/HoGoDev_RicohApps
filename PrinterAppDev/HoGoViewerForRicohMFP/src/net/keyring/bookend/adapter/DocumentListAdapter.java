@@ -46,7 +46,7 @@ public class DocumentListAdapter extends SimpleAdapter{
 	/** MainListActionクラス */
 	private MainListAction mAction;
 	
-//	private List<Integer> listSelectedPosition;
+	private List<Integer> listSelectedPosition;
 	private int positionSelected = -1;
 	
 	private static final String TAG = DocumentListAdapter.class.getSimpleName();
@@ -73,12 +73,12 @@ public class DocumentListAdapter extends SimpleAdapter{
 		this.mInflater = (LayoutInflater) context
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		mCon = context;
-//		listSelectedPosition = new ArrayList<Integer>();
+		listSelectedPosition = new ArrayList<Integer>();
 	}
 	
-//	public List<Integer> getListSelectedPosition(){
-//		return listSelectedPosition;
-//	}
+	public List<Integer> getListSelectedPosition(){
+		return listSelectedPosition;
+	}
 	
 	public void setPositionSelected(int position){
 		positionSelected = position;
@@ -173,13 +173,13 @@ public class DocumentListAdapter extends SimpleAdapter{
 			holder.thumbnail.setVisibility(View.VISIBLE);			
 		}
 		
-		if(positionSelected == position){
-//			holder.cbSelect.setChecked(true);
-			holder.llItemBook.setBackgroundColor(R.color.item_checked);
-		}else{
-//			holder.cbSelect.setChecked(false);
-			holder.llItemBook.setBackgroundResource(R.color.white);
-		}
+//		if(positionSelected == position){
+////			holder.cbSelect.setChecked(true);
+//			holder.llItemBook.setBackgroundColor(R.color.item_checked);
+//		}else{
+////			holder.cbSelect.setChecked(false);
+//			holder.llItemBook.setBackgroundResource(R.color.white);
+//		}
 		holder.cbSelect.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {			
 			
 			@SuppressLint("ResourceAsColor") @Override
@@ -187,19 +187,19 @@ public class DocumentListAdapter extends SimpleAdapter{
 //				View row = (View) buttonView.getParent();
 				if(isChecked && positionSelected != position){
 					Log.i(TAG, "Postion: " + position);
-//					listSelectedPosition.add(position);
-					setPositionSelected(position);
+					listSelectedPosition.add(position);
+//					setPositionSelected(position);
 //					holder.cbSelect.setChecked(true);
-//					holder.llItemBook.setBackgroundColor(R.color.item_checked);
+					holder.llItemBook.setBackgroundColor(R.color.item_checked);
 					
 				}
 				else{
-//					if(listSelectedPosition.contains(position)){
-//						listSelectedPosition.remove((Integer)position);
-//					}
-					setPositionSelected(-1);
+					if(listSelectedPosition.contains(position)){
+						listSelectedPosition.remove((Integer)position);
+					}
+//					setPositionSelected(-1);
 //					holder.cbSelect.setChecked(false);
-//					holder.llItemBook.setBackgroundResource(R.color.white);
+					holder.llItemBook.setBackgroundResource(R.color.white);
 				}
 			}
 		});
