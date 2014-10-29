@@ -1,6 +1,6 @@
 /*
  * This file is auto-generated.  DO NOT MODIFY.
- * Original file: E:\\VuDungThien\\latest-ricoh\\HoGoViewerForRicohMFP\\src\\net\\keyring\\bookend\\callback\\WebBookShelfDlCallback.aidl
+ * Original file: C:\\Users\\ThienDV\\git\\HoGoDev_RicohApps\\PrinterAppDev\\HoGoViewerForRicohMFP\\src\\net\\keyring\\bookend\\callback\\WebBookShelfDlCallback.aidl
  */
 package net.keyring.bookend.callback;
 /**
