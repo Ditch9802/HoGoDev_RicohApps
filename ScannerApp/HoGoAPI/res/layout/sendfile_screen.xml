@@ -101,7 +101,7 @@
                         android:layout_toLeftOf="@+id/btn_address_book"
                         android:background="@android:drawable/editbox_background"
                         android:ellipsize="start"
-                        android:hint="Input email to send"
+                        android:hint="Input E-mail to send"
                         android:inputType="textEmailAddress"
                         />
 
@@ -189,7 +189,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Number of Local of prints allowed"
+                        android:text="Number of prints allowed"
                         android:textStyle="bold" />
 
                     <Spinner

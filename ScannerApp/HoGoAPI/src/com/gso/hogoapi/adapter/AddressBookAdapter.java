@@ -64,6 +64,7 @@ public class AddressBookAdapter extends BaseAdapter {
 			holder.tvFirstname = (TextView) convertView.findViewById(R.id.tvFirstName);
 			holder.tvLastName = (TextView) convertView.findViewById(R.id.tvLastName);
 			holder.tvCompany = (TextView) convertView.findViewById(R.id.tvCompany);
+			holder.tvEmail = (TextView) convertView.findViewById(R.id.tvEmail);
 			holder.cbxTag = (CheckBox) convertView.findViewById(R.id.cbxTag);
 			holder.cbxTag.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 
@@ -82,9 +83,10 @@ public class AddressBookAdapter extends BaseAdapter {
 
 		holder.email = item.getEmail();
 		holder.cbxTag.setChecked(item.isSelected());
-		holder.tvFirstname.setText(item.getMiddleName()+" "+item.getFirstName());
+		holder.tvFirstname.setText(item.getFirstName());//item.getMiddleName()+" "+
 		holder.tvLastName.setText(item.getLastName());
 		holder.tvCompany.setText(item.getCompany());
+		holder.tvEmail.setText(item.getEmail());
 		
 		holder.cbxTag.setTag(item);
 		convertView.setTag(holder);
@@ -94,7 +96,7 @@ public class AddressBookAdapter extends BaseAdapter {
 	}
 
 	public class Holder {
-		private TextView tvFirstname, tvLastName, tvCompany;
+		private TextView tvFirstname, tvLastName, tvCompany, tvEmail;
 		private CheckBox cbxTag;
 		private String email;
 	}

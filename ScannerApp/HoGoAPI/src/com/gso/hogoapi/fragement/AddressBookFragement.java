@@ -51,7 +51,12 @@ public class AddressBookFragement extends DialogFragment implements IServiceList
 	private Button btnDone;
 	private AddressBookAdapter adapter;
 	private EditText etSearch;
+	private String mMailTo;
 
+	public AddressBookFragement(String mailTo) {
+		// TODO Auto-generated constructor stub
+		mMailTo = mailTo;
+	}
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -218,6 +223,7 @@ public class AddressBookFragement extends DialogFragment implements IServiceList
 
 			if (resData.getStatus().equalsIgnoreCase("OK")) {
 				List<AddressBookItem> addressBookList = (List<AddressBookItem>) resData.getData();
+				addressBookList = filterList(addressBookList);
 				bindAddressBookData(addressBookList);
 			} else if (resData.getStatus().equalsIgnoreCase("SessionIdNotFound")) {
 				HoGoApplication.instace().setToken(getActivity(), null);
@@ -239,5 +245,16 @@ public class AddressBookFragement extends DialogFragment implements IServiceList
 		}
 //		setProgressBarShowing(false);
 		((MainActivity) getActivity()).setProgressVisibility(false);
+	}
+	private List<AddressBookItem> filterList(
+			List<AddressBookItem> addressBookList) {
+		List<AddressBookItem> result = new ArrayList<AddressBookItem>();
+		// TODO Auto-generated method stub
+		for(AddressBookItem item: addressBookList){
+			if(!mMailTo.contains(item.getEmail())){
+				result.add(item);
+			}
+		}
+		return result;
 	}
 }

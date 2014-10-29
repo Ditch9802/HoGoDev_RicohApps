@@ -1,0 +1,83 @@
+10
+
+dir
+9251
+svn+ssh://svn.keyring.net/svnrepo/krclientsvn/trunk/android/RicohMFP/Bookend-RicohMFP/custom/ana
+svn+ssh://svn.keyring.net/svnrepo/krclientsvn
+
+
+
+2013-02-26T09:09:07.095290Z
+7945
+shindo
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+a623d986-c1b0-4020-b52c-ef547ea9265e
+
+build.properties
+file
+
+
+
+
+2014-07-31T08:34:45.415000Z
+27539586d275faca81cc665af6ddb758
+2012-08-01T07:28:43.716625Z
+7317
+shindo
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+134
+
+drawable
+dir
+
+drawable-hdpi
+dir
+
+drawable-ldpi
+dir
+
+drawable-mdpi
+dir
+
+drawable-nodpi
+dir
+
+values
+dir
+
+values-ja
+dir
+

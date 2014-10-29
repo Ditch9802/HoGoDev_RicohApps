@@ -1,0 +1,120 @@
+10
+
+dir
+9251
+svn+ssh://svn.keyring.net/svnrepo/krclientsvn/trunk/android/RicohMFP/Bookend-RicohMFP/custom/comilisu
+svn+ssh://svn.keyring.net/svnrepo/krclientsvn
+
+
+
+2014-03-25T08:54:00.566563Z
+8845
+shindo
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+a623d986-c1b0-4020-b52c-ef547ea9265e
+
+build.properties
+file
+
+
+
+
+2014-07-31T08:34:43.884000Z
+1f031d45c9c7b2d1b04b4808cc2ae748
+2014-03-25T08:30:50.497850Z
+8844
+shindo
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+270
+
+comilisu.keystore
+file
+
+
+
+
+2014-07-31T08:34:43.844000Z
+4f0b83d7ae19fc5bd118ef9f47dcad97
+2014-03-25T08:30:50.497850Z
+8844
+shindo
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+2255
+
+drawable
+dir
+
+drawable-hdpi
+dir
+
+drawable-ldpi
+dir
+
+drawable-mdpi
+dir
+
+drawable-nodpi
+dir
+
+drawable-xhdpi
+dir
+
+values
+dir
+
+values-ja
+dir
+
