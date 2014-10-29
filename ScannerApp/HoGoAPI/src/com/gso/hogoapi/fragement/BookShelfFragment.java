@@ -72,9 +72,9 @@ public class BookShelfFragment extends Fragment implements IServiceListener {
 	@Override
 	public void onResume() {
 		super.onResume();
-		if (mActivity != null) {
-			mActivity.enterBookShelfScreen();
-		}
+//		if (mActivity != null) {
+//			mActivity.enterBookShelfScreen();
+//		}
 	}
 	
     @Override
@@ -119,9 +119,9 @@ public class BookShelfFragment extends Fragment implements IServiceListener {
     public void onStop() {
     	super.onStop();
     	if (mActivity != null) {
-    		mActivity.exitBookShelfScreen();
-//    		BookShelfAdapter.mItems = null;
-    		((MainActivity)getActivity()).changeToAdd();
+//    		mActivity.exitBookShelfScreen();
+////    		BookShelfAdapter.mItems = null;
+//    		((MainActivity)getActivity()).changeToAdd();
     	}
     }
     
