@@ -449,15 +449,12 @@ public class WebBookShelfActivity extends BookendActivity implements ConstList,
 	 */
 	private boolean webBookShelf_menu(MenuItem item) {
 		boolean ret = true;
-		switch (item.getItemId()) {
-		default:
-			ret = super.onOptionsItemSelected(item);
-			break;
-		case R.id.menu_sort: // コンテンツリストソート方法選択
+		int id = item.getItemId();
+
+		if (id == R.id.menu_sort) { // コンテンツリストソート方法選択
 			setSortCheck();
 			ret = true;
-			break;
-		case R.id.descend_date: // ダウンロード日時降順
+		} else if (id == R.id.descend_date) { // ダウンロード日時降順
 			if (item.isChecked())
 				item.setChecked(false);
 			else
@@ -465,8 +462,7 @@ public class WebBookShelfActivity extends BookendActivity implements ConstList,
 			// ソート方法登録,リスト更新
 			Preferences.sSort_web = ConstDB.DESCEND_DATE;
 			setList();
-			break;
-		case R.id.ascend_date: // ダウンロード日時昇順
+		} else if (id == R.id.ascend_date) { // ダウンロード日時昇順
 			if (item.isChecked())
 				item.setChecked(false);
 			else
@@ -474,8 +470,7 @@ public class WebBookShelfActivity extends BookendActivity implements ConstList,
 			// ソート方法登録,リスト更新
 			Preferences.sSort_web = ConstDB.ASCEND_DATE;
 			setList();
-			break;
-		case R.id.descend_title: // タイトル降順
+		} else if (id == R.id.descend_title) { // タイトル降順
 			if (item.isChecked())
 				item.setChecked(false);
 			else
@@ -483,8 +478,7 @@ public class WebBookShelfActivity extends BookendActivity implements ConstList,
 			// ソート方法登録,リスト更新
 			Preferences.sSort_web = ConstDB.DESCEND_NAME;
 			setList();
-			break;
-		case R.id.ascend_title: // タイトル昇順
+		} else if (id == R.id.ascend_title) { // タイトル昇順
 			if (item.isChecked())
 				item.setChecked(false);
 			else
@@ -492,12 +486,10 @@ public class WebBookShelfActivity extends BookendActivity implements ConstList,
 			// ソート方法登録,リスト更新
 			Preferences.sSort_web = ConstDB.ASCEND_NAME;
 			setList();
-			break;
-		case R.id.menu_filter: // ●フィルタ設定
+		} else if (id == R.id.menu_filter) { // ●フィルタ設定
 			setFilterCheck();
 			ret = true;
-			break;
-		case R.id.filter_yet: // ・未ダウンロードコンテンツ一覧
+		} else if (id == R.id.filter_yet) { // ・未ダウンロードコンテンツ一覧
 			Preferences.sListFilter = VIEW_DELETE_CONTENTS;
 			if (item.isChecked())
 				item.setChecked(false);
@@ -505,8 +497,7 @@ public class WebBookShelfActivity extends BookendActivity implements ConstList,
 				item.setChecked(true);
 			setList();
 			ret = true;
-			break;
-		case R.id.filter_all: // ・Allコンテンツ一覧
+		} else if (id == R.id.filter_all) { // ・Allコンテンツ一覧
 			Preferences.sListFilter = VIEW_ALL_CONTENTS;
 			if (item.isChecked())
 				item.setChecked(false);
@@ -514,7 +505,8 @@ public class WebBookShelfActivity extends BookendActivity implements ConstList,
 				item.setChecked(true);
 			setList();
 			ret = true;
-			break;
+		} else {
+			ret = super.onOptionsItemSelected(item);
 		}
 		return ret;
 	}

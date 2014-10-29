@@ -690,15 +690,12 @@ public class MainActivity extends BookendActivity implements Const, ConstList, C
 	private boolean main_menu(MenuItem item) {
 		boolean ret = true;
 
-		switch (item.getItemId()) {
-		default:
-			ret = super.onOptionsItemSelected(item);
-			break;
-		case R.id.menu_sort: // コンテンツリストソート方法選択
+		int id = item.getItemId();
+
+		if (id == R.id.menu_sort) { // コンテンツリストソート方法選択
 			setSortCheck();
 			ret = true;
-			break;
-		case R.id.descend_date: // ダウンロード日時降順
+		} else if (id == R.id.descend_date) { // ダウンロード日時降順
 			if (item.isChecked())
 				item.setChecked(false);
 			else
@@ -706,8 +703,7 @@ public class MainActivity extends BookendActivity implements Const, ConstList, C
 			// ソート方法登録,リスト更新
 			mPref.setSort(ConstDB.DESCEND_DATE);
 			listView(ConstDB.DESCEND_DATE);
-			break;
-		case R.id.ascend_date: // ダウンロード日時昇順
+		} else if (id == R.id.ascend_date) { // ダウンロード日時昇順
 			if (item.isChecked())
 				item.setChecked(false);
 			else
@@ -715,8 +711,7 @@ public class MainActivity extends BookendActivity implements Const, ConstList, C
 			// ソート方法登録,リスト更新
 			mPref.setSort(ConstDB.ASCEND_DATE);
 			listView(ConstDB.ASCEND_DATE);
-			break;
-		case R.id.descend_title: // タイトル降順
+		} else if (id == R.id.descend_title) { // タイトル降順
 			if (item.isChecked())
 				item.setChecked(false);
 			else
@@ -724,8 +719,7 @@ public class MainActivity extends BookendActivity implements Const, ConstList, C
 			// ソート方法登録,リスト更新
 			mPref.setSort(ConstDB.DESCEND_NAME);
 			listView(ConstDB.DESCEND_NAME);
-			break;
-		case R.id.ascend_title: // タイトル昇順
+		} else if (id == R.id.ascend_title) { // タイトル昇順
 			if (item.isChecked())
 				item.setChecked(false);
 			else
@@ -733,7 +727,8 @@ public class MainActivity extends BookendActivity implements Const, ConstList, C
 			// ソート方法登録,リスト更新
 			mPref.setSort(ConstDB.ASCEND_NAME);
 			listView(ConstDB.ASCEND_NAME);
-			break;
+		} else {
+			ret = super.onOptionsItemSelected(item);
 		}
 		return ret;
 	}
