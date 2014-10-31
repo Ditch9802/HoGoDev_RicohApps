@@ -31,6 +31,8 @@
     <!-- Print color setting dialog -->
     <string name="print_color_dlg_title">Print Color</string>
     <string name="print_source_dlg_title">Page Source</string>
+    <string name="print_paper_side_dlg_title">Layout Option</string>
+    <string name="print_print_resolution_dlg_title">Quality</string>
 
     <!-- Staple setting -->
     <string name="staple_dual_left">dual left</string>

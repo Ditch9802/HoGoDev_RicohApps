@@ -1,6 +1,10 @@
 /*
  * This file is auto-generated.  DO NOT MODIFY.
+<<<<<<< HEAD
  * Original file: C:\\Users\\ThienDV\\git\\HoGoDev_RicohApps\\PrinterAppDev\\HoGoViewerForRicohMFP\\src\\com\\android\\vending\\billing\\IMarketBillingService.aidl
+=======
+ * Original file: D:\\THIENRUNNING\\HoGoDev_RicohApps\\PrinterAppDev\\HoGoViewerForRicohMFP\\src\\com\\android\\vending\\billing\\IMarketBillingService.aidl
+>>>>>>> c4ed62a7b764954b9b006de5f6c95940f3733cf5
  */
 package com.android.vending.billing;
 public interface IMarketBillingService extends android.os.IInterface

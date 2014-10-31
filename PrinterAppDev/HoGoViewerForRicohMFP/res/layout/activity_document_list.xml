@@ -79,13 +79,13 @@
 	        android:id="@+id/imgRefresh"
 	        android:layout_width="40dp"
 	        android:layout_height="40dp"
-	        android:src="@drawable/ic_refresh"
+	        android:src="@drawable/btn_sync_nor_sel"
 	        android:scaleType="fitXY"/>
 	    <ImageView 
 	        android:id="@+id/imgPrint"
 	        android:layout_width="40dp"
 	        android:layout_height="40dp"
-	        android:src="@drawable/ic_print"
+	        android:src="@drawable/btn_print_nor_sel"
 	        android:layout_marginLeft="60dp"
 	        android:layout_marginRight="60dp"
 	        android:scaleType="fitXY"/>
@@ -93,14 +93,14 @@
 	        android:id="@+id/imgDelete"
 	        android:layout_width="40dp"
 	        android:layout_height="40dp"
-	        android:src="@drawable/ic_delete"
+	        android:src="@drawable/btn_delete_nor_sel"
 	        android:layout_marginRight="60dp"
 	        android:scaleType="fitXY"/>
 	    <ImageView 
 	        android:id="@+id/imgLogout"
 	        android:layout_width="40dp"
 	        android:layout_height="40dp"
-	        android:src="@drawable/ic_logout"
+	        android:src="@drawable/btn_exit_nor_sel"
 	        android:scaleType="fitXY"/>
 	</LinearLayout>
 </LinearLayout>

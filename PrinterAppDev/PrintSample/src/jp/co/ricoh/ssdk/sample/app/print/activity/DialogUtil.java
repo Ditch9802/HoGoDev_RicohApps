@@ -32,7 +32,9 @@ import jp.co.ricoh.ssdk.sample.function.print.PrintFile;
 import jp.co.ricoh.ssdk.sample.function.print.PrintFile.PDL;
 import jp.co.ricoh.ssdk.sample.function.print.attribute.standard.Copies;
 import jp.co.ricoh.ssdk.sample.function.print.attribute.standard.PageTray;
+import jp.co.ricoh.ssdk.sample.function.print.attribute.standard.PaperSide;
 import jp.co.ricoh.ssdk.sample.function.print.attribute.standard.PrintColor;
+import jp.co.ricoh.ssdk.sample.function.print.attribute.standard.PrintResolution;
 import jp.co.ricoh.ssdk.sample.function.print.attribute.standard.Staple;
 
 import java.util.List;
@@ -236,6 +238,56 @@ public class DialogUtil {
                 String selectedPageSource = items[which];
                 ((MainActivity) context).getSettingHolder()
                         .setSelectedPageTrayValue(PageTrayUtil.getPageTrayFromResourceString(context,selectedPageSource));
+
+            }
+        });
+        return dialog.create();
+    }
+    
+    public static AlertDialog createPaperSideDialog(final Context context, List<PaperSide> paperSide){
+        final String[] items = new String[paperSide.size()];
+        int i = 0;
+        for(PaperSide source : paperSide) {
+            items[i] = PaperSideUtil.getPaperSideResourceString(context, source);
+            i++;
+        }
+
+        AlertDialog.Builder dialog = new AlertDialog.Builder(context);
+        dialog.setTitle(context.getString(R.string.print_paper_side_dlg_title));
+        dialog.setNegativeButton(context.getString(R.string.btn_cancel), null);
+        dialog.setItems(items, new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                String selectedPaperSide = items[which];
+                ((MainActivity) context).getSettingHolder()
+                        .setSelectedPaperSideValue(PaperSideUtil.getPaperSideFromResourceString(context,selectedPaperSide));
+
+            }
+        });
+        return dialog.create();
+    }
+    
+    public static AlertDialog createPrintResolutionDialog(final Context context, List<PrintResolution> printResolution){
+        final String[] items = new String[printResolution.size()];
+        int i = 0;
+        for(PrintResolution source : printResolution) {
+            items[i] = PrintResolutionUtil.getPrintResolutionResourceString(context, source);
+            i++;
+        }
+
+        AlertDialog.Builder dialog = new AlertDialog.Builder(context);
+        dialog.setTitle(context.getString(R.string.print_print_resolution_dlg_title));
+        dialog.setNegativeButton(context.getString(R.string.btn_cancel), null);
+        dialog.setItems(items, new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                String selectedPrintResolution = items[which];
+                ((MainActivity) context).getSettingHolder()
+                        .setSelectedPrintResolutionValue(PrintResolutionUtil.getPrintResolutionFromResourceString(context,selectedPrintResolution));
 
             }
         });

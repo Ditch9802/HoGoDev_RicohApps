@@ -451,12 +451,16 @@ public class MainActivity extends Activity{
                 // TODO Auto-generated method stub
                 String color = mColor.getText().toString();
                 String pageTray = mPaperSource.getText().toString();
+                String paperSide = mLayoutOption.getText().toString();
+                String printResolution = mQuanlity.getText().toString();
                 String copies = mHolder.getSelectedCopiesValue().getValue().toString();
                 
                 Log.e(TAG, "Number copy text: " + copies);
                 PreferenceUtils.setString(MainActivity.this, PreferenceUtils.PRINT_COLOR, color);
                 PreferenceUtils.setString(MainActivity.this, PreferenceUtils.PRINT_NUMBER_COPIES, copies);
                 PreferenceUtils.setString(MainActivity.this, PreferenceUtils.PAPER_SOURCE, pageTray);
+                PreferenceUtils.setString(MainActivity.this, PreferenceUtils.PAPER_SIDE, paperSide);
+                PreferenceUtils.setString(MainActivity.this, PreferenceUtils.PRINT_RESOLUTION, printResolution);
             }
         });
         
@@ -487,6 +491,25 @@ public class MainActivity extends Activity{
                     mHolder.setSelectedPageTrayValue(pageTrayList.get(0));
                     mColor.setText(PageTrayUtil.getPageTrayResourceString(MainActivity.this,
                     mHolder.getSelectedPageTrayValue()));
+                    
+                }
+                
+                List<PaperSide> paperSideList = PaperSideUtil.getSelectablePaperSideList(MainActivity.this);
+
+                if (paperSideList != null) {
+                    mHolder.setSelectedPaperSideValue(paperSideList.get(0));
+                    mLayoutOption.setText(PaperSideUtil.getPaperSideResourceString(MainActivity.this,
+                    mHolder.getSelectedPaperSideValue()));
+                    
+                }
+                
+                List<PrintResolution> printResolutionList = PrintResolutionUtil.getSelectablePrintResolutionList(MainActivity.this);
+
+                if (printResolutionList != null) {
+                    mHolder.setSelectedPrintResolutionValue(printResolutionList.get(0));
+                    mColor.setText(PrintResolutionUtil.getPrintResolutionResourceString(MainActivity.this,
+                    mHolder.getSelectedPrintResolutionValue()));
+                    
                 }
             }
         });
@@ -522,8 +545,56 @@ public class MainActivity extends Activity{
             }
         });
 //        mPaperSize.setOnClickListener(this);
-//        mQuanlity.setOnClickListener(this);
-//        mLayoutOption.setOnClickListener(this);
+        mQuanlity.setOnClickListener(new OnClickListener() {
+            
+            @Override
+            public void onClick(View arg0) {
+                // TODO Auto-generated method stub
+                PDL selectedPDL = getSettingHolder().getSelectedPDL();
+                Map<PDL,PrintSettingSupportedHolder> map =
+                        ((PrintSampleApplication)getApplication()).getSettingSupportedDataHolders();
+                PrintSettingSupportedHolder holder = map.get(selectedPDL);
+
+                //(2)
+                AlertDialog dlg = DialogUtil.createPrintResolutionDialog(MainActivity.this, holder.getSelectablePrintResolutionList());
+
+                dlg.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                    @Override
+                    public void onDismiss(DialogInterface dialogInterface) {
+                        if(null != mHolder.getSelectedPrintResolutionValue()) {
+                            String printResolution = PrintResolutionUtil.getPrintResolutionResourceString(MainActivity.this,mHolder.getSelectedPrintResolutionValue());
+                            mQuanlity.setText(printResolution);
+                        }
+                    }
+                });
+                DialogUtil.showDialog(dlg, DialogUtil.DEFAULT_DIALOG_WIDTH);
+            }
+        });
+        mLayoutOption.setOnClickListener(new OnClickListener() {
+            
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                PDL selectedPDL = getSettingHolder().getSelectedPDL();
+                Map<PDL,PrintSettingSupportedHolder> map =
+                        ((PrintSampleApplication)getApplication()).getSettingSupportedDataHolders();
+                PrintSettingSupportedHolder holder = map.get(selectedPDL);
+
+                //(2)
+                AlertDialog dlg = DialogUtil.createPaperSideDialog(MainActivity.this, holder.getSelectablePaperSideList());
+
+                dlg.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                    @Override
+                    public void onDismiss(DialogInterface dialogInterface) {
+                        if(null != mHolder.getSelectedPaperSideValue()) {
+                            String paperSide = PaperSideUtil.getPaperSideResourceString(MainActivity.this,mHolder.getSelectedPaperSideValue());
+                            mLayoutOption.setText(paperSide);
+                        }
+                    }
+                });
+                DialogUtil.showDialog(dlg, DialogUtil.DEFAULT_DIALOG_WIDTH);
+            }
+        });
 //        mFinishingOption.setOnClickListener(this);
         mColor.setOnClickListener(new OnClickListener() {
             
@@ -811,7 +882,7 @@ public class MainActivity extends Activity{
                    
                }
            }else{
-               mHolder.setSelectedPrintColorValue(null);
+               mHolder.setSelectedPrintResolutionValue(null);
            }
         }
         return true;

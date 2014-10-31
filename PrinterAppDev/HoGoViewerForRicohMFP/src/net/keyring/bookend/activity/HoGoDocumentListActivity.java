@@ -235,49 +235,22 @@ public class HoGoDocumentListActivity extends BookendActivity implements RegistC
 			
 			@Override
 			public void onClick(View v) {
-//				List<Integer> listSelectedPosition = mAdapter.getListSelectedPosition();
-//				if(listSelectedPosition.size() <= 0){
-//					Toast.makeText(HoGoDocumentListActivity.this, "Please select book which you want to delete", Toast.LENGTH_SHORT).show();
-//				}else{
-//					AlertDialog.Builder dialog = mMainListAction.setClickButtonDelete(HoGoDocumentListActivity.this, mData, mAdapter, listSelectedPosition);
-//					if(dialog == null){
-//						Toast.makeText(getApplicationContext(), "Contents Detail ... None.", Toast.LENGTH_SHORT).show();
-//					}else{
-//						dialog.setPositiveButton(
-//								getString(R.string.delete),
-//								new OnClickListener() {
-//									// 削除ボタン
-//									@Override
-//									public void onClick(DialogInterface dialog, int which) {
-//										
-//										if (!mMainListAction.deleteListBook(getApplicationContext())) {
-//											Toast.makeText(HoGoDocumentListActivity.this, "Delete : fail", Toast.LENGTH_SHORT).show();
-//										}
-//										// list更新
-//										listView(Preferences.sSort_main);
-//									}
-//								});
-//						// 閉じるボタン
-//						dialog.setNegativeButton(getString(R.string.close), null);
-//						dialog.show();
-//					}
-//				}
-				
-				//
-				int positionSelected = mAdapter.getPositionSelected();
-				if(positionSelected != -1){
-					AlertDialog.Builder dialog = mMainListAction
-							.setListLongClickDialog(HoGoDocumentListActivity.this, mData, mAdapter, positionSelected);
-					if (dialog == null) {
+				List<Integer> listSelectedPosition = mAdapter.getListSelectedPosition();
+				if(listSelectedPosition.size() <= 0){
+					Toast.makeText(HoGoDocumentListActivity.this, "Please select book which you want to delete", Toast.LENGTH_SHORT).show();
+				}else{
+					AlertDialog.Builder dialog = mMainListAction.setClickButtonDelete(HoGoDocumentListActivity.this, mData, mAdapter, listSelectedPosition);
+					if(dialog == null){
 						Toast.makeText(getApplicationContext(), "Contents Detail ... None.", Toast.LENGTH_SHORT).show();
-					} else {
+					}else{
 						dialog.setPositiveButton(
 								getString(R.string.delete),
 								new OnClickListener() {
 									// 削除ボタン
 									@Override
 									public void onClick(DialogInterface dialog, int which) {
-										if (!mMainListAction.delete(getApplicationContext())) {
+										
+										if (!mMainListAction.deleteListBook(getApplicationContext())) {
 											Toast.makeText(HoGoDocumentListActivity.this, "Delete : fail", Toast.LENGTH_SHORT).show();
 										}
 										// list更新
@@ -288,9 +261,36 @@ public class HoGoDocumentListActivity extends BookendActivity implements RegistC
 						dialog.setNegativeButton(getString(R.string.close), null);
 						dialog.show();
 					}
-				}else{
-					Toast.makeText(HoGoDocumentListActivity.this, "Choose book to delete", Toast.LENGTH_SHORT).show();
 				}
+				
+				//
+//				int positionSelected = mAdapter.getPositionSelected();
+//				if(positionSelected != -1){
+//					AlertDialog.Builder dialog = mMainListAction
+//							.setListLongClickDialog(HoGoDocumentListActivity.this, mData, mAdapter, positionSelected);
+//					if (dialog == null) {
+//						Toast.makeText(getApplicationContext(), "Contents Detail ... None.", Toast.LENGTH_SHORT).show();
+//					} else {
+//						dialog.setPositiveButton(
+//								getString(R.string.delete),
+//								new OnClickListener() {
+//									// 削除ボタン
+//									@Override
+//									public void onClick(DialogInterface dialog, int which) {
+//										if (!mMainListAction.delete(getApplicationContext())) {
+//											Toast.makeText(HoGoDocumentListActivity.this, "Delete : fail", Toast.LENGTH_SHORT).show();
+//										}
+//										// list更新
+//										listView(Preferences.sSort_main);
+//									}
+//								});
+//						// 閉じるボタン
+//						dialog.setNegativeButton(getString(R.string.close), null);
+//						dialog.show();
+//					}
+//				}else{
+//					Toast.makeText(HoGoDocumentListActivity.this, "Choose book to delete", Toast.LENGTH_SHORT).show();
+//				}
 				
 			}
 		});
@@ -301,10 +301,17 @@ public class HoGoDocumentListActivity extends BookendActivity implements RegistC
 			public void onClick(View v) {
 //				Intent i = new Intent(HoGoDocumentListActivity.this, HoGoPrintSettingActivity.class);
 //				startActivity(i);
-				int positionSelected = mAdapter.getPositionSelected();
-				int book_status = mMainListAction.listClickAction(
-						getApplicationContext(), mMainList, mData, mAdapter, positionSelected);
-				viewCheck(book_status, mMainListAction.getBook());
+				List<Integer> listSelectedPosition = mAdapter.getListSelectedPosition();
+				if(listSelectedPosition.size() <= 0){
+					Toast.makeText(HoGoDocumentListActivity.this, "Please select book which you want to print", Toast.LENGTH_SHORT).show();
+				}else{
+//					int positionSelected = mAdapter.getPositionSelected();
+					int positionSelected = listSelectedPosition.get(0);
+					int book_status = mMainListAction.listClickAction(
+							getApplicationContext(), mMainList, mData, mAdapter, positionSelected);
+					viewCheck(book_status, mMainListAction.getBook());
+				}
+				
 			}
 		});
 	}
