@@ -12,8 +12,13 @@ public class SharedPreferencesManager {
 	private SharedPreferences _sharedPreferences;
 
 	public static final String SESSION_DATA = "SESSION_DATA";
+	public static final String SCAN_DATA = "SCAN_DATA";
 	public static final String SESSION = "SESSION";
-
+	public static final String PAGE_SIZE ="PAGE_SIZE";
+	public static final String COLOR ="COLOR";
+	public static final String QUALITY ="QUALITY";
+	public static final String PREVIEW ="PREVIEW";
+	
 	public SharedPreferencesManager(Context context) {
 		_context = context;
 		_sharedPreferences = PreferenceManager
@@ -49,8 +54,19 @@ public class SharedPreferencesManager {
 			return null;
 	}
 
-	
-
+	// --------------------------------------------------
+	public boolean saveValue(String key, String value) {
+		Editor editor = _context.getSharedPreferences(SCAN_DATA,
+				Context.MODE_PRIVATE).edit();
+		editor.putString(key, value);
+		return editor.commit();
+	}
+	public String getValue(String key) {
+		SharedPreferences savedSession = _context.getSharedPreferences(
+				SCAN_DATA, Context.MODE_PRIVATE);
+		return savedSession.getString(key, null);
+		
+	}
 	private boolean isSessionValid(String session) {
 		// TODO Auto-generated method stub
 		return session == null? false : true;

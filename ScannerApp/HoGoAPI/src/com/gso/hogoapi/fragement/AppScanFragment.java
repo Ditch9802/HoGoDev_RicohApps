@@ -69,6 +69,7 @@ import com.gso.hogoapi.model.FileData;
 import com.gso.hogoapi.model.FileUpload;
 import com.gso.hogoapi.model.ResponseData;
 import com.gso.hogoapi.service.DataParser;
+import com.gso.hogoapi.util.SharedPreferencesManager;
 import com.gso.serviceapilib.IServiceListener;
 import com.gso.serviceapilib.Service;
 import com.gso.serviceapilib.ServiceAction;
@@ -192,6 +193,7 @@ public class AppScanFragment extends Fragment implements IServiceListener {
 	private boolean mMultipleRunning = false;
 	private CheckBox chkPreview;
 	OnFinishedScanningListener mFinishedScanningListener;
+	private Button mButtonSaveSetting;
 
 	public interface OnFinishedScanningListener {
 		public void onFinishedScanning(FileUpload result);
@@ -251,6 +253,40 @@ public class AppScanFragment extends Fragment implements IServiceListener {
 				new Handler());
 		mScanSettingDataHolder = mApplication.getScanSettingDataHolder();
 		mDestSettingDataHolder = mApplication.getDestinationSettingDataHolder();
+		
+		SharedPreferencesManager shared = HoGoApplication.instace().getSharedPreferencesManager(mContext);
+		if(shared.getValue(SharedPreferencesManager.PAGE_SIZE) !=null){
+			mScanSettingDataHolder.setSelectedSide(Integer.parseInt(shared.getValue(SharedPreferencesManager.PAGE_SIZE)));
+			String label = getResources().getString(
+					mScanSettingDataHolder
+							.getSelectedSideLabel());
+			mButtonSide.setText(label);
+		}
+			
+		if(shared.getValue(SharedPreferencesManager.COLOR) !=null){
+			mScanSettingDataHolder.setSelectedColor((Integer.parseInt(shared.getValue(SharedPreferencesManager.COLOR))));
+			String label = getResources().getString(
+					mScanSettingDataHolder
+							.getSelectedColorLabel());
+			mButtonColor.setText(label);
+		}
+		if (shared.getValue(SharedPreferencesManager.QUALITY) != null) {
+
+			mScanSettingDataHolder
+					.setSelectedResolution(Integer.parseInt(shared
+							.getValue(SharedPreferencesManager.QUALITY)));
+			String label = getResources().getString(
+					mScanSettingDataHolder.getSelectedResolutionLabel());
+			mButtonFileSetting.setText(label);
+		}
+		if (shared.getValue(SharedPreferencesManager.PREVIEW) != null) {
+
+			mScanSettingDataHolder.setSelectedPreview((Integer.parseInt(shared
+					.getValue(SharedPreferencesManager.PREVIEW))));
+
+			chkPreview.setChecked(mScanSettingDataHolder
+					.getSelectedPreviewLabel() == 1);
+		}
 		mStateMachine = mApplication.getStateMachine();
 		mStateMachine.registActivity(getActivity());
 		text_state = (TextView) view.findViewById(R.id.text_state);
@@ -380,6 +416,22 @@ public class AppScanFragment extends Fragment implements IServiceListener {
 				mStateMachine.procScanEvent(ScanEvent.REQUEST_JOB_START);
 			}
 		});
+		
+		mButtonSaveSetting = (Button)view.findViewById(R.id.btn_save_scan_settings);
+		mButtonSaveSetting.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+	
+				ScanSettingDataHolder scanSetDataHolder = mApplication.getScanSettingDataHolder();
+				SharedPreferencesManager shared = HoGoApplication.instace().getSharedPreferencesManager(mContext);
+				shared.saveValue(SharedPreferencesManager.COLOR, ""+scanSetDataHolder.getSelectedColorValue().getValue());
+				shared.saveValue(SharedPreferencesManager.QUALITY, ""+scanSetDataHolder.getSelectedResolutionValue().getValue());
+				shared.saveValue(SharedPreferencesManager.PAGE_SIZE, ""+scanSetDataHolder.getSelectedSideValue().getValue());
+			}
+		});
+		
 
 		// (9)
 		disableSettingKey();

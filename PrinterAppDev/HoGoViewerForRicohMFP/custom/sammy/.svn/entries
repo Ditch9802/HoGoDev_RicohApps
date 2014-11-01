@@ -1,0 +1,117 @@
+10
+
+dir
+9251
+svn+ssh://svn.keyring.net/svnrepo/krclientsvn/trunk/android/RicohMFP/Bookend-RicohMFP/custom/sammy
+svn+ssh://svn.keyring.net/svnrepo/krclientsvn
+
+
+
+2013-05-28T08:17:50.127428Z
+8203
+shindo
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+a623d986-c1b0-4020-b52c-ef547ea9265e
+
+build.properties
+file
+
+
+
+
+2014-07-31T08:34:44.384000Z
+bd3570e8896bd6659f8f2860393a589b
+2012-09-05T06:21:43.457438Z
+7513
+shindo
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+277
+
+drawable
+dir
+
+drawable-hdpi
+dir
+
+drawable-ldpi
+dir
+
+drawable-mdpi
+dir
+
+drawable-nodpi
+dir
+
+promo777town.keystore
+file
+
+
+
+
+2014-07-31T08:34:44.254000Z
+e267e5d00c9d053bdc6d8ba2a9979750
+2012-09-05T06:21:43.457438Z
+7513
+shindo
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+2270
+
+values
+dir
+
+values-ja
+dir
+

@@ -114,17 +114,7 @@ public class SendFileFragment extends Fragment implements OnClickListener,
 		rLDateExprid.setOnClickListener(this);
 		btnAddressBook.setOnClickListener(this);
 		cbxIsPrint = (CheckBox) v.findViewById(R.id.chx_allow_printing);
-		cbxIsPrint
-				.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 
-					@Override
-					public void onCheckedChanged(CompoundButton buttonView,
-							boolean isChecked) {
-						// TODO Auto-generated method stub
-						isPrint = isChecked;
-
-					}
-				});
 
 		
 		cbxIsSendNotifyEmail = (CheckBox) v.findViewById(R.id.chx_send_notification_email);
@@ -170,7 +160,7 @@ public class SendFileFragment extends Fragment implements OnClickListener,
 		});
 
 		
-		Spinner spinnerPrint = (Spinner) v.findViewById(R.id.sp_print_number);
+		final Spinner spinnerPrint = (Spinner) v.findViewById(R.id.sp_print_number);
 		final String[] itemsPrint = new String[] { "2", "3", "4",
 				"5","6","7","8","9","10" };
 
@@ -194,6 +184,19 @@ public class SendFileFragment extends Fragment implements OnClickListener,
 			public void onNothingSelected(AdapterView<?> arg0) {
 				// TODO Auto-generated method stub
 				
+			}
+		});
+		spinnerPrint.setEnabled(isPrint);
+		cbxIsPrint
+		.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
+			@Override
+			public void onCheckedChanged(CompoundButton buttonView,
+					boolean isChecked) {
+				// TODO Auto-generated method stub
+				isPrint = isChecked;
+				spinnerPrint.setEnabled(isPrint);
+
 			}
 		});
 		// SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
@@ -227,7 +230,7 @@ public class SendFileFragment extends Fragment implements OnClickListener,
 
 	private void exeGetAddressBook() {
 		// TODO Auto-generated method stub
-		AddressBookFragement fragment = new AddressBookFragement();
+		AddressBookFragement fragment = new AddressBookFragement(etMailto.getText().toString());
 		fragment.setTargetFragment(this, 1);
 
 		getFragmentManager().beginTransaction().add(fragment, "address_book")
@@ -255,7 +258,7 @@ public class SendFileFragment extends Fragment implements OnClickListener,
 
 	protected void updateEmailSend(List<AddressBookItem> list) {
 		// TODO Auto-generated method stub
-		String mailTo = "";
+		String mailTo = etMailto.getText().toString();
 		for (AddressBookItem item : list) {
 			mailTo += mailTo.equals("") ? "" + item.getEmail() : ","
 					+ item.getEmail();
