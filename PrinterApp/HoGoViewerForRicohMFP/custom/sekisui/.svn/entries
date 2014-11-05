@@ -1,83 +1,0 @@
-10
-
-dir
-9251
-svn+ssh://svn.keyring.net/svnrepo/krclientsvn/trunk/android/RicohMFP/Bookend-RicohMFP/custom/sekisui
-svn+ssh://svn.keyring.net/svnrepo/krclientsvn
-
-
-
-2013-05-01T08:38:36.465917Z
-8171
-shindo
-
-
-svn:special svn:externals svn:needs-lock
-
-
-
-
-
-
-
-
-
-
-
-a623d986-c1b0-4020-b52c-ef547ea9265e
-
-build.properties
-file
-
-
-
-
-2014-07-31T08:34:44.985000Z
-59ef7d751dd4af091803c1e13b4335f5
-2013-03-27T02:50:23.554495Z
-8119
-shindo
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-158
-
-drawable
-dir
-
-drawable-hdpi
-dir
-
-drawable-ldpi
-dir
-
-drawable-mdpi
-dir
-
-drawable-xhdpi
-dir
-
-values
-dir
-
-values-ja
-dir
-
